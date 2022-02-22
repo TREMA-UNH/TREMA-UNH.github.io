@@ -130,7 +130,146 @@ Horseshoe-crab:
   subset.[\[tab:data-stats\]]{#tab:data-stats label="tab:data-stats"}
 :::
 
-## Wikimark Statistics
+## Wikimarks
+
+*Wikimarks* are created from a subset of pages, such as lists of
+Wikidata QIDs or category memberships. The page subset is separated into
+a test set and five train folds. For each of them task-specific
+datasets, such as queries, candidate sets, and relevance ground truth's
+for the *Wikimarks* are exported. By default the following information
+is provided for each dataset:[^9]
+
+Articles $\dagger$:
+
+:   Content of processed articles (JSONL or CBOR).
+
+Titles/QIDs:
+
+:   Page titles and Wikidata QIDs of pages in this subset.
+
+Paragraphs $\dagger$:
+
+:   Corpus of paragraphs from this article subset.
+
+Provenance:
+
+:   Information about the Wikipedia dump the subset originated from.
+
+Additionally, task-specific *Wikimark* data is provides as described in
+the following.
+
+![*Wikimarks* derived for article-level retrieval and clustering (left)
+from a given article (right). Paragraph IDs indicated by numbers in
+black dots; entity IDs as letters in stick figures; ground truth cluster
+indexes. ](rel-cluster-benchmark.png)
+
+
+## Retrieval *Wikimark*
+
+The retrieval *Wikimark* is designed to study the quality of retrieval
+models. For queries derived from Wikipedia titles, any paragraph
+originating from the Wikipedia article is counted as relevant. This
+*Wikimark* was referred to as the "automatic ground truth" in the TREC
+Complex Answer Retrieval task.
+
+*Wikimarks* for three kinds of retrieval scenarios are provided:
+
+-   Article: The query is the page title, and the goal is to retrieve
+    paragraphs that are relevant for this query. For the passage
+    retrieval relevance data (i.e., qrels) any paragraph located
+    anywhere on the original page is counted as relevant, all other
+    paragraphs are non-relevant.
+
+-   Toplevel: The query is a combination of page title and heading of a
+    top-level section. The goal is to retrieve paragraphs that are in
+    fact located within this section or one of its subsections.
+
+-   Hierarchical: The query is derived from any section on the page. The
+    goal is to retrieve paragraphs that are exactly in this section, not
+    a subsection.
+
+In addition to passage-level retrieval, we also provide a *Wikimark* for
+entity retrieval, where any entity (as represented by their Wikipedia
+pages) that is linked to from a relevant paragraph is regarded as
+relevant.
+
+As a corpus for retrieving passages from, we recommend to use the
+paragraph corpus described in Section
+[\[sec:paragraph-corpus\]](#sec:paragraph-corpus){reference-type="ref"
+reference="sec:paragraph-corpus"}. As a legal set of entities, we
+recommend to use an unprocessed dump of Wikipedia pages.
+
+For the retrieval *Wikimark*, we provide the following information:
+
+Outlines:
+
+:   Title and section outlines of the articles, to derive query texts
+    from. Page metadata is available.
+
+Topics:
+
+:   Query IDs for each section---these can also be obtained from the
+    outlines.
+
+Passage Qrels $\dagger$:
+
+:   `Trec-eval` compatible qrels files of paragraph IDs for
+    article-level retrieval, top-level section retrieval, and
+    hierarchical section retrieval.
+
+Entity Qrels $\dagger$:
+
+:   `Trec-eval` compatible qrels files of entity IDs (same as page IDs)
+    for article, top-level section, and hierarchical section retrieval.
+
+#### Evaluation.
+
+We recommend to use the retrieval evaluation tool `trec-eval`[^10] with
+option `-c` using the provided qrels files.
+
+![*Wikimarks* derived for query-specific entity linking (bottom) from a
+the second paragraph (top). The task is to annotate the plain text with
+entity links (for example with entities a, d, and e). True entities d
+and e are derived from hyperlinks contained in this paragraph (bold)
+with given character spans. Since entity a was linked in a previous
+paragraph and its annotation is to be accepted without
+penalty.](entity-linking-benchmark.png)
+
+## Query-specific Clustering *Wikimark* {#sec:wikimark}
+
+The task of search result clustering, will, given a search query and a
+ranking of search results, identify query-specific clusters for
+presentation. We provide a *Wikimark* dataset for this clustering task,
+where the query is taken as page title, and each top-level section
+defines one ground truth cluster. The search results are taken from the
+article-level retrieval task. To train on this task in isolation from a
+retrieval system, we suggest to use all passages that originate from
+this page.
+
+The query-specific clustering *Wikimark* is provided as a JSONL gzipped
+file[^11] which contains the following information:
+
+Query:
+
+:   The query text is derived from the page name; the query ID from the
+    page ID.
+
+Elements:
+
+:   List of paragraph IDs contained on the page.
+
+True Cluster Labels $\dagger$:
+
+:   List of true cluster labels for each element. The $i$'th cluster
+    label is derived from the section ID of the top-level section where
+    the $i$'th element is located.
+
+True Cluster Index $\dagger$:
+
+:   Projecting the true cluster labels onto integers from $0,1\dots$.
+
+In this *Wikimark*, we remove instances with less than two clusters.
+
 
 Number of train/test instances for each Wikimark.
 
