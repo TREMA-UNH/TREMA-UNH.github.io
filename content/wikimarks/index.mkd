@@ -1,5 +1,6 @@
 # Wikimarks
 
+
 We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of
 tasks from Wikipedia. We call these
 benchmarks *Wikimarks*. This work is an extension of the infrastructure
@@ -12,6 +13,15 @@ retrieval benchmarks as they build upon a readily-available source of
 real-world text content. Furthermore, Wikipedia articles feature exhibit
 considerable machine-readable structure in the form of page structure,
 hyperlink structure, and complementary data sources such as [Wikidata][].
+
+### Authors
+Laura Dietz, Shubham Chatterjee, Connor Lennox, Sumanta Kashyapi, Pooja Oza, Ben Gamari
+
+University of New Hampshire, USA and Well-Typed LLP, UK
+
+Contacts: dietz@cs.unh.edu, {sc1242, cjl1053, sk1105, pho1003}@wildcats.unh.edu,  ben@well-typed.com
+
+
 
 ## Tasks
 
