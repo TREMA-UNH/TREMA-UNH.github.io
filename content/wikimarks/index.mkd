@@ -227,14 +227,6 @@ Entity Qrels $\dagger$:
 We recommend to use the retrieval evaluation tool `trec-eval`[^10] with
 option `-c` using the provided qrels files.
 
-![*Wikimarks* derived for query-specific entity linking (bottom) from a
-the second paragraph (top). The task is to annotate the plain text with
-entity links (for example with entities a, d, and e). True entities d
-and e are derived from hyperlinks contained in this paragraph (bold)
-with given character spans. Since entity a was linked in a previous
-paragraph and its annotation is to be accepted without
-penalty.](entity-linking-benchmark.png)
-
 ## Query-specific Clustering *Wikimark* {#sec:wikimark}
 
 The task of search result clustering, will, given a search query and a
@@ -269,6 +261,73 @@ True Cluster Index $\dagger$:
 :   Projecting the true cluster labels onto integers from $0,1\dots$.
 
 In this *Wikimark*, we remove instances with less than two clusters.
+
+
+
+![*Wikimarks* derived for query-specific entity linking (bottom) from a
+the second paragraph (top). The task is to annotate the plain text with
+entity links (for example with entities a, d, and e). True entities d
+and e are derived from hyperlinks contained in this paragraph (bold)
+with given character spans. Since entity a was linked in a previous
+paragraph and its annotation is to be accepted without
+penalty.](entity-linking-benchmark.png)
+
+
+## Query-specific Entity Linking *Wikimark* {#sec:entity-link-wikimark}
+
+Entity linking is typically discussed as an NLP task that ignores the
+context of a search query. However when presenting relevant information
+for a search query, maybe it would be best not to annotate all possible
+entity links, but instead focus on linking entities that are relevant
+for the query. *Wikimarks* allow us to create a query-specific entity
+linking dataset, as Wikipedia's editorial policies are to only include
+hyperlink to pages when the information is relevant for the topic of the
+article.
+
+The query-specific entity linking *Wikimark* is provided as a JSONL
+gzipped file which contains the following information:
+
+Query:
+
+:   The query text is derived from the page name; the query ID from the
+    page ID.
+
+Text-only Paragraph:
+
+:   The text contents of paragraph (without entities links), to be
+    annotated with entity links.
+
+True Linked Paragraph $\dagger$:
+
+:   The original paragraph (with links) for training and as ground
+    truth.
+
+True Entity Labels $\dagger$:
+
+:   List of entity IDs that should be linked in this paragraph. These
+    are provided as internal PageIDs as well as Wikidata QIDs.
+
+Acceptable Entity Labels $\dagger$:
+
+:   List of acceptable entity IDs that can be linked in this paragraph
+    without penalty. List of entities linked in this paragraph and any
+    previous paragraph. These are provided as internal PageIDs as well
+    as Wikidata QIDs.
+
+We remove instances of paragraphs without any linked entities.
+
+Wikipedia's editorial policies mandate that entities are only linked
+once per article. Consequently, entities that are mentioned repeatedly
+are only linked once. Since the entity linking ground truth is derived
+from hyperlinks, entity linking predictions would get penalized for
+linking all these entities. To alleviate this without resorting to
+heuristics, we collect all entities linked in all preceding paragraphs
+of an article and exposed them as `acceptable entity labels`. The entity
+linking evaluation should only give credit to every entity in
+`true labels`, but not penalize entities in `acceptable labels`.
+
+
+
 
 
 Number of train/test instances for each Wikimark.
