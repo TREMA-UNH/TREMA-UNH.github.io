@@ -1056,45 +1056,46 @@ language-configuration for this pipeline. We thank all participants TREC
 CAR for being early adopters, and anyone who engaged with us in
 discussion on how to derive additional benchmarks from Wikipedia.
 
-[^1]: 
+[^1]: <https://www.wikidata.org>
 
-[^2]: 
+[^2]: <https://jsonlines.org/>
 
-[^3]: 
+[^3]: <https://www.rfc-editor.org/rfc/rfc8949.html>
 
-[^4]: 
+[^4]: <https://fever.ai/dataset/feverous.html>
 
-[^5]: 
+[^5]: <https://trec-car.cs.unh.edu>
 
-[^6]: 
 
-[^7]: 
+[^6]: <https://en.wikipedia.org/wiki/Help:Wikitext>
 
-[^8]: 
+[^7]: <https://www.mediawiki.org/wiki/Markup_spec>
+
+[^8]: <https://www.mediawiki.org/wiki/Parsoid>
 
 [^9]: Data marked with $\dagger$ is reserved for training and evaluation
     only.
 
-[^10]: 
+[^10]: https://github.com/usnistgov/trec_eval
 
 [^11]: Because of the redundancy induced by repeated JSON keys, we
     recommend to open the file as a Gzipped stream, rather than
     decompressing it.
 
-[^12]: 
+[^12]: <https://scikit-learn.org/stable/modules/clustering.html>
 
-[^13]: 
+[^13]: <https://sobigdata.d4science.org/web/tagme/wat-api>
 
-[^14]: Vital articles
+[^14]: Vital articles <https://en.wikipedia.org/wiki/Wikipedia:Vital_articles>
     
 
-[^15]: Good articles
+[^15]: Good articles <https://en.wikipedia.org/wiki/Wikipedia:Good_articles>
     
 
-[^16]: Passage and Entity Retrieval:
+[^16]: Passage and Entity Retrieval: <https://github.com/laura-dietz/trec-car-methods>
     
 
 [^17]: `sklearn.feature_extraction.text` and `sklearn.cluster` in
     version 1.0.2
 
-[^18]: 
+[^18]: <https://sobigdata.d4science.org/web/tagme/wat-api>
