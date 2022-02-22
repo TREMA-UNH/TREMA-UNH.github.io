@@ -15,7 +15,7 @@ main = hakyll $ do
                 route   idRoute
                 compile compressCssCompiler
 
-        match "content/**/*.mkd" $ do
+        match "content/**.mkd" $ do
                 route   $ setExtension "html" `composeRoutes` gsubRoute "content/" (const "")
                 compile $ pandocCompiler
                         >>= loadAndApplyTemplate "templates/default.html" defaultContext
