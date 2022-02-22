@@ -1,0 +1,41 @@
+name: CI
+
+# Trigger the workflow on push or pull request, but only for the develop branch
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    name: ghc ${{ matrix.ghc }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cabal: ["3.2"]
+        ghc:
+          - "8.10.4"
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+
+    - uses: haskell/actions/setup@v1.2.9
+      id: setup-haskell-cabal
+      name: Setup Haskell
+      with:
+        ghc-version: ${{ matrix.ghc }}
+        cabal-version: ${{ matrix.cabal }}
+
+    - uses: actions/cache@v2.1.7
+      name: Cache ~/.cabal/store
+      with:
+        path: ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('cabal.project.freeze') }}
+
+    - name: Build
+      run: |
+        cabal configure --enable-tests --enable-benchmarks --test-show-details=direct
+        cabal build all
+
+    - name: Generate
+      run: |
+        cabal run generate
