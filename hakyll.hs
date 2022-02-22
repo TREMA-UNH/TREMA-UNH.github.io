@@ -16,7 +16,7 @@ main = hakyll $ do
                 compile compressCssCompiler
 
         match "content/**.png" $ do
-                route   idRoute
+                route   $ gsubRoute "content/" (const "")
                 compile copyFileCompiler
 
         match "content/**.mkd" $ do
