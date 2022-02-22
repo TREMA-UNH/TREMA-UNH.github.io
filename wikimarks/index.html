@@ -34,14 +34,14 @@
 <h2 id="tools-installation-and-usage">Tools, Installation, and Usage</h2>
 <p>Our pipeline for generating Wikimarks is found in the <a href="https://github.com/TREMA-UNH/trec-car-release"><code>TREMA-UNH/trec-car-release</code></a> project. Please follow installation, configuration and usage instructions in the <code>README</code>.</p>
 <p>This pipeline builds upon the conversion tools provided by the <a href="https://github.com/TREMA-UNH/trec-car-create"><code>trec-car-create</code></a> package, which provides utilities for converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia. Please follow installation and compilation instructions described in the <code>README</code>.</p>
-<h2 id="provided-conversions">Provided Conversions</h2>
+<h2 id="wikipedia-conversions">Wikipedia Conversions</h2>
 <p>Along with the methodology and tools, we provide the raw products of our article conversion pipeline run on the English, Simple English, and Japanese Wikipedia dumps from 1 January 2022. These <code>unprocessedAll</code> datasets include all pages of each Wiki in machine-readable JSONL or CBOR formats.</p>
 <ul>
 <li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
-<h2 id="provided-benchmarks">Provided Benchmarks</h2>
+<h2 id="wikimark-collections">Wikimark Collections</h2>
 <p>In addition to the raw conversions described above, we also provide several Wikimarks extracted from these conversions:</p>
 <ul>
 <li><p>the <code>benchmarks</code> dataset provides Wikimarks for passage retrieval, entity retrieval, query-specific clustering, and entity linking, extracted from the page subsets described in below.</p></li>
