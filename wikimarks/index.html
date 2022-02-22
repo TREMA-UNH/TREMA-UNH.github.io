@@ -161,7 +161,74 @@ Predicate: <code>qid-in-set ["Q1329239"]</code></p>
 </tbody>
 </table>
 </div>
-<h2 id="wikimark-statistics">Wikimark Statistics</h2>
+<h2 id="wikimarks-1">Wikimarks</h2>
+<p><em>Wikimarks</em> are created from a subset of pages, such as lists of Wikidata QIDs or category memberships. The page subset is separated into a test set and five train folds. For each of them task-specific datasets, such as queries, candidate sets, and relevance ground truth’s for the <em>Wikimarks</em> are exported. By default the following information is provided for each dataset:[^9]</p>
+<dl>
+<dt>Articles <span class="math inline">†</span>:</dt>
+<dd><p>Content of processed articles (JSONL or CBOR).</p>
+</dd>
+<dt>Titles/QIDs:</dt>
+<dd><p>Page titles and Wikidata QIDs of pages in this subset.</p>
+</dd>
+<dt>Paragraphs <span class="math inline">†</span>:</dt>
+<dd><p>Corpus of paragraphs from this article subset.</p>
+</dd>
+<dt>Provenance:</dt>
+<dd><p>Information about the Wikipedia dump the subset originated from.</p>
+</dd>
+</dl>
+<p>Additionally, task-specific <em>Wikimark</em> data is provides as described in the following.</p>
+<figure>
+<img src="rel-cluster-benchmark.png" alt="Wikimarks derived for article-level retrieval and clustering (left) from a given article (right). Paragraph IDs indicated by numbers in black dots; entity IDs as letters in stick figures; ground truth cluster indexes." /><figcaption aria-hidden="true"><em>Wikimarks</em> derived for article-level retrieval and clustering (left) from a given article (right). Paragraph IDs indicated by numbers in black dots; entity IDs as letters in stick figures; ground truth cluster indexes.</figcaption>
+</figure>
+<h2 id="retrieval-wikimark">Retrieval <em>Wikimark</em></h2>
+<p>The retrieval <em>Wikimark</em> is designed to study the quality of retrieval models. For queries derived from Wikipedia titles, any paragraph originating from the Wikipedia article is counted as relevant. This <em>Wikimark</em> was referred to as the “automatic ground truth” in the TREC Complex Answer Retrieval task.</p>
+<p><em>Wikimarks</em> for three kinds of retrieval scenarios are provided:</p>
+<ul>
+<li><p>Article: The query is the page title, and the goal is to retrieve paragraphs that are relevant for this query. For the passage retrieval relevance data (i.e., qrels) any paragraph located anywhere on the original page is counted as relevant, all other paragraphs are non-relevant.</p></li>
+<li><p>Toplevel: The query is a combination of page title and heading of a top-level section. The goal is to retrieve paragraphs that are in fact located within this section or one of its subsections.</p></li>
+<li><p>Hierarchical: The query is derived from any section on the page. The goal is to retrieve paragraphs that are exactly in this section, not a subsection.</p></li>
+</ul>
+<p>In addition to passage-level retrieval, we also provide a <em>Wikimark</em> for entity retrieval, where any entity (as represented by their Wikipedia pages) that is linked to from a relevant paragraph is regarded as relevant.</p>
+<p>As a corpus for retrieving passages from, we recommend to use the paragraph corpus described in Section <a href="#sec:paragraph-corpus" data-reference-type="ref" data-reference="sec:paragraph-corpus">[sec:paragraph-corpus]</a>. As a legal set of entities, we recommend to use an unprocessed dump of Wikipedia pages.</p>
+<p>For the retrieval <em>Wikimark</em>, we provide the following information:</p>
+<dl>
+<dt>Outlines:</dt>
+<dd><p>Title and section outlines of the articles, to derive query texts from. Page metadata is available.</p>
+</dd>
+<dt>Topics:</dt>
+<dd><p>Query IDs for each section—these can also be obtained from the outlines.</p>
+</dd>
+<dt>Passage Qrels <span class="math inline">†</span>:</dt>
+<dd><p><code>Trec-eval</code> compatible qrels files of paragraph IDs for article-level retrieval, top-level section retrieval, and hierarchical section retrieval.</p>
+</dd>
+<dt>Entity Qrels <span class="math inline">†</span>:</dt>
+<dd><p><code>Trec-eval</code> compatible qrels files of entity IDs (same as page IDs) for article, top-level section, and hierarchical section retrieval.</p>
+</dd>
+</dl>
+<h4 id="evaluation.">Evaluation.</h4>
+<p>We recommend to use the retrieval evaluation tool <code>trec-eval</code>[^10] with option <code>-c</code> using the provided qrels files.</p>
+<figure>
+<img src="entity-linking-benchmark.png" alt="Wikimarks derived for query-specific entity linking (bottom) from a the second paragraph (top). The task is to annotate the plain text with entity links (for example with entities a, d, and e). True entities d and e are derived from hyperlinks contained in this paragraph (bold) with given character spans. Since entity a was linked in a previous paragraph and its annotation is to be accepted without penalty." /><figcaption aria-hidden="true"><em>Wikimarks</em> derived for query-specific entity linking (bottom) from a the second paragraph (top). The task is to annotate the plain text with entity links (for example with entities a, d, and e). True entities d and e are derived from hyperlinks contained in this paragraph (bold) with given character spans. Since entity a was linked in a previous paragraph and its annotation is to be accepted without penalty.</figcaption>
+</figure>
+<h2 id="sec:wikimark">Query-specific Clustering <em>Wikimark</em></h2>
+<p>The task of search result clustering, will, given a search query and a ranking of search results, identify query-specific clusters for presentation. We provide a <em>Wikimark</em> dataset for this clustering task, where the query is taken as page title, and each top-level section defines one ground truth cluster. The search results are taken from the article-level retrieval task. To train on this task in isolation from a retrieval system, we suggest to use all passages that originate from this page.</p>
+<p>The query-specific clustering <em>Wikimark</em> is provided as a JSONL gzipped file[^11] which contains the following information:</p>
+<dl>
+<dt>Query:</dt>
+<dd><p>The query text is derived from the page name; the query ID from the page ID.</p>
+</dd>
+<dt>Elements:</dt>
+<dd><p>List of paragraph IDs contained on the page.</p>
+</dd>
+<dt>True Cluster Labels <span class="math inline">†</span>:</dt>
+<dd><p>List of true cluster labels for each element. The <span class="math inline"><em>i</em></span>’th cluster label is derived from the section ID of the top-level section where the <span class="math inline"><em>i</em></span>’th element is located.</p>
+</dd>
+<dt>True Cluster Index <span class="math inline">†</span>:</dt>
+<dd><p>Projecting the true cluster labels onto integers from <span class="math inline">0, 1…</span>.</p>
+</dd>
+</dl>
+<p>In this <em>Wikimark</em>, we remove instances with less than two clusters.</p>
 <p>Number of train/test instances for each Wikimark.</p>
 <div class="table*">
 <div class="footnotesize">
