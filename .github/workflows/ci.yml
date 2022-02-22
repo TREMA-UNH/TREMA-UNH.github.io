@@ -41,6 +41,12 @@ jobs:
       run: |
         cabal run trema-site -- build
 
+    - name: Check for broken links
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y linkchecker
+        linkchecker _site
+
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
