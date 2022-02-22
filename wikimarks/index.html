@@ -24,21 +24,50 @@
 <p>In <span class="citation" data-cites="dietz2022">@dietz2022</span> we describe a methodology and tool-set for deriving information retrieval benchmarks for a variety of tasks from Wikipedia. We call these benchmarks <em>Wikimarks</em>. This work is an extension of the infrastructure developed while organizing the <a href="http://trec-car.cs.unh.edu/">Complex Answer Retrieval track</a> at <a href="https://trec.nist.gov/">NIST TREC</a> and examines several using Wikipedia to assess several tasks not previously considered in the TREC-CAR context.</p>
 <p>We believe that Wikimarks can serve to complement traditional information retrieval benchmarks as they build upon a readily-available source of real-world text content. Furthermore, Wikipedia articles feature exhibit considerable machine-readable structure in the form of page structure, hyperlink structure, and complementary data sources such as <a href="https://wikidata.org/">Wikidata</a>.</p>
 <h2 id="tasks">Tasks</h2>
-<p>The paper describes Wikimarks for six information retrieval tasks:</p>
+<p>The paper describes Wikimarks for four information retrieval tasks:</p>
 <ul>
-<li>TODO</li>
+<li><em>passage retrieval</em>: retrieval of relevant text passages for a keyword query</li>
+<li><em>entity retrieval</em>: retrieval of relevant <em>entities</em> (defined to be Wikipedia pages) for a keyword query</li>
+<li><em>query-specific clustering</em>: sub-topic clustering of passages for a keyword query</li>
+<li><em>query-specific entity-linking</em>: annotation of query-relevant entity links in relevant passages</li>
 </ul>
 <h2 id="tools">Tools</h2>
 <p>Our pipeline for generating Wikimarks can, along with usage instructions, be found in the <a href="https://github.com/TREMA-UNH/trec-car-release"><code>TREMA-UNH/trec-car-release</code></a> project. See the <code>README</code> for further details.</p>
 <p>This pipeline builds upon the tools provided by the <a href="https://github.com/TREMA-UNH/trec-car-create"><code>trec-car-create</code></a> package, which provides utilities for extracting, inspecting, filtering, and generating benchmarks from Wikipedia dumps.</p>
-<h2 id="benchmarks">Benchmarks</h2>
-<p>Along with the methodology and tools, we provide a full set of Wikimarks produced from a small subset of the 1 January 2022 Wikipedia dump. Specifically, we offer benchmarks derived from the following Wikis:</p>
+<h2 id="provided-conversions">Provided Conversions</h2>
+<p>Along with the methodology and tools, we provide the raw products of our article conversion pipeline run on the English, Simple English, and Japanese Wikipedia dumps from 1 January 2022. These <code>unprocessedAll</code> datasets include all pages of each Wiki in machine-readable JSONL and CBOR formats.</p>
 <ul>
-<li>English Wikipedia, <code>enwiki</code></li>
-<li>Simple Wikipedia, <code>simplewiki</code></li>
-<li>Japanese Wikipedia, <code>jawiki</code></li>
+<li><code>enwiki</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">download</a></li>
 </ul>
-<p>These are licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> and are available for download from <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/" class="uri">http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/</a>.</p>
+<h2 id="provided-benchmarks">Provided Benchmarks</h2>
+<p>In addition to the raw conversions described above, we also provide several Wikimarks extracted from these conversions:</p>
+<ul>
+<li><p>the <code>benchmarks</code> dataset provides Wikimarks for passage retrieval, entity retrieval, query-specific clustering, and entity linking, extracted from the page subsets described in below.</p></li>
+<li><p>the <code>unprocessedAllButBenchmark</code> dataset provides all pages except for the set included in <code>benchmarks</code> and is intended to be used for training of systems to be evaluated using <code>benchmarks</code>.</p></li>
+<li><p>the <code>paragraphCorpus</code> dataset is a corpus of paragraphs from articles to be used for passage retrieval evaluation.</p></li>
+</ul>
+<h3 id="page-subsets">Page subsets</h3>
+<p>The benchmarks are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
+<dl>
+<dt>Vital-articles:</dt>
+<dd><p>A set of important articles that the Wikipedia community <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles">identified</a>. The community strives to provide these articles for all languages. We obtain the set of “vital” articles via Wikidata, then filter the processed articles by Wikidata QID.<br />
+Predicate: <code>qid-set-from-file "./vital-articles.qids"</code></p>
+</dd>
+<dt>Good-articles:</dt>
+<dd><p>A Wikipedia committee defines a set of <a href="https://en.wikipedia.org/wiki/Wikipedia:Good_articles">good articles</a> that are well-written, contain factually accurate and verifiable information and are of broad importance. Such pages are identified either as template “GA” or “good article”, which our pipeline is configured to expose as page tag “Good article”.<br />
+Predicate: <code>has-page-tag ["Good article"]</code></p>
+</dd>
+<dt>US-history:</dt>
+<dd><p>A set of pages in categories that contain the words “United” “States” “history”, such as “History of the United States” or “United States history timelines”.<br />
+Predicate: <code>(category-contains "history" &amp; category-contains "united" &amp; category-contains "states")</code></p>
+</dd>
+<dt>Horseshoe-crab:</dt>
+<dd><p>The single Wikipedia page on horseshoe crabs used in the example above. It is identified by its Wikidata QID.<br />
+Predicate: <code>qid-in-set ["Q1329239"]</code></p>
+</dd>
+</dl>
+<h2 id="license">License</h2>
+<p>The conversions and benchmarks described above are licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
         </section>
       </div>
     </div>
