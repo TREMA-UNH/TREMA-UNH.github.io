@@ -22,7 +22,7 @@ The paper describes Wikimarks for six information retrieval tasks:
 ## Tools
 
 Our pipeline for generating Wikimarks can, along with usage instructions, be
-found in the [TREMA-UNH/trec-car-release][`trec-car-release`] project. See the
+found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. See the
 `README` for further details.
 
 This pipeline builds upon the tools provided by the
