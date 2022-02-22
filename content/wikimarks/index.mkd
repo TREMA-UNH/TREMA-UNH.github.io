@@ -93,6 +93,29 @@ Horseshoe-crab:
     above. It is identified by its Wikidata QID.\
     Predicate: `qid-in-set ["Q1329239"]`
 
+
+::: {#tab:data-stats}
+                                 en   simple        ja
+  ----------------------- --------- -------- ---------
+  vital-articles.test           521      461       503
+  vital-articles.train          528      471       539
+  good-articles.test         17,086        1       809
+  good-articles.train        17,361        2       838
+  US-history.test             4,232        9       \--
+  US-history.train            4,284       13       \--
+  horseshoe-crab.train            1        1       \--
+  benchmarkY1.test              131       44        71
+  benchmarkY1.train             117       42        81
+  car-train-large.train     884,709   17,335   246,649
+  test200.test                  \--        1        42
+  test200.train                 188       12        44
+
+  : Number of articles in each *Wikimark*
+  subset.[\[tab:data-stats\]]{#tab:data-stats label="tab:data-stats"}
+:::
+
+
+
 ## License
 
 The conversions and benchmarks described above are licensed under the [Creative
