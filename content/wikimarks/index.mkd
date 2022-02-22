@@ -41,7 +41,8 @@ Specifically, we offer benchmarks derived from the following Wikis:
 * Japanese Wikipedia, `jawiki`
 
 These are licensed under the [Creative Commons Attribution-ShareAlike 3.0
-Unported License][cc-sa] and are available for download from TODO.
+Unported License][cc-sa] and are available for download from
+<http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/>.
 
 
 [trec-car]: http://trec-car.cs.unh.edu/ 
