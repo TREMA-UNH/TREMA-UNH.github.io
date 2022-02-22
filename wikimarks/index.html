@@ -37,9 +37,9 @@
 <h2 id="provided-conversions">Provided Conversions</h2>
 <p>Along with the methodology and tools, we provide the raw products of our article conversion pipeline run on the English, Simple English, and Japanese Wikipedia dumps from 1 January 2022. These <code>unprocessedAll</code> datasets include all pages of each Wiki in machine-readable JSONL or CBOR formats.</p>
 <ul>
-<li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
-<li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
-<li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
+<li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
+<li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
+<li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
 <h2 id="provided-benchmarks">Provided Benchmarks</h2>
 <p>In addition to the raw conversions described above, we also provide several Wikimarks extracted from these conversions:</p>
@@ -47,6 +47,12 @@
 <li><p>the <code>benchmarks</code> dataset provides Wikimarks for passage retrieval, entity retrieval, query-specific clustering, and entity linking, extracted from the page subsets described in below.</p></li>
 <li><p>the <code>unprocessedAllButBenchmark</code> dataset provides all pages except for the set included in <code>benchmarks</code> and is intended to be used for training of systems to be evaluated using <code>benchmarks</code>.</p></li>
 <li><p>the <code>paragraphCorpus</code> dataset is a corpus of paragraphs from articles to be used for passage retrieval evaluation.</p></li>
+</ul>
+<p>These datasets are are provided in JSONL or CBOR formats.</p>
+<ul>
+<li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
+<li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
+<li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
 <h3 id="page-subsets">Page subsets</h3>
 <p>The benchmarks are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
