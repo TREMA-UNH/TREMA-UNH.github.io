@@ -1,14 +1,14 @@
 cabal-version:       3.0
-name:                wikimarks-site
+name:                trema-site
 version:             0.1.0.0
-synopsis:            Wikimarks site
+synopsis:            TREMA site
 license:             BSD-3-Clause
 author:              Ben Gamari
 maintainer:          ben@smart-cactus.org
 copyright:           (c) 2022 Ben Gamari
 build-type:          Simple
 
-executable wikimarks-site
+executable trema-site
   main-is:             hakyll.hs
   build-depends:       base >=4.13 && <4.16,
                        containers,

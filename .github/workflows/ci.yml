@@ -9,6 +9,7 @@ jobs:
   build:
     name: ghc ${{ matrix.ghc }}
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         cabal: ["3.2"]
@@ -38,4 +39,10 @@ jobs:
 
     - name: Generate
       run: |
-        cabal run generate
+        cabal run trema-site -- build
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages
+        folder: _site
