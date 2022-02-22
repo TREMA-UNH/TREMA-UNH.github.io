@@ -1,0 +1,1100 @@
+Wikimarks: Harvesting Relevance Benchmarks from Wikipedia
+==========================================================
+
+Laura Dietz, Shubham Chatterjee, Connor Lennox, Sumanta Kashyapi, Pooja Oza, Ben Gamari
+
+Manuscript under submission.
+
+# Introduction
+
+Many information retrieval benchmarks have complicated licensing
+requirements, potentially impacting the dissemination and
+reproducibility of approaches. Wikipedias are freely available under a
+Creative Commons Share-Alike license, which explicitly allows the
+redistribution of derived data sets.
+
+With this resource paper, we provide a conversion pipeline for deriving
+fully automated test collections from Wikipedia for a range of
+information retrieval-centric tasks. Our approach is based on the
+assumption that Wikipedia pages were written to answer imagined
+information needs expressed in the page title (and/or headings). While
+many Wikipedia pages center on people and locations rather than general
+information needs, we focus on the remainder of pages which cover a wide
+range of topics of general interest, such as "Geomagnetic Reversal",
+"Wildlife Management", and "Superfood".
+
+Each of these page topics are interpreted within an information
+retrieval scenario where a user with limited prior knowledge is seeking
+for a general overview on the topic. A system for such information needs
+might retrieve, cluster, and organize information into a single
+integrated response. Our idea is to provide benchmarks to study each of
+those tasks across a shared set of topics.
+
+Our approach for harvesting relevance benchmarks is based on the
+assumption that for information needs derived from Wikipedia titles, the
+actual content of the Wikipedia article constitutes a relevant response.
+Based on this assumption, we can train and evaluate several
+information-centric tasks: passage retrieval as well as query-specific
+subtopic clustering. Using the hyperlinks on Wikipedia articles, we can
+derive benchmarks for several entity-oriented tasks, such as entity
+retrieval, which is asking for entities that are central to the topic,
+as well as query-specific entity linking, which is asking to annotate
+text with relevant entities. Furthermore, Wikipedias are available
+various language versions with information about which pages correspond
+to the same topic across languages. This provides an opportunity for
+studying multi-lingual (and even cross-language) retrieval tasks.
+
+We refer to our automatically harvested relevance benchmarks as
+"*Wikimarks*" to differentiate them from manually created benchmarks.
+While our prior studies [@dietz2020humans] strongly suggest that
+evaluation results based on *Wikimarks* strongly correlate with results
+on manually created benchmarks, we advocate to use *Wikimarks* as a
+training criterion and early evaluation paradigm---to be complemented
+with manually created test collections.
+
+#### Contributions.
+
+This resource provides the software and customizable toolchain for (1)
+converting any Wikipedia dump to an easily machine-accessible format and
+(2) harvesting a variety of *Wikimarks* from the dump.
+
+The toolchain was recently extended to (3) provide multi-lingual support
+and (4) includes Wikidata[^1] "Q" identifiers (QIDs) of pages, which are
+stable across time and language. As machine-readable interchange formats
+for the converted Wikipedia dump, the tool chain now supports (5) the
+JSON-lines[^2] format (JSON-L) which allows for easy to inspection of
+the data model in a text editor. This is in addition to the Concise
+Binary Object Representation[^3] (CBOR) as defined in Internet Standard
+RFC 8949.
+
+We provide (6) converted Wikipedia dumps from English, Simple English,
+and Japanese Wikipedia, dating to January 1st, 2022. As concrete
+examples, we (7) provide concrete *Wikimarks* for passage retrieval,
+entity retrieval, query-specific clustering, and entity linking for each
+of these three dumps.
+
+# Related Work
+
+A wide range of manual test collections are widely used in the
+information retrieval community. However, the manual effort associated
+with their creation often prohibits the study of novel information
+seeking tasks, such as query-specific variants of clustering or entity
+linking, or outline generation for novel search result interfaces.
+
+Several approaches to semi-automatic support in test collection creation
+are discussed, including active learning for annotation and evaluation
+metrics that correct for resulting biases
+[@cormack1998efficient; @jayasinghe2014improving; @yilmaz2008simple; @zhang2018evaluating
+--inter alia]. While these significantly reduce the cost, they still
+rely on manual annotations.
+
+In this work, we provide a pipeline, dump, and methods for fully
+automated test collection creation. These are not intended to replace
+manual test collections, but to provide a means for early evaluations
+before significant costs are spent.
+
+## Fully Automatic Test Collections
+
+Approaches for fully automatic benchmark creation have been discussed in
+the community. A popular approaches have been suggested by
+@berendsen2013pseudo [@azzopardi2007building], where a artificial
+queries are simulated by selecting terms that maximize the probability
+of discriminating between the relevant and non-relevant document set. An
+open question is how to ensure that queries represent realistic
+information needs.
+
+Alternatively metadata of articles can be exploited, such as using
+anchor text [@asadi2011pseudo], metadata of scientific articles about
+method, classification, and control [@berendsen2012generating],
+categories in the Open Directory Project [@beitzel2003using], or glosses
+in Freebase [@dalvi2015automatic]. The resource we provide in this paper
+is another example of this approach.
+
+Within the TREC Complex Answer Retrieval track, both automatic and
+manual test collections were used. A study [@dietz2020humans] compared
+the official leaderboard of submitted approaches using the manual ground
+truth with the leaderboard under the automatic test collection. Both
+leaderboards are very similar, suggesting that the automatic ground
+truth is useful for early method development. In this resource, we
+provide code for the automatic test collection and significantly extend
+this approach.
+
+## Related Resources in Related Fields
+
+Several research communities are relying on Wikipedia to derive
+collections and benchmarks.
+
+To study algorithms for fact extraction and verification, the FEVER
+shared task[^4] [@Aly21Feverous] uses a large collection of manually
+verified claims which are annotated with evidence in the form of
+sentences or table cells on Wikipedia pages.
+
+The summarization community evaluate their algorithms on their ability
+to produce a summary that is similar to the lead text (i.e., text above
+the first section heading) given the remainder of a Wikipedia article.
+@ghalandari2020large derive summarization dataset from the Wikipedia
+event portal. Recently @perez2021models suggest similar benchmarks for
+cross-lingual summarization across different language versions of the
+same article.
+
+In open-domain aspect-based summarization, the task is to provide
+targeted summaries of a document from different perspectives. The
+WikiAsp dataset [@hayashi2021wikiasp] derives these perspectives from
+section headings of Wikipedia articles.
+
+In SECTOR [@arnold2019sector], a benchmark for text segmentation is
+derived from Wikipedia article text with section boundaries.
+
+In Entity Aspect Linking, the goal is to refine an existing entity link
+in text to state which of several aspects of an entity is most relevant.
+Benchmarks were created from context of Wikipedia hyperlinks to a
+Wikipedia article's section, where the article identifies the entity,
+and the section its most relevant aspect
+[@nanni2018entity; @ramsdell2020large].
+
+In multi-hop question answering relevant information across multiple
+documents need to be combined to answer the question.
+@welbl2018constructing construct the Quangaroo dataset from a chain of
+relation triples on Wikidata. For each entity on relation chains, the
+lead texts of entity's articles are provided.
+
+Previously, slot-filling and relation extraction approaches have been
+trained to extract information from Wikipedia infoboxes or Wikidata from
+the accompanying article [@kasneci2009yago; @hewlett2016wikireading].
+
+## Related Resource Releases
+
+As part of the TREC Complex Answer Retrieval (CAR) track[^5], we
+provided a *Wikimark* based on a dump of the English Wikipedia from
+2016. However, to avoid cheating in the TREC CAR track, the software and
+toolchain to produce the *Wikimark* was not released (but we release it
+now).
+
+Since the dump provided by Wikimedia is difficult to parse, we provided
+an easily-machine readable dump for English Wikipedia from 2018 and 2020
+as a service to TREC News and TREC Conversational Assistance tracks.
+
+In 2020, we provided a Wikimark for Entity Aspect Linking based in the
+2020 English Wikipedia dump.
+
+## What is New about *this* Resource?
+
+In contrast to previous releases, this resource provides software and
+customizable toolchain for converting Wikipedia dumps and harvesting
+*Wikimarks*. We are providing Wikipedia dumps for recent dumps from
+January 1st 2022. In addition to previously offered English Wikipedia
+dumps, we also provide conversions from Simple English and Japanese
+Wikipedias. We provide *Wikimarks* for query-specific clustering and
+entity linking, alongside previously available benchmarks for retrieval.
+Moreover, all datasets are now available as gzipped JSONL formats,
+although previously used CBOR formats are offered as well.
+
+# Resource Creation Approach
+
+We create the *Wikimark* resource by first converting the Wikipedia dump
+to an easily machine-readable format, then processing it, extracting
+subsets from which *Wikimarks* are derived for a range of tasks.
+
+## Wikipedia Dump Conversion {#sec:unprocessed}
+
+Mediawiki offers "XML dumps" of the raw Wikitext markup,[^6] as it was
+edited by authors of Wikipedia articles. A major challenge is the
+abundance of markup mistakes (due to the manual editing). The Wikitext
+markup is designed to be rendered by an error tolerant template engine
+that iteratively replaces markup with rendered text. There is no clear
+specification of how the markup is to be interpreted in the light of
+errors.[^7]
+
+A common source of errors arise from user mistakes in parenthetical
+markup expressions, such as links, templates, bold and italics markup or
+quotes which have missing end markers. Such mistakes renders Wikitext a
+very difficult format to parse. We use a PEG parser-generator that is
+able to efficiently backtrack and recover when content contains
+ill-formed expressions according to the grammar. However, we abandoned
+attempts of parsing italics and bold formatting, as these contain the
+highest numbers of markup errors (and hence parsing ambiguities).
+
+Mediawiki supports a large variety of inline templates, which are used
+for formatting, tagging, common patterns, and temporal expressions. For
+example the templates `when` and `as-of` keep time expressions up to
+date. While by default, our processing pipeline deletes template
+expressions, our the language specific configuration file allows to
+provide static substitutions to avoid incomplete sentences.
+
+Since we developed this parser in 2016, several parallel initiatives
+provided better access to Wikipedia data, such as MediaWiki's
+Parsoid[^8]. While most of these libraries are targeting HTML and
+clear-text generation, our focus is on preserving all the semantic
+information associated with different elements of a Wikipedia article.
+In particular, we provide the following information about Wikipedia
+articles, as depicted in Figure [1](#fig:example){reference-type="ref"
+reference="fig:example"}:
+
+![Example of provided information from a Wikipedia article.
+ License: CC BY-SA 3.0;
+Redacted for brevity.[\[fig:example\]]{#fig:example
+label="fig:example"}](horseshoe-crab-wikipedia.pdf){#fig:example
+width="1\\columnwidth"}
+
+Title:
+
+:   Used as page name and entity name. Page IDs are derived as
+    URL-encoding of the page name. Example "Horseshoe crab".
+
+Wikidata QID:
+
+:   The Wikidata IDs (`Qxxx`) is exposed as page metadata along with the
+    wiki site identifier (e.g. "enwiki"). This allows cross-referencing
+    corresponding pages across different dumps and languages. Example
+    "`Q1329239`"
+
+Paragraphs:
+
+:   Each paragraph is represented as chunks of plain text and links. The
+    paragraph ID is derived from an MD5 hash of the visible text.
+
+Links:
+
+:   Each internal hyperlink is preserved with anchor text, target page,
+    and if applicable, target section. Example "brackish" links to the
+    page "Brackish water".
+
+Lead Text:
+
+:   Used as a short description of the entity, it is preserved as one or
+    more paragraphs. Example "Horseshoe crabs are marine\..."
+
+Sections and Headings:
+
+:   Sections are preserved with content and headings. Sections can
+    contain subsections recursively. Heading IDs are derived as
+    URL-encoding of the heading text. Example: "Threats" (top-level
+    section)
+
+Administrative Sections:
+
+:   Some sections include meta information about a page rather than
+    actual content, often such sections are available for all Wikipedia
+    pages, examples are "References", "Further reading", or "External
+    links". Our pipeline will first convert them as-is but supports the
+    removal of those sections if desired.
+
+Lists:
+
+:   Bulleted lists are preserved with indentation level. The content is
+    represented as a paragraph.
+
+Images:
+
+:   Images are preserved with URL to the graphic and their caption,
+    which is represented as a paragraph. Example "Underside of two
+    horseshoe crabs\..."
+
+Infobox:
+
+:   Infoboxes are preserved with their name (Example "biota") and
+    represented as a list of key, value pairs. Keys are strings, while
+    values can be any element above (paragraph, image, etc).
+
+Categories:
+
+:   The category information is preserved in the page metadata (Example
+    "Xiphosura")
+
+Redirects:
+
+:   When a page is renamed, the old page name presents a redirect to the
+    new page. This is a useful resource of alternative names. We
+    post-process the dump to expose this information in the page
+    metadata. Example the plural form "Horseshoe crabs".
+
+In-Links:
+
+:   While outlinks of a page can be derived from the link information of
+    a page, we post-process all pages to collect hyperlinks linking to
+    any given page. This information is preserved in the page metadata
+    (both as page IDs and page names).
+
+Disambiguations:
+
+:   Disambiguation pages that refer to this page as exposed in the page
+    metadata. Disambiguation pages provide information about pages that
+    share an ambiguous name. The Wikitext denotes this information as a
+    disambiguation template. Unfortunately, different languages can use
+    language-specific disambiguation templates for example in German
+    "Begriffsklärung". These have to be customized in the
+    language-specific pipeline configuration.
+
+Page tags:
+
+:   Some interesting page information is preserved as page-level
+    templates, examples are "Vital articles" or "Good articles" which
+    are identified by a committee. The tags are configurable and will be
+    exposed as page metadata.
+
+The results of this conversion are available in the `unprocessedAll`
+package. It contains article pages, category pages, and disambiguation
+pages. This package is most useful to analyze conversion errors or
+templates that need to be customized in the language-dependent
+configuration.
+
+Researchers who prefer to build their own *Wikimark* processing
+pipeline, are recommended to base their code on this data set.
+
+## Processing and Deduplication {#sec:processed}
+
+The following pipeline steps will filter and deduplicate the dump before
+splitting it into *Wikimarks*.
+
+#### Remove pages.
+
+In the next step, we discard category, disambiguation, and list pages
+since most of their information is preserved in the metadata of article
+pages. The exact filter predicate can be configured by adjusting the
+`config.filterPredicates` property.
+
+#### Remove sections.
+
+Then the content of each article is transformed by removing infoboxes,
+the category information at bottom of the page, and administrative
+headings. Page metadata is preserved. The filtering options can be
+configured with `config.pageProcessing` using options listed in
+`config.pageProcessing`.
+
+#### Deduplication (optional).
+
+There is an abundance of duplicated content on Wikipedia. Since the
+paragraph ID is based on a hash of the visible content, this provides an
+easy solution for removing identical content. However, there still
+remain many near-duplicates. For English pages, we provide a
+deduplication mechanism: All paragraphs are divided into buckets with a
+GloVE-based locality-sensitive hash. Next, every pair of paragraphs
+within the same bucket that has 95% bigram overlap is called a
+duplicate. After repeating the randomized process five times and
+applying the transitivity of duplicate relationships, we derive clusters
+of near-duplicate paragraphs. For each cluster, one representative
+paragraph is chosen.
+
+Next all remaining articles in the collection are re-written to replace
+paragraphs in the duplicate cluster with its cluster representative. All
+following pipeline steps apply to this collection.
+
+#### Paragraph Corpus[\[sec:paragraph-corpus\]]{#sec:paragraph-corpus label="sec:paragraph-corpus"}.
+
+All paragraphs are extracted from of all articles, shuffled, and
+provided as a paragraph corpus.
+
+#### Article Cleaning.
+
+To ensure that only high-quality text-centric articles are chosen during
+*Wikimark* creation, we remove sections with very short headings (less
+than three letters) or very long headings (more than 100 characters) as
+these indicate pages with mal-formed Wikitext. We remove images and
+their captions as well as sections without textual content. We also
+remove any page with less than three remaining sections, as these
+indicate pages based on visual content.
+
+#### *Wikimarks*.
+
+We recommend to derive *Wikimarks* from these cleaned articles. The
+processing pipeline will associate each article with a train vs test
+split and one of five folds. To obtain random, yet reproducible results,
+we use a deterministic hash of the page name to assign a page to one of
+these splits, which are consistent across all following steps.
+
+Our pipeline allows the selection of subsets of articles via a wide
+range of predicates described in Table
+[\[tab:predicate\]](#tab:predicate){reference-type="ref"
+reference="tab:predicate"}. For example, subsets can be selected om the
+basis of category membership, existence of a page tag, or when
+explicitly listed via page title or Wikidata QID. Several predicates can
+be combined with simple logic expressions.
+
+# Automatic Benchmarks aka *Wikimarks*
+
+*Wikimarks* are created from a subset of pages, such as lists of
+Wikidata QIDs or category memberships. The page subset is separated into
+a test set and five train folds. For each of them task-specific
+datasets, such as queries, candidate sets, and relevance ground truth's
+for the *Wikimarks* are exported. By default the following information
+is provided for each dataset:[^9]
+
+Articles $\dagger$:
+
+:   Content of processed articles (JSONL or CBOR).
+
+Titles/QIDs:
+
+:   Page titles and Wikidata QIDs of pages in this subset.
+
+Paragraphs $\dagger$:
+
+:   Corpus of paragraphs from this article subset.
+
+Provenance:
+
+:   Information about the Wikipedia dump the subset originated from.
+
+Additionally, task-specific *Wikimark* data is provides as described in
+the following.
+
+![*Wikimarks* derived for article-level retrieval and clustering (left)
+from a given article (right). Paragraph IDs indicated by numbers in
+black dots; entity IDs as letters in stick figures; ground truth cluster
+indexes. ](rel-cluster-benchmark.pdf){width="0.8\\columnwidth"}
+
+## Retrieval *Wikimark*
+
+The retrieval *Wikimark* is designed to study the quality of retrieval
+models. For queries derived from Wikipedia titles, any paragraph
+originating from the Wikipedia article is counted as relevant. This
+*Wikimark* was referred to as the "automatic ground truth" in the TREC
+Complex Answer Retrieval task.
+
+*Wikimarks* for three kinds of retrieval scenarios are provided:
+
+-   Article: The query is the page title, and the goal is to retrieve
+    paragraphs that are relevant for this query. For the passage
+    retrieval relevance data (i.e., qrels) any paragraph located
+    anywhere on the original page is counted as relevant, all other
+    paragraphs are non-relevant.
+
+-   Toplevel: The query is a combination of page title and heading of a
+    top-level section. The goal is to retrieve paragraphs that are in
+    fact located within this section or one of its subsections.
+
+-   Hierarchical: The query is derived from any section on the page. The
+    goal is to retrieve paragraphs that are exactly in this section, not
+    a subsection.
+
+In addition to passage-level retrieval, we also provide a *Wikimark* for
+entity retrieval, where any entity (as represented by their Wikipedia
+pages) that is linked to from a relevant paragraph is regarded as
+relevant.
+
+As a corpus for retrieving passages from, we recommend to use the
+paragraph corpus described in Section
+[\[sec:paragraph-corpus\]](#sec:paragraph-corpus){reference-type="ref"
+reference="sec:paragraph-corpus"}. As a legal set of entities, we
+recommend to use an unprocessed dump of Wikipedia pages.
+
+For the retrieval *Wikimark*, we provide the following information:
+
+Outlines:
+
+:   Title and section outlines of the articles, to derive query texts
+    from. Page metadata is available.
+
+Topics:
+
+:   Query IDs for each section---these can also be obtained from the
+    outlines.
+
+Passage Qrels $\dagger$:
+
+:   `Trec-eval` compatible qrels files of paragraph IDs for
+    article-level retrieval, top-level section retrieval, and
+    hierarchical section retrieval.
+
+Entity Qrels $\dagger$:
+
+:   `Trec-eval` compatible qrels files of entity IDs (same as page IDs)
+    for article, top-level section, and hierarchical section retrieval.
+
+#### Evaluation.
+
+We recommend to use the retrieval evaluation tool `trec-eval`[^10] with
+option `-c` using the provided qrels files.
+
+![*Wikimarks* derived for query-specific entity linking (bottom) from a
+the second paragraph (top). The task is to annotate the plain text with
+entity links (for example with entities a, d, and e). True entities d
+and e are derived from hyperlinks contained in this paragraph (bold)
+with given character spans. Since entity a was linked in a previous
+paragraph and its annotation is to be accepted without
+penalty.](entity-linking-benchmark.pdf){width="0.9\\columnwidth"}
+
+## Query-specific Clustering *Wikimark* {#sec:wikimark}
+
+The task of search result clustering, will, given a search query and a
+ranking of search results, identify query-specific clusters for
+presentation. We provide a *Wikimark* dataset for this clustering task,
+where the query is taken as page title, and each top-level section
+defines one ground truth cluster. The search results are taken from the
+article-level retrieval task. To train on this task in isolation from a
+retrieval system, we suggest to use all passages that originate from
+this page.
+
+The query-specific clustering *Wikimark* is provided as a JSONL gzipped
+file[^11] which contains the following information:
+
+Query:
+
+:   The query text is derived from the page name; the query ID from the
+    page ID.
+
+Elements:
+
+:   List of paragraph IDs contained on the page.
+
+True Cluster Labels $\dagger$:
+
+:   List of true cluster labels for each element. The $i$'th cluster
+    label is derived from the section ID of the top-level section where
+    the $i$'th element is located.
+
+True Cluster Index $\dagger$:
+
+:   Projecting the true cluster labels onto integers from $0,1\dots$.
+
+In this *Wikimark*, we remove instances with less than two clusters.
+
+#### Evaluation
+
+Our *Wikimark* format is designed to work with `scikit.learn`'s cluster
+evaluation measures.[^12] This evaluation assumes that true clusters are
+represented as indexes $0,1,\dots$. The evaluation measure uses a list
+of true labels, were for the `element` at position $i$, the true cluster
+index is located at position $i$ of the list `true cluster label`. To
+evaluate a predicted clustering, represent each cluster on its own scale
+from $0,1,\dots$ (different from true labels), an produce a list of
+predicted cluster labels in the order of given elements $i$. We
+recommend to evaluate using the Adjusted RAND index evaluation metric,
+which ranges from -1 (worst) to +1 (best) with 0 referring to a random
+clustering.
+
+::: {#tab:data-stats}
+                                 en   simple        ja
+  ----------------------- --------- -------- ---------
+  vital-articles.test           521      461       503
+  vital-articles.train          528      471       539
+  good-articles.test         17,086        1       809
+  good-articles.train        17,361        2       838
+  US-history.test             4,232        9       \--
+  US-history.train            4,284       13       \--
+  horseshoe-crab.train            1        1       \--
+  benchmarkY1.test              131       44        71
+  benchmarkY1.train             117       42        81
+  car-train-large.train     884,709   17,335   246,649
+  test200.test                  \--        1        42
+  test200.train                 188       12        44
+
+  : Number of articles in each *Wikimark*
+  subset.[\[tab:data-stats\]]{#tab:data-stats label="tab:data-stats"}
+:::
+
+## Query-specific Entity Linking *Wikimark* {#sec:entity-link-wikimark}
+
+Entity linking is typically discussed as an NLP task that ignores the
+context of a search query. However when presenting relevant information
+for a search query, maybe it would be best not to annotate all possible
+entity links, but instead focus on linking entities that are relevant
+for the query. *Wikimarks* allow us to create a query-specific entity
+linking dataset, as Wikipedia's editorial policies are to only include
+hyperlink to pages when the information is relevant for the topic of the
+article.
+
+The query-specific entity linking *Wikimark* is provided as a JSONL
+gzipped file which contains the following information:
+
+Query:
+
+:   The query text is derived from the page name; the query ID from the
+    page ID.
+
+Text-only Paragraph:
+
+:   The text contents of paragraph (without entities links), to be
+    annotated with entity links.
+
+True Linked Paragraph $\dagger$:
+
+:   The original paragraph (with links) for training and as ground
+    truth.
+
+True Entity Labels $\dagger$:
+
+:   List of entity IDs that should be linked in this paragraph. These
+    are provided as internal PageIDs as well as Wikidata QIDs.
+
+Acceptable Entity Labels $\dagger$:
+
+:   List of acceptable entity IDs that can be linked in this paragraph
+    without penalty. List of entities linked in this paragraph and any
+    previous paragraph. These are provided as internal PageIDs as well
+    as Wikidata QIDs.
+
+We remove instances of paragraphs without any linked entities.
+
+Wikipedia's editorial policies mandate that entities are only linked
+once per article. Consequently, entities that are mentioned repeatedly
+are only linked once. Since the entity linking ground truth is derived
+from hyperlinks, entity linking predictions would get penalized for
+linking all these entities. To alleviate this without resorting to
+heuristics, we collect all entities linked in all preceding paragraphs
+of an article and exposed them as `acceptable entity labels`. The entity
+linking evaluation should only give credit to every entity in
+`true labels`, but not penalize entities in `acceptable labels`.
+
+#### Evaluation.
+
+Unfortunately, there are no established evaluation frameworks for entity
+linking. We recommend to separately evaluate the set of correctly linked
+entities and the offsets of annotated spans as macro-average on
+mean-squared error of character offsets. A widely used evaluation
+measure is the F1 measure on the predicted entity set (referred to as
+`predicted labels`). For the F1 measure we suggest to derive statistics
+from the size of label sets as follows.
+
+TP:
+
+:   `predicted labels` $\cap$ `true labels`
+
+FP:
+
+:   `predicted labels` $\setminus$ `acceptable labels`
+
+FN:
+
+:   `true labels` $\setminus$ `predicted labels`
+
+We suggest to evaluate the quality of annotated text spans via the set
+of all true labels $T$. The per-entity span error is the root mean
+squared error on predicted spans $(b_p, e_p)$ versus spans $(b_t, e_t)$.
+
+#### Interfacing with Entity Linking Software.
+
+A wide range of entity linking software is available, such as the
+TagMe-successor "WAT"[^13] or Rel [@van2020rel]. A practical issue lies
+in using unique identifiers of entities in linking systems. While more
+and more entity linking systems are using stable Wikidata QIDs, today,
+many entity linking systems still use English Wikipedia page titles to
+uniquely identify entities---however pages are occasionally renamed, and
+page titles on Simple English might be different.
+
+While the Wikidata API provides a lookup-service, it is not practical
+for large-scale entity linking experiments. To support this situation,
+we provide a lookup resource for converting Wikipedia page titles to
+Wikidata QIDs, which includes previously renamed titles.
+
+# Provided Dumps and *Wikimarks*
+
+Since running our conversion pipeline can take several days, we
+demonstrate its usefulness by providing three Wikipedia dumps from
+January 1st, 2022 for English Wikipedia, Simple English Wikipedia, and
+Japanese Wikipedia.
+
+For each Wikipedia, we provide separately both for CBOR and JSONL output
+formats:
+
+`unprocessedAll`:
+
+:   an unprocessed dump of all Wikipedia articles, as described in
+    Section [3.1](#sec:unprocessed){reference-type="ref"
+    reference="sec:unprocessed"}.
+
+`collection`:
+
+:   all resources needed to perform experiments:
+
+    `benchmarks`:
+
+    :   *Wikimarks* for different subsets, as detailed below.
+
+    `paragraphCorpus`:
+
+    :   a corpus for passage retrieval as described in Section
+        [3.2](#sec:processed){reference-type="ref"
+        reference="sec:processed"}.
+
+    `unprocessedAllButBenchmark`:
+
+    :   an unprocessed Wikipedia dump in lieu of a knowledge graph
+        (pages from which *Wikimarks* were created are held out).
+
+We provide an example *Wikimarks* to demonstrate the versatility of the
+pipeline. These subsets are highly configurable and can be extended in
+the Wikipedia-specific configuration. Table
+[1](#tab:data-stats){reference-type="ref" reference="tab:data-stats"}
+lists the number of pages contained in each train/test set of the
+subsets.
+
+name-contains SUBSTR
+
+:   matches pages where the page name contains the SUBSTR (case
+    insensitive)
+
+name-has-prefix PREFIX
+
+:   matches pages where the page name starts with PREFIX (case
+    sensitive)
+
+name-has-suffix SUFFIX
+
+:   matches pages where the page name ends with SUFFIX (case sensitive)
+
+category-contains SUBSTR
+
+:   matches pages that are a member of a category that contains SUBSTR
+    (case insensitive)
+
+name-in-set \[\"P1\", \"P2\", \"P3\"
+
+:   \] matches pages whose page names are in the given set P1,P2,P3
+
+name-or-redirect-in-set \[\"P1\", ..
+
+:   \] same as name-in-set but also matches in redirects (useful when
+    pages are renamed)
+
+pageid-in-set \[\"P1\", \"P2\", \"P3\"
+
+:   \] matches pages whose page IDs are in the given set P1,P2,P3
+
+qid-in-set \[\"Q1\", \"Q2\", \"Q3\"
+
+:   \] matches pages with Wikidata QIDs in the given set Q1,Q2,Q3 (note
+    requires pages file with populated QIDs)
+
+has-page-tag \[\"T1\", \...
+
+:   \] matches pages with the given Page Tags, e.g. \"Good article\"
+
+true
+
+:   always true
+
+PRED1 $\vert$ PRED2
+
+:   Boolean OR, matches predicate PRED1 or PRED2
+
+PRED1 & PRED2
+
+:   Boolean AND, matches predicate PRED1 and PRED2
+
+! PRED
+
+:   Boolean NOT, inverts the predicate PRED
+
+page-hash-mod N K \[SALT
+
+:   \] matches pages where (hash of the page name) $\mod N == K$, for
+    $N > K$
+
+```{=html}
+
+```
+
+Vital-articles:
+
+:   A set of important articles that the Wikipedia community
+    identified[^14]. The community strives to provide these articles for
+    all languages. We obtain the set of Vital articles via Wikidata,
+    then filter the processed articles by Wikidata QID.\
+    Predicate ` qid-set-from-file "./vital-articles.qids"`
+
+Good-articles:
+
+:   A Wikipedia committee defines a set of good articles[^15] that are
+    well-written, contain factually accurate and verifiable information
+    and are of broad importance. Such pages are identified either as
+    template "GA" or "good article", which our pipeline is configured to
+    expose as page tag "Good article".\
+    Predicate: `has-page-tag ["Good article"]`
+
+US-history:
+
+:   A set of pages in categories that contain the words "United"
+    "States" "history", such as "History of the United States" or
+    "United States history timelines".\
+    Predicate:
+    `(category-contains "history" & category-contains "united" & category-contains "states")`
+
+Horseshoe-crab:
+
+:   The single Wikipedia page on horseshoe crabs used in the example
+    above. It is identified by its Wikidata QID.\
+    Predicate: `qid-in-set ["Q1329239"]`
+
+For backwards compatibility, we also provide subsets used in the TREC
+Complex Answer Retrieval track.
+
+BenchmarkY1:
+
+:   Train/Test set used in the first year of TREC CAR Articles manually
+    selected by browsing then randomly split into train/test.
+
+Car-train-large:
+
+:   Intended to be a very large training set for CAR, excludes pages
+    categories related to people, events, works of art, sports clubs and
+    lists. This set was originally known in CAR as "train-v2.0" and used
+    to filter the training set. Note, that the general training set
+    produced by our pipeline includes any category.
+
+Test200:
+
+:   An initial test of two hundred training pages selected from a list
+    of articles in training fold 0. Some of these articles were later
+    identified to be of weak quality (and removed from Wikipedia) and
+    this subset was not officially used.
+
+Since `car-train-large` and `test200` subsets do not provide a test set,
+all files in the test directory are empty.
+
+# Experimental Reference Baselines
+
+We are providing reference baselines for our example *Wikimarks* derived
+for the benchmarkY1 subsets from English and Simple English Wikipedia.
+The total number of test instances for each *Wikimark* are given in
+Table
+[\[tab:table-num-instances\]](#tab:table-num-instances){reference-type="ref"
+reference="tab:table-num-instances"}. The results obtained with our
+recommended evaluation approaches are presented in Table
+[\[tab:results\]](#tab:results){reference-type="ref"
+reference="tab:results"}.
+
+::: table*
+::: footnotesize
+  ----------------------- ------------------- --------- ---------- -- ------------------- --------- ----------- -- ---------------------- -------- -------- -- -------------------------- --------- ---------- --
+                            Relevant Passages                           Relevant Entities                            Clustering Instances                        Entity Linking Instances                      
+                                           en    simple         ja                     en    simple          ja                        en   simple       ja                            en    simple         jp 
+  vital-articles.test                  44,444     7,117     12,448                159,392    20,626      38,975                       521      328      393                        64,857     9,339     23,217 
+  vital-articles.train                 42,008     6,845     13,330                149,609    19,401      42,357                       528      324      440                        61,984     8,663     25,743 
+  good-articles.test                  408,454         7     23,869               1429,087        47      65,031                    17,088        1      626                       777,081         8     27,903 
+  good-articles.train                 415,034        17     24,375               1465,327        87      61,050                    17,362        1      626                       789,726        39     27,538 
+  US-history.test                      83,213       176         --                206,672       405          --                     4,232        6       --                       169,014       210         -- 
+  US-history.train                     83,255       146         --                205,438       608          --                     4,285        7       --                       160,764       173         -- 
+  horseshoe-crab.train                     21        11         --                     69        40          --                         1        1       --                            44        13         -- 
+  benchmarkY1.test                      6,554       434      1,160                 15,698     1,117       3,018                       131       23       56                         8,536       454      1,978 
+  benchmarkY1.train                     5,588       449      1,396                 14,744     1,273       3,440                       117       25       60                         7,258       513      2,152 
+  car-train-large.train             9,254,925   113,444   1496,289             19,764,159   249,369   3,462,123                   885,014    6,918   87,012                    25,423,934   185,203   3824,333 
+  test200.train                         5,537       109        335                 12,345       272         929                       188        5       19                         9,147       135        612 
+  ----------------------- ------------------- --------- ---------- -- ------------------- --------- ----------- -- ---------------------- -------- -------- -- -------------------------- --------- ---------- --
+:::
+:::
+
+::: table*
+  ------------------------------------------- -- ------------------- -------- ------- -------- ------------------ --------- ------- --------- -- -- ------------------- --------- ------- --------- ------------------ --------- ------- ---------
+                                                              simple                                                                                                 en                                                                  
+                                                   benchmarkY1.train                             benchmarkY1.test                                     benchmarkY1.train                               benchmarkY1.test                   
+  Paragraph Retrieval \[MAP\]                                                                                                                                                                                                            
+  bm25                                                         **0** **31**     **0** **04**                **0** **29**      **0** **03**                            0 097             0 01                         0 094             0 01
+  bm25-rm3                                                         0 29             0 04                        0 26              0 03                            **0** **107**     **0** **01**                 **0** **101**     **0** **01**
+  QL-rm3                                                           0 25             0 04                        0 20              0 02                                0 084             0 01                         0 076             0 01
+  Entity Ranking \[MAP\]                                                                                                                                                                                                                 
+  page-bm25                                                        0 03             0 005                       0 038             0 007                               0 025             0 002                        0 026             0 003
+  page-bm25-rm3                                                    0 05             0 007                       0 048             0 007                               0 037             0 003                        0 038             0 004
+  paragraph-bm25-ECM                                           **0** **23**     **0** **03**                **0** **253**     **0** **021**                       **0** **215**     **0** **01**                 **0** **21**      **0** **01**
+  Cluster \[Adjusted RAND Index\]                                                                                                                                                                                                        
+  TF-IDF agglomerative                                             0 16             0 06                        0 27              0 07                                0 15              0 01                         0 16              0 01
+  TF-IDF kmeans                                                    0 13             0 01                        0 12              0 01                                0 11              0 04                     **0** **19**      **0** **05**
+  SBERT kmeans                                                 **0** **38**     **0** **09**                **0** **38**      **0** **09**                        **0** **23**      **0** **02**                 **0** **19**      **0** **01**
+  Entity Linking \[Paragraph-Macro-avg F1\]                                                                                                                                                                                              
+  WAT                                                          **0** **44**     **0** **01**                **0** **42**      **0** **01**                        **0** **332**     **0** **004**                **0** **310**     **0** **003**
+  ------------------------------------------- -- ------------------- -------- ------- -------- ------------------ --------- ------- --------- -- -- ------------------- --------- ------- --------- ------------------ --------- ------- ---------
+:::
+
+## Passage Retrieval
+
+We provide reference results for article-level retrieval, using page
+titles as queries. Paragraphs are retrieved from the `paragraphCorpus`
+of each Wikipedia dump respectively.
+
+Baseline implementations are based on Lucene, with code provided
+online.[^16] As baselines we include:
+
+bm25:
+
+:   Lucene's BM25 method.
+
+bm25-rm3:
+
+:   RM3 query expansion, then retrieve with BM25.
+
+QL-rm3:
+
+:   RM3 query expansion, then retrieve with Lucene's Dirichlet-smoothed
+    query likelihood.
+
+As can be seen in Table
+[\[tab:results\]](#tab:results){reference-type="ref"
+reference="tab:results"}, all methods perform reasonably in terms of
+MAP. For brevity we are omitting R-precision, reciprocal rank, and NDCG
+results, which lead to similar conclusions.
+
+Note that in this study, article-level results are reported - this is
+unlike results for TREC CAR which are based on hierarchical-level
+retrieval.
+
+## Entity Retrieval
+
+In article-level entity retrieval, page titles are used as queries.
+Entities are retrieved from the `allButBenchmark` articles of each
+respective Wikipedia dump.
+
+Baseline implementations are based on Lucene using an index of pages in
+`allButBenchmark` and an index of paragraphs (with links) of the
+`paragraphCorpus`. As baselines we include:
+
+page-bm25:
+
+:   Retrieving Wikipedia pages via BM25.
+
+page-bm25-rm3:
+
+:   RM3 query expansion, then retrieving pages with BM25.
+
+paragraph-bm25-ECM:
+
+:   Retrieving paragraphs with BM25, then ranking entities linked in
+    these paragraphs with the entity context model (ECM).
+
+The entity context model (ECM) [@chatterjee2021entity] represents
+documents in a feedback run as a language model over entity links, then
+uses an RM3-style expansion to derive a distribution over entity links.
+While @dalton2014entity used these entities as expansion terms, here we
+use them as a means of ranking entities.
+
+Table [\[tab:results\]](#tab:results){reference-type="ref"
+reference="tab:results"} demonstrates that retrieving entities via their
+Wikipedia pages obtains poor results, while ECM, which uses entity links
+in a feedback set obtains good results. This is in line with earlier
+findings [@chatterjee2021entity].
+
+## Clustering
+
+We provide reference results for the following clustering methods based
+on TF-IDF and clustering in default configuration as provided by
+`scikit.learn`.[^17] We assume knowledge of the true number of clusters.
+
+TF-IDF agglomerative:
+
+:   Each paragraph is represented as a TF-IDF vector, then using
+    agglomerative clustering with Euclidean distance.
+
+TF-IDF kmeans:
+
+:   TF-IDF paragraph representation, then using K-means clustering.
+
+SBERT kmeans:
+
+:   Using Sentence-BERT paragraph representation (using ), then using
+    K-means clustering.
+
+Sentence-BERT [@reimers2019sentence] is a BERT-based embedding model
+trained for clustering sentences. We are using the `bert-base-uncased`
+version provided by the authors.
+
+We evaluate the predicted clusterings using the Adjusted Rand Index.
+Results are given in Table
+[\[tab:results\]](#tab:results){reference-type="ref"
+reference="tab:results"}. We observe that Sentence-BERT performs best.
+
+## Entity Linking
+
+We provide reference results for entity linking with the WAT entity
+linker[^18] [@piccinno2014wat] using its default configuration.
+
+Since the WAT linker used entity IDs based on Wikipedia titles of an
+unknown dump, we use our title to Wikidata QID conversion resource to
+annotate entity linking spans with QIDs. We follow the evaluation
+paradigm discussed in Section
+[4.3](#sec:entity-link-wikimark){reference-type="ref"
+reference="sec:entity-link-wikimark"}. Results are evaluated in F1 per
+paragraph, we provide macro-averages over paragraphs.
+
+The results demonstrate that an external entity linking tool can obtain
+reasonable performance on our *Wikimark*. While results are omitted, we
+obtain similar performance for micro-averaged F1 (0.29), and query-based
+macro-averaged-F1 (0.30) for benchmarkY1.test set from English
+Wikipedia. We find 15,561 true positives, 70,120 false positives, and
+4,965 false negatives.
+
+# Conclusions
+
+We provide a resource for generating *Wikimarks*---automatically
+harvested benchmarks from Wikipedia. We provide an efficient
+implementation for deriving *Wikimarks* from any Wikipedia dump. Our
+pipeline handles the download of Wikipedia files, the dump conversion,
+processing, subset creation, and derivation of four example *Wikimarks*
+for passage and entity retrieval, query-specific clustering, and
+query-specific entity linking. The pipeline is configurable to adjust
+for different page subsets, different languages, and is extensible
+towards additional *Wikimarks*. While the software was originally
+developed to provide data for the TREC Complex Answer Retrieval track,
+it has been significantly extended towards multiple languages and
+additional *Wikimarks*, Wikidata integration new JSONL output formats.
+
+As a proof of concept, we provide three recent Wikipedia dumps for
+English, Simple English, and Japanese from January 1st, 2022, along with
+*Wikimarks* for different page subsets. We provide results of reference
+baseline results for retrieval, clustering, and entity linking on these
+datasets, which are in-line with previous findings.
+
+Other communities have successfully leveraged content from Wikipedias
+for benchmark creation, and studies on TREC CAR demonstrated that
+findings under automatic *Wikimarks* are in line with results based on
+manual annotations of trained assessors. Nevertheless, *Wikimarks* are
+not a replacement for manually annotated benchmarks. However, we hope to
+contribute a means for providing evaluations for early research
+developments and training of data-hungry machine learning methods. This
+approach can overcome challenges for novel information retrieval tasks,
+such as search result organization and result annotation for
+information-seeking.
+
+# Acknowledgements {#acknowledgements .unnumbered}
+
+This material is based upon work supported by the National Science
+Foundation under Grant No. 1846017. Disclaimer. Any opinions, findings,
+and conclusions or recommendations expressed in this material are those
+of the author(s) and do not necessarily reflect the views of the
+National Science Foundation.
+
+We would like to thank Hideo Joho for providing the Japanese
+language-configuration for this pipeline. We thank all participants TREC
+CAR for being early adopters, and anyone who engaged with us in
+discussion on how to derive additional benchmarks from Wikipedia.
+
+[^1]: 
+
+[^2]: 
+
+[^3]: 
+
+[^4]: 
+
+[^5]: 
+
+[^6]: 
+
+[^7]: 
+
+[^8]: 
+
+[^9]: Data marked with $\dagger$ is reserved for training and evaluation
+    only.
+
+[^10]: 
+
+[^11]: Because of the redundancy induced by repeated JSON keys, we
+    recommend to open the file as a Gzipped stream, rather than
+    decompressing it.
+
+[^12]: 
+
+[^13]: 
+
+[^14]: Vital articles
+    
+
+[^15]: Good articles
+    
+
+[^16]: Passage and Entity Retrieval:
+    
+
+[^17]: `sklearn.feature_extraction.text` and `sklearn.cluster` in
+    version 1.0.2
+
+[^18]: 
