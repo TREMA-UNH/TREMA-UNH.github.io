@@ -41,11 +41,11 @@ article conversion pipeline run on the English, Simple English, and Japanese
 Wikipedia dumps from 1 January 2022. These `unprocessedAll` datasets include
 all pages of each Wiki in machine-readable JSONL or CBOR formats.
 
-* English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
+* English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
 
-* Simple English `simple`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
+* Simple English `simple`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
 
-* Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
+* Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
 
 
 ## Provided Benchmarks
@@ -63,6 +63,16 @@ Wikimarks extracted from these conversions:
 
 * the `paragraphCorpus` dataset is a corpus of paragraphs from articles to
   be used for passage retrieval evaluation.
+
+
+These datasets are are provided in JSONL or CBOR formats.
+
+* English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
+
+* Simple English `simple`:  [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
+
+* Japanese `ja`:  [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
+
 
 ### Page subsets
 
