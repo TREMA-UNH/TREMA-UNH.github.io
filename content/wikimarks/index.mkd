@@ -15,9 +15,12 @@ hyperlink structure, and complementary data sources such as [Wikidata][].
 
 ## Tasks
 
-The paper describes Wikimarks for six information retrieval tasks:
+The paper describes Wikimarks for four information retrieval tasks:
 
-* TODO
+* *passage retrieval*: retrieval of relevant text passages for a keyword query
+* *entity retrieval*: retrieval of relevant *entities* (defined to be Wikipedia pages) for a keyword query
+* *query-specific clustering*: sub-topic clustering of passages for a keyword query
+* *query-specific entity-linking*: annotation of query-relevant entity links in relevant passages
 
 ## Tools
 
@@ -30,19 +33,35 @@ This pipeline builds upon the tools provided by the
 extracting, inspecting, filtering, and generating benchmarks from Wikipedia
 dumps.
 
-## Benchmarks
+## Provided Conversions
 
-Along with the methodology and tools, we provide a full set of Wikimarks
-produced from a small subset of the 1 January 2022 Wikipedia dump.
-Specifically, we offer benchmarks derived from the following Wikis:
+Along with the methodology and tools, we provide the raw products of our
+article conversion pipeline run on the English, Simple English, and Japanese
+Wikipedia dumps from 1 January 2022. These `unprocessedAll` datasets include
+all pages of each Wiki in machine-readable JSONL and CBOR formats.
 
-* English Wikipedia, `enwiki`
-* Simple Wikipedia, `simplewiki`
-* Japanese Wikipedia, `jawiki`
+* `enwiki`: [download](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
 
-These are licensed under the [Creative Commons Attribution-ShareAlike 3.0
-Unported License][cc-sa] and are available for download from
-<http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/>.
+## Provided Benchmarks
+
+In addition to the raw conversions described above, we also provide several
+Wikimarks extracted from these conversions:
+
+* the `benchmarks` dataset provides Wikimarks for passage retrieval, entity
+  retrieval, query-specific clustering, and entity linking, extracted from the
+  page subsets described in Section TODO of the paper.
+
+* the `unprocessedAllButBenchmark` dataset provides all pages except for the
+  set included in `benchmarks` and is intended to be used for training of
+  systems to be evaluated using `benchmarks`
+
+* the `paragraphCorpus` dataset is a corpus of paragraphs from articles to
+  be used for passage retrieval evaluation.
+
+## License
+
+The conversions and benchmarks described above are licensed under the [Creative
+Commons Attribution-ShareAlike 3.0 Unported License][cc-sa].
 
 
 [trec-car]: http://trec-car.cs.unh.edu/ 
@@ -51,3 +70,4 @@ Unported License][cc-sa] and are available for download from
 [cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
 [trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
 [trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
+[download]: http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/
