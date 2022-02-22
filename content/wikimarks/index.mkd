@@ -1,4 +1,46 @@
 # Wikimarks
 
-Hello world.
+In @dietz2022 we describe a methodology and tool-set for deriving information
+retrieval benchmarks for a variety of tasks from Wikipedia. We call these
+benchmarks *Wikimarks*. This work is an extension of the infrastructure
+developed while organizing the [Complex Answer Retrieval track][trec-car] at
+[NIST TREC][trec] and examines several using Wikipedia to assess several tasks
+not previously considered in the TREC-CAR context.
 
+We believe that Wikimarks can serve to complement traditional information
+retrieval benchmarks as they build upon a readily-available source of
+real-world text content. Furthermore, Wikipedia articles feature exhibit
+considerable machine-readable structure in the form of page structure,
+hyperlink structure, and complementary data sources such as [Wikidata][].
+
+## Tasks
+
+The paper describes Wikimarks for six information retrieval tasks:
+
+* TODO
+
+## Tools
+
+Our pipeline for generating Wikimarks can, along with usage instructions, be
+found in the [TREMA-UNH/trec-car-release][trec-car-release] project. See the
+`README` for further details.
+
+## Benchmarks
+
+Along with the methodology and tools, we provide a full set of Wikimarks
+produced from a small subset of the 1 January 2022 Wikipedia dump.
+Specifically, we offer benchmarks derived from the following Wikis:
+
+* English Wikipedia, `enwiki`
+* Simple Wikipedia, `simplewiki`
+* Japanese Wikipedia, `jawiki`
+
+These are licensed under the [Creative Commons Attribution-ShareAlike 3.0
+Unported License][cc-sa] and are available for download from TODO.
+
+
+[trec-car]: http://trec-car.cs.unh.edu/ 
+[trec]: https://trec.nist.gov/
+[Wikidata]: https://wikidata.org/
+[cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
+[trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
