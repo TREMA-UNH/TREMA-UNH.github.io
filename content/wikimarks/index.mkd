@@ -22,8 +22,13 @@ The paper describes Wikimarks for six information retrieval tasks:
 ## Tools
 
 Our pipeline for generating Wikimarks can, along with usage instructions, be
-found in the [TREMA-UNH/trec-car-release][trec-car-release] project. See the
+found in the [TREMA-UNH/trec-car-release][`trec-car-release`] project. See the
 `README` for further details.
+
+This pipeline builds upon the tools provided by the
+[`trec-car-create`][trec-car-create] package, which provides utilities for
+extracting, inspecting, filtering, and generating benchmarks from Wikipedia
+dumps.
 
 ## Benchmarks
 
@@ -44,3 +49,4 @@ Unported License][cc-sa] and are available for download from TODO.
 [Wikidata]: https://wikidata.org/
 [cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
 [trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
+[trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
