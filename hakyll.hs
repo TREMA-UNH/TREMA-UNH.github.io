@@ -15,6 +15,10 @@ main = hakyll $ do
                 route   idRoute
                 compile compressCssCompiler
 
+        match "content/**.png" $ do
+                route   idRoute
+                compile copyFileCompiler
+
         match "content/**.mkd" $ do
                 route   $ setExtension "html" `composeRoutes` gsubRoute "content/" (const "")
                 compile $ pandocCompiler
