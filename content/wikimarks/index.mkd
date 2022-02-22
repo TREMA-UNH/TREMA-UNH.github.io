@@ -1,7 +1,7 @@
 # Wikimarks
 
-In @dietz2022 we describe a methodology and tool-set for deriving information
-retrieval benchmarks for a variety of tasks from Wikipedia. We call these
+We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of
+tasks from Wikipedia. We call these
 benchmarks *Wikimarks*. This work is an extension of the infrastructure
 developed while organizing the [Complex Answer Retrieval track][trec-car] at
 [NIST TREC][trec] and examines several using Wikipedia to assess several tasks
@@ -22,25 +22,31 @@ The paper describes Wikimarks for four information retrieval tasks:
 * *query-specific clustering*: sub-topic clustering of passages for a keyword query
 * *query-specific entity-linking*: annotation of query-relevant entity links in relevant passages
 
-## Tools
+## Tools, Installation, and Usage
 
-Our pipeline for generating Wikimarks can, along with usage instructions, be
-found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. See the
-`README` for further details.
+Our pipeline for generating Wikimarks is
+found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. 
+Please follow installation, configuration and usage instructions in the
+`README`.
 
-This pipeline builds upon the tools provided by the
+This pipeline builds upon the conversion tools provided by the
 [`trec-car-create`][trec-car-create] package, which provides utilities for
-extracting, inspecting, filtering, and generating benchmarks from Wikipedia
-dumps.
+converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
+Please follow installation and compilation instructions described in the `README`.
 
 ## Provided Conversions
 
 Along with the methodology and tools, we provide the raw products of our
 article conversion pipeline run on the English, Simple English, and Japanese
 Wikipedia dumps from 1 January 2022. These `unprocessedAll` datasets include
-all pages of each Wiki in machine-readable JSONL and CBOR formats.
+all pages of each Wiki in machine-readable JSONL or CBOR formats.
 
-* `enwiki`: [download](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
+* English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
+
+* Simple English `simple`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
+
+* Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
+
 
 ## Provided Benchmarks
 
