@@ -34,7 +34,7 @@ This pipeline builds upon the conversion tools provided by the
 converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
 Please follow installation and compilation instructions described in the `README`.
 
-## Provided Conversions
+## Wikipedia Conversions
 
 Along with the methodology and tools, we provide the raw products of our
 article conversion pipeline run on the English, Simple English, and Japanese
@@ -48,7 +48,7 @@ all pages of each Wiki in machine-readable JSONL or CBOR formats.
 * Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
 
 
-## Provided Benchmarks
+## Wikimark Collections
 
 In addition to the raw conversions described above, we also provide several
 Wikimarks extracted from these conversions:
