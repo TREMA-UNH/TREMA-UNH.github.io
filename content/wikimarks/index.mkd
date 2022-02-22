@@ -49,14 +49,49 @@ Wikimarks extracted from these conversions:
 
 * the `benchmarks` dataset provides Wikimarks for passage retrieval, entity
   retrieval, query-specific clustering, and entity linking, extracted from the
-  page subsets described in Section TODO of the paper.
+  page subsets described in below.
 
 * the `unprocessedAllButBenchmark` dataset provides all pages except for the
   set included in `benchmarks` and is intended to be used for training of
-  systems to be evaluated using `benchmarks`
+  systems to be evaluated using `benchmarks`.
 
 * the `paragraphCorpus` dataset is a corpus of paragraphs from articles to
   be used for passage retrieval evaluation.
+
+### Page subsets
+
+The benchmarks are constructed from the following subset of Wikipedia pages
+from each of the provided Wikipedias:
+
+Vital-articles:
+
+:   A set of important articles that the Wikipedia community
+    [identified][vital articles]. The community strives to provide these articles for
+    all languages. We obtain the set of "vital" articles via Wikidata,
+    then filter the processed articles by Wikidata QID.\
+    Predicate: `qid-set-from-file "./vital-articles.qids"`
+
+Good-articles:
+
+:   A Wikipedia committee defines a set of [good articles][] that are
+    well-written, contain factually accurate and verifiable information
+    and are of broad importance. Such pages are identified either as
+    template "GA" or "good article", which our pipeline is configured to
+    expose as page tag "Good article".\
+    Predicate: `has-page-tag ["Good article"]`
+
+US-history:
+
+:   A set of pages in categories that contain the words "United"
+    "States" "history", such as "History of the United States" or
+    "United States history timelines".\
+    Predicate: `(category-contains "history" & category-contains "united" & category-contains "states")`
+
+Horseshoe-crab:
+
+:   The single Wikipedia page on horseshoe crabs used in the example
+    above. It is identified by its Wikidata QID.\
+    Predicate: `qid-in-set ["Q1329239"]`
 
 ## License
 
@@ -71,3 +106,5 @@ Commons Attribution-ShareAlike 3.0 Unported License][cc-sa].
 [trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
 [trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
 [download]: http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/
+[good articles]: https://en.wikipedia.org/wiki/Wikipedia:Good_articles
+[vital articles]: https://en.wikipedia.org/wiki/Wikipedia:Vital_articles
