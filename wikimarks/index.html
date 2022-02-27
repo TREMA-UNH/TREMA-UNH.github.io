@@ -93,7 +93,7 @@
 <li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
-<h3 id="page-subsets">Page subsets</h3>
+<h3 id="page-subsets">Page Subsets</h3>
 <p>The benchmarks described above are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
 <dl>
 <dt>Vital-articles:</dt>
@@ -113,6 +113,8 @@
 <p><code>trec-car-filter</code> Predicate: <code>qid-in-set ["Q1329239"]</code></p>
 </dd>
 </dl>
+<p>Additionally, we provide subsets used in the <a href="http://trec-car.cs.unh.edu/">TREC Complex Answer Retrieval Track</a> for backwards compatibility.</p>
+<h3 id="subset-statistics">Subset Statistics</h3>
 <div id="tab:data-stats">
 <table>
 <caption>Number of articles in each <em>Wikimark</em> subset.</caption>
@@ -201,7 +203,7 @@
 </table>
 </div>
 <h2 id="wikimarks">Wikimarks</h2>
-<p>In this work, we provide a methodology for deriving <em>Wikimarks</em> for four common information retrieval tasks:</p>
+<p>We provide a methodology for deriving <em>Wikimarks</em> for four common information retrieval tasks:</p>
 <ul>
 <li><em>passage retrieval</em>: retrieval of relevant text passages for a keyword query</li>
 <li><em>entity retrieval</em>: retrieval of relevant <em>entities</em> (defined to be Wikipedia pages) for a keyword query</li>
