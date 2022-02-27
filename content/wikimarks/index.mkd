@@ -129,7 +129,7 @@ These datasets are provided in JSONL or CBOR formats.
 
 
 
-### Page subsets
+### Page Subsets
 
 The benchmarks described above are constructed from the following subset of
 Wikipedia pages from each of the provided Wikipedias:
@@ -169,6 +169,10 @@ Horseshoe-crab:
     `trec-car-filter` Predicate: `qid-in-set ["Q1329239"]`
 
 
+Additionally, we provide subsets used in the [TREC Complex Answer Retrieval Track][trec-car] for backwards compatibility.
+
+### Subset Statistics
+
 ::: {#tab:data-stats}
                                  en   simple        ja
   ----------------------- --------- -------- ---------
@@ -191,7 +195,7 @@ Horseshoe-crab:
 
 ## Wikimarks {#wikimarks}
 
-In this work, we provide a methodology for deriving *Wikimarks* for four common
+We provide a methodology for deriving *Wikimarks* for four common
 information retrieval tasks:
 
 * *passage retrieval*: retrieval of relevant text passages for a keyword query
