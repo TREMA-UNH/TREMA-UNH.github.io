@@ -13,6 +13,19 @@ real-world text content. Furthermore, Wikipedia articles feature exhibit
 considerable machine-readable structure in the form of page structure,
 hyperlink structure, and complementary data sources such as [Wikidata][].
 
+
+### Authors
+- Laura Dietz <dietz@cs.unh.edu>
+- Shubham Chatterjee <sc1242@wildcats.unh.edu>
+- Connor Lennox <cjl1053@wildcats.unh.edu>,
+- Sumanta Kashyapi <sk1105@wildcats.unh.edu>, 
+- Pooja Oza <pho1003@wildcats.unh.edu>, 
+- Ben Gamari <ben@well-typed.com>
+
+University of New Hampshire, USA and Well-Typed LLP, UK
+
+## Table of Contents
+
 In this online supplement, we provide:
 
  * An approach for deriving [wikimark collections](#wikimarks), i.e., Wikipedia-derived benchmarks, 
@@ -23,13 +36,6 @@ In this online supplement, we provide:
  * A [set of Wikimarks](#collections) derived from these three Wikipedias
  * An [evaluation](#evaluation) of serveral baseline methods using these benchmarks
 
-
-### Authors
-Laura Dietz, Shubham Chatterjee, Connor Lennox, Sumanta Kashyapi, Pooja Oza, Ben Gamari
-
-University of New Hampshire, USA and Well-Typed LLP, UK
-
-Contacts: dietz@cs.unh.edu, {sc1242, cjl1053, sk1105, pho1003}@wildcats.unh.edu,  ben@well-typed.com
 
 
 ## Tools, Installation, and Usage {#tools}
