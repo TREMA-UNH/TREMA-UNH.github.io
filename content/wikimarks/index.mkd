@@ -62,6 +62,39 @@ CBOR formats.
 * Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
 
 
+### Data Model
+
+
+Wikipedia articlesare all described with following this grammar. Wikipedia-internal hyperlinks are preserved through `ParaLink`s.
+
+
+~~~~~
+     Page         -> $pageName $pageId [PageSkeleton] PageType PageMetadata
+     PageType     -> ArticlePage | CategoryPage | RedirectPage ParaLink | DisambiguationPage
+     PageMetadata -> RedirectNames DisambiguationNames DisambiguationIds CategoryNames CategoryIds InlinkIds InlinkAnchors WikiDataQid SiteId PageTags
+     RedirectNames       -> [$pageName] 
+     DisambiguationNames -> [$pageName] 
+     DisambiguationIds   -> [$pageId] 
+     CategoryNames       -> [$pageName] 
+     CategoryIds         -> [$pageId] 
+     InlinkIds           -> [$pageId] 
+     InlinkAnchors       -> [$anchorText] 
+     WikiDataQid         -> [$qid] 
+     SiteId              -> [$siteId] 
+     PageTags            -> [$pageTags] 
+     
+     PageSkeleton -> Section | Para | Image | ListItem | Infobox
+     Section      -> $sectionHeading [PageSkeleton]
+     Para         -> Paragraph
+     Paragraph    -> $paragraphId, [ParaBody]
+     ListItem     -> $nestingLevel, Paragraph
+     Image        -> $imageURL [PageSkeleton]
+     ParaBody     -> ParaText | ParaLink
+     ParaText     -> $text
+     ParaLink     -> $targetPage $targetPageId $targetPageQid $linkSection $anchorText
+     Infobox      -> $infoboxName [($key, [PageSkeleton])]
+~~~~~
+
 ## Wikimark Collections {#collections}
 
 In addition to the raw conversions described above, we also provide several
@@ -86,6 +119,8 @@ These datasets are provided in JSONL or CBOR formats.
 * Simple English `simple`:  [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
 
 * Japanese `ja`:  [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
+
+
 
 
 ### Page subsets
