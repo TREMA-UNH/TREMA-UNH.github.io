@@ -47,6 +47,32 @@
 <li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
+<h3 id="data-model">Data Model</h3>
+<p>Wikipedia articlesare all described with following this grammar. Wikipedia-internal hyperlinks are preserved through <code>ParaLink</code>s.</p>
+<pre><code>     Page         -&gt; $pageName $pageId [PageSkeleton] PageType PageMetadata
+     PageType     -&gt; ArticlePage | CategoryPage | RedirectPage ParaLink | DisambiguationPage
+     PageMetadata -&gt; RedirectNames DisambiguationNames DisambiguationIds CategoryNames CategoryIds InlinkIds InlinkAnchors WikiDataQid SiteId PageTags
+     RedirectNames       -&gt; [$pageName] 
+     DisambiguationNames -&gt; [$pageName] 
+     DisambiguationIds   -&gt; [$pageId] 
+     CategoryNames       -&gt; [$pageName] 
+     CategoryIds         -&gt; [$pageId] 
+     InlinkIds           -&gt; [$pageId] 
+     InlinkAnchors       -&gt; [$anchorText] 
+     WikiDataQid         -&gt; [$qid] 
+     SiteId              -&gt; [$siteId] 
+     PageTags            -&gt; [$pageTags] 
+     
+     PageSkeleton -&gt; Section | Para | Image | ListItem | Infobox
+     Section      -&gt; $sectionHeading [PageSkeleton]
+     Para         -&gt; Paragraph
+     Paragraph    -&gt; $paragraphId, [ParaBody]
+     ListItem     -&gt; $nestingLevel, Paragraph
+     Image        -&gt; $imageURL [PageSkeleton]
+     ParaBody     -&gt; ParaText | ParaLink
+     ParaText     -&gt; $text
+     ParaLink     -&gt; $targetPage $targetPageId $targetPageQid $linkSection $anchorText
+     Infobox      -&gt; $infoboxName [($key, [PageSkeleton])]</code></pre>
 <h2 id="collections">Wikimark Collections</h2>
 <p>In addition to the raw conversions described above, we also provide several Wikimarks extracted from these conversions:</p>
 <ul>
