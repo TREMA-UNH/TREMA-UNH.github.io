@@ -15,14 +15,13 @@ hyperlink structure, and complementary data sources such as [Wikidata][].
 
 In this work, we provide:
 
- * A framework for deriving [benchmarks](#wikimarks) for a set of four common
-   information retrieval tasks
+ * A framework for deriving [benchmark collections](#wikimarks) for a set of
+   four common information retrieval tasks
  * A [set of tools](#tools) for deriving Wikimarks from Wikipedia dumps
  * A [set of machine-readable conversions](#conversions) of the English, Simple
    English, and Japanese Wikipedias
  * A [set of Wikimarks](#collections) derived from these three Wikipedias
- * An [evaluation](#evaluation) using these benchmark collections of several baseline
-   methods.
+ * An [evaluation](#evaluation) of serveral baseline methods using these benchmarks
 
 
 ### Authors
@@ -50,8 +49,9 @@ Please follow installation and compilation instructions described in the `README
 
 Along with the methodology and tools, we provide the raw products of our
 article conversion pipeline run on the English, Simple English, and Japanese
-Wikipedia dumps from 1 January 2022. These `unprocessedAll` datasets include
-all pages of each Wiki in machine-readable JSONL or CBOR formats.
+Wikipedia dumps from 1 January 2022. These datasets, which we call
+`unprocessedAll`, include all pages of each Wiki in machine-readable JSONL or
+CBOR formats.
 
 * English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
 
@@ -67,7 +67,7 @@ Wikimarks extracted from these conversions:
 
 * the `benchmarks` dataset provides Wikimarks for passage retrieval, entity
   retrieval, query-specific clustering, and entity linking, extracted from the
-  page subsets described in below.
+  page subsets described below.
 
 * the `unprocessedAllButBenchmark` dataset provides all pages except for the
   set included in `benchmarks` and is intended to be used for training of
@@ -77,7 +77,7 @@ Wikimarks extracted from these conversions:
   be used for passage retrieval evaluation.
 
 
-These datasets are are provided in JSONL or CBOR formats.
+These datasets are provided in JSONL or CBOR formats.
 
 * English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
 
@@ -88,16 +88,17 @@ These datasets are are provided in JSONL or CBOR formats.
 
 ### Page subsets
 
-The benchmarks are constructed from the following subset of Wikipedia pages
-from each of the provided Wikipedias:
+The benchmarks described above are constructed from the following subset of
+Wikipedia pages from each of the provided Wikipedias:
 
 Vital-articles:
 
 :   A set of important articles that the Wikipedia community
     [identified][vital articles]. The community strives to provide these articles for
     all languages. We obtain the set of "vital" articles via Wikidata,
-    then filter the processed articles by Wikidata QID.\
-    Predicate: `qid-set-from-file "./vital-articles.qids"`
+    then filter the processed articles by Wikidata QID.
+
+    `trec-car-filter` Predicate: `qid-set-from-file "./vital-articles.qids"`
 
 Good-articles:
 
@@ -105,21 +106,24 @@ Good-articles:
     well-written, contain factually accurate and verifiable information
     and are of broad importance. Such pages are identified either as
     template "GA" or "good article", which our pipeline is configured to
-    expose as page tag "Good article".\
-    Predicate: `has-page-tag ["Good article"]`
+    expose as page tag "Good article".
+
+    `trec-car-filter` Predicate: `has-page-tag ["Good article"]`
 
 US-history:
 
 :   A set of pages in categories that contain the words "United"
     "States" "history", such as "History of the United States" or
-    "United States history timelines".\
-    Predicate: `(category-contains "history" & category-contains "united" & category-contains "states")`
+    "United States history timelines".
+
+    `trec-car-filter` Predicate: `(category-contains "history" & category-contains "united" & category-contains "states")`
 
 Horseshoe-crab:
 
 :   The single Wikipedia page on horseshoe crabs used in the example
-    above. It is identified by its Wikidata QID.\
-    Predicate: `qid-in-set ["Q1329239"]`
+    above. It is identified by its Wikidata QID.
+
+    `trec-car-filter` Predicate: `qid-in-set ["Q1329239"]`
 
 
 ::: {#tab:data-stats}
@@ -138,8 +142,7 @@ Horseshoe-crab:
   test200.test                  \--        1        42
   test200.train                 188       12        44
 
-  : Number of articles in each *Wikimark*
-  subset.[\[tab:data-stats\]]{#tab:data-stats label="tab:data-stats"}
+  : Number of articles in each *Wikimark* subset.
 :::
 
 
