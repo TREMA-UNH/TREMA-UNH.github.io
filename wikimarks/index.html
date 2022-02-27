@@ -25,11 +25,11 @@
 <p>We believe that Wikimarks can serve to complement traditional information retrieval benchmarks as they build upon a readily-available source of real-world text content. Furthermore, Wikipedia articles feature exhibit considerable machine-readable structure in the form of page structure, hyperlink structure, and complementary data sources such as <a href="https://wikidata.org/">Wikidata</a>.</p>
 <p>In this work, we provide:</p>
 <ul>
-<li>A framework for deriving <a href="#wikimarks">benchmarks</a> for a set of four common information retrieval tasks</li>
+<li>A framework for deriving <a href="#wikimarks">benchmark collections</a> for a set of four common information retrieval tasks</li>
 <li>A <a href="#tools">set of tools</a> for deriving Wikimarks from Wikipedia dumps</li>
 <li>A <a href="#conversions">set of machine-readable conversions</a> of the English, Simple English, and Japanese Wikipedias</li>
 <li>A <a href="#collections">set of Wikimarks</a> derived from these three Wikipedias</li>
-<li>An <a href="#evaluation">evaluation</a> using these benchmark collections of several baseline methods.</li>
+<li>An <a href="#evaluation">evaluation</a> of serveral baseline methods using these benchmarks</li>
 </ul>
 <h3 id="authors">Authors</h3>
 <p>Laura Dietz, Shubham Chatterjee, Connor Lennox, Sumanta Kashyapi, Pooja Oza, Ben Gamari</p>
@@ -39,7 +39,7 @@
 <p>Our pipeline for generating Wikimarks is found in the <a href="https://github.com/TREMA-UNH/trec-car-release"><code>TREMA-UNH/trec-car-release</code></a> project. Please follow installation, configuration and usage instructions in the <code>README</code>.</p>
 <p>This pipeline builds upon the conversion tools provided by the <a href="https://github.com/TREMA-UNH/trec-car-create"><code>trec-car-create</code></a> package, which provides utilities for converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia. Please follow installation and compilation instructions described in the <code>README</code>.</p>
 <h2 id="conversions">Wikipedia Conversions</h2>
-<p>Along with the methodology and tools, we provide the raw products of our article conversion pipeline run on the English, Simple English, and Japanese Wikipedia dumps from 1 January 2022. These <code>unprocessedAll</code> datasets include all pages of each Wiki in machine-readable JSONL or CBOR formats.</p>
+<p>Along with the methodology and tools, we provide the raw products of our article conversion pipeline run on the English, Simple English, and Japanese Wikipedia dumps from 1 January 2022. These datasets, which we call <code>unprocessedAll</code>, include all pages of each Wiki in machine-readable JSONL or CBOR formats.</p>
 <ul>
 <li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
@@ -48,39 +48,39 @@
 <h2 id="collections">Wikimark Collections</h2>
 <p>In addition to the raw conversions described above, we also provide several Wikimarks extracted from these conversions:</p>
 <ul>
-<li><p>the <code>benchmarks</code> dataset provides Wikimarks for passage retrieval, entity retrieval, query-specific clustering, and entity linking, extracted from the page subsets described in below.</p></li>
+<li><p>the <code>benchmarks</code> dataset provides Wikimarks for passage retrieval, entity retrieval, query-specific clustering, and entity linking, extracted from the page subsets described below.</p></li>
 <li><p>the <code>unprocessedAllButBenchmark</code> dataset provides all pages except for the set included in <code>benchmarks</code> and is intended to be used for training of systems to be evaluated using <code>benchmarks</code>.</p></li>
 <li><p>the <code>paragraphCorpus</code> dataset is a corpus of paragraphs from articles to be used for passage retrieval evaluation.</p></li>
 </ul>
-<p>These datasets are are provided in JSONL or CBOR formats.</p>
+<p>These datasets are provided in JSONL or CBOR formats.</p>
 <ul>
 <li><p>English <code>en</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Simple English <code>simple</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz">CBOR</a></p></li>
 <li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
 <h3 id="page-subsets">Page subsets</h3>
-<p>The benchmarks are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
+<p>The benchmarks described above are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
 <dl>
 <dt>Vital-articles:</dt>
-<dd><p>A set of important articles that the Wikipedia community <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles">identified</a>. The community strives to provide these articles for all languages. We obtain the set of “vital” articles via Wikidata, then filter the processed articles by Wikidata QID.<br />
-Predicate: <code>qid-set-from-file "./vital-articles.qids"</code></p>
+<dd><p>A set of important articles that the Wikipedia community <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles">identified</a>. The community strives to provide these articles for all languages. We obtain the set of “vital” articles via Wikidata, then filter the processed articles by Wikidata QID.</p>
+<p><code>trec-car-filter</code> Predicate: <code>qid-set-from-file "./vital-articles.qids"</code></p>
 </dd>
 <dt>Good-articles:</dt>
-<dd><p>A Wikipedia committee defines a set of <a href="https://en.wikipedia.org/wiki/Wikipedia:Good_articles">good articles</a> that are well-written, contain factually accurate and verifiable information and are of broad importance. Such pages are identified either as template “GA” or “good article”, which our pipeline is configured to expose as page tag “Good article”.<br />
-Predicate: <code>has-page-tag ["Good article"]</code></p>
+<dd><p>A Wikipedia committee defines a set of <a href="https://en.wikipedia.org/wiki/Wikipedia:Good_articles">good articles</a> that are well-written, contain factually accurate and verifiable information and are of broad importance. Such pages are identified either as template “GA” or “good article”, which our pipeline is configured to expose as page tag “Good article”.</p>
+<p><code>trec-car-filter</code> Predicate: <code>has-page-tag ["Good article"]</code></p>
 </dd>
 <dt>US-history:</dt>
-<dd><p>A set of pages in categories that contain the words “United” “States” “history”, such as “History of the United States” or “United States history timelines”.<br />
-Predicate: <code>(category-contains "history" &amp; category-contains "united" &amp; category-contains "states")</code></p>
+<dd><p>A set of pages in categories that contain the words “United” “States” “history”, such as “History of the United States” or “United States history timelines”.</p>
+<p><code>trec-car-filter</code> Predicate: <code>(category-contains "history" &amp; category-contains "united" &amp; category-contains "states")</code></p>
 </dd>
 <dt>Horseshoe-crab:</dt>
-<dd><p>The single Wikipedia page on horseshoe crabs used in the example above. It is identified by its Wikidata QID.<br />
-Predicate: <code>qid-in-set ["Q1329239"]</code></p>
+<dd><p>The single Wikipedia page on horseshoe crabs used in the example above. It is identified by its Wikidata QID.</p>
+<p><code>trec-car-filter</code> Predicate: <code>qid-in-set ["Q1329239"]</code></p>
 </dd>
 </dl>
 <div id="tab:data-stats">
 <table>
-<caption>Number of articles in each <em>Wikimark</em> subset.<span id="tab:data-stats" label="tab:data-stats">[tab:data-stats]</span></caption>
+<caption>Number of articles in each <em>Wikimark</em> subset.</caption>
 <thead>
 <tr class="header">
 <th></th>
