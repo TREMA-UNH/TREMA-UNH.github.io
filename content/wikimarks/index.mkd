@@ -71,7 +71,7 @@ CBOR formats.
 ### Data Model
 
 
-Wikipedia articlesare all described with following this grammar. Wikipedia-internal hyperlinks are preserved through `ParaLink`s.
+Wikipedia articles, paragraphs, and outlines are provided in CBOR or JSONL are all represented with following this grammar. Wikipedia-internal hyperlinks are preserved through `ParaLink`s.
 
 
 ~~~~~
