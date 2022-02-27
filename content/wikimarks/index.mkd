@@ -446,8 +446,18 @@ Number of train/test instances for each Wikimark.
 
 ## License
 
-The conversions and benchmarks described above are licensed under the [Creative
-Commons Attribution-ShareAlike 3.0 Unported License][cc-sa].
+
+
+This data set is part of the Wikimarks dataset version v2.6.
+
+The conversions and benchmarks described above are provided by Laura Dietz, Ben Gamari
+  under a <a rel="license"
+href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative
+Commons Attribution-ShareAlike 3.0 Unported License</a>. The data is
+based on content extracted from <https://dumps.wikipedia.org/> that is
+licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported
+License.
+
 
 
 [trec-car]: http://trec-car.cs.unh.edu/ 
