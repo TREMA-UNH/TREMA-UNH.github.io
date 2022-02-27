@@ -1,6 +1,5 @@
 # Wikimarks
 
-
 We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of
 tasks from Wikipedia. We call these
 benchmarks *Wikimarks*. This work is an extension of the infrastructure
@@ -14,6 +13,18 @@ real-world text content. Furthermore, Wikipedia articles feature exhibit
 considerable machine-readable structure in the form of page structure,
 hyperlink structure, and complementary data sources such as [Wikidata][].
 
+In this work, we provide:
+
+ * A framework for deriving [benchmarks](#wikimarks) for a set of four common
+   information retrieval tasks
+ * A [set of tools](#tools) for deriving Wikimarks from Wikipedia dumps
+ * A [set of machine-readable conversions](#conversions) of the English, Simple
+   English, and Japanese Wikipedias
+ * A [set of Wikimarks](#collections) derived from these three Wikipedias
+ * An [evaluation](#evaluation) using these benchmark collections of several baseline
+   methods.
+
+
 ### Authors
 Laura Dietz, Shubham Chatterjee, Connor Lennox, Sumanta Kashyapi, Pooja Oza, Ben Gamari
 
@@ -22,17 +33,7 @@ University of New Hampshire, USA and Well-Typed LLP, UK
 Contacts: dietz@cs.unh.edu, {sc1242, cjl1053, sk1105, pho1003}@wildcats.unh.edu,  ben@well-typed.com
 
 
-
-## Tasks
-
-The paper describes Wikimarks for four information retrieval tasks:
-
-* *passage retrieval*: retrieval of relevant text passages for a keyword query
-* *entity retrieval*: retrieval of relevant *entities* (defined to be Wikipedia pages) for a keyword query
-* *query-specific clustering*: sub-topic clustering of passages for a keyword query
-* *query-specific entity-linking*: annotation of query-relevant entity links in relevant passages
-
-## Tools, Installation, and Usage
+## Tools, Installation, and Usage {#tools}
 
 Our pipeline for generating Wikimarks is
 found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. 
@@ -44,7 +45,8 @@ This pipeline builds upon the conversion tools provided by the
 converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
 Please follow installation and compilation instructions described in the `README`.
 
-## Wikipedia Conversions
+
+## Wikipedia Conversions {#conversions}
 
 Along with the methodology and tools, we provide the raw products of our
 article conversion pipeline run on the English, Simple English, and Japanese
@@ -58,7 +60,7 @@ all pages of each Wiki in machine-readable JSONL or CBOR formats.
 * Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
 
 
-## Wikimark Collections
+## Wikimark Collections {#collections}
 
 In addition to the raw conversions described above, we also provide several
 Wikimarks extracted from these conversions:
@@ -140,11 +142,20 @@ Horseshoe-crab:
   subset.[\[tab:data-stats\]]{#tab:data-stats label="tab:data-stats"}
 :::
 
-## Wikimarks
 
-*Wikimarks* are created from a subset of pages, such as lists of
-Wikidata QIDs or category memberships. The page subset is separated into
-a test set and five train folds. For each of them task-specific
+## Wikimarks {#wikimarks}
+
+In this work, we provide a methodology for deriving *Wikimarks* for four common
+information retrieval tasks:
+
+* *passage retrieval*: retrieval of relevant text passages for a keyword query
+* *entity retrieval*: retrieval of relevant *entities* (defined to be Wikipedia pages) for a keyword query
+* *query-specific clustering*: sub-topic clustering of passages for a keyword query
+* *query-specific entity-linking*: annotation of query-relevant entity links in relevant passages
+
+*Wikimarks* are created from a subset of Wikipedia pages, such as lists of
+Wikidata QIDs or category memberships.  The page subset is separated into a
+test set and five train folds. For each of them task-specific
 datasets, such as queries, candidate sets, and relevance ground truth's
 for the *Wikimarks* are exported. By default the following information
 is provided for each dataset:[^9]
@@ -174,7 +185,7 @@ black dots; entity IDs as letters in stick figures; ground truth cluster
 indexes. ](rel-cluster-benchmark.png)
 
 
-## Retrieval *Wikimark*
+### Retrieval *Wikimark*
 
 The retrieval *Wikimark* is designed to study the quality of retrieval
 models. For queries derived from Wikipedia titles, any paragraph
@@ -237,7 +248,7 @@ Entity Qrels $\dagger$:
 We recommend to use the retrieval evaluation tool `trec-eval`[^10] with
 option `-c` using the provided qrels files.
 
-## Query-specific Clustering *Wikimark* {#sec:wikimark}
+### Query-specific Clustering *Wikimark* {#sec:wikimark}
 
 The task of search result clustering, will, given a search query and a
 ranking of search results, identify query-specific clusters for
@@ -283,7 +294,7 @@ paragraph and its annotation is to be accepted without
 penalty.](entity-linking-benchmark.png)
 
 
-## Query-specific Entity Linking *Wikimark* {#sec:entity-link-wikimark}
+### Query-specific Entity Linking *Wikimark* {#sec:entity-link-wikimark}
 
 Entity linking is typically discussed as an NLP task that ignores the
 context of a search query. However when presenting relevant information
@@ -337,9 +348,6 @@ linking evaluation should only give credit to every entity in
 `true labels`, but not penalize entities in `acceptable labels`.
 
 
-
-
-
 Number of train/test instances for each Wikimark.
 
 ::: table*
@@ -363,9 +371,7 @@ Number of train/test instances for each Wikimark.
 :::
 
 
-## Evaluation Results for Reference Baselines
-
-
+## Evaluation Results for Reference Baselines {#evaluation}
 
 ::: table*
   --------------------------------------- ---------------------- --------------------- ----------------------- -- ----------------------- -----------------------
