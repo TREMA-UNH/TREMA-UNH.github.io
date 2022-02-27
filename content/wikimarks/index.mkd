@@ -13,10 +13,10 @@ real-world text content. Furthermore, Wikipedia articles feature exhibit
 considerable machine-readable structure in the form of page structure,
 hyperlink structure, and complementary data sources such as [Wikidata][].
 
-In this work, we provide:
+In this online supplement, we provide:
 
- * A framework for deriving [benchmark collections](#wikimarks) for a set of
-   four common information retrieval tasks
+ * An approach for deriving [wikimark collections](#wikimarks), i.e., Wikipedia-derived benchmarks, 
+ * for a set of  four common information retrieval tasks
  * A [set of tools](#tools) for deriving Wikimarks from Wikipedia dumps
  * A [set of machine-readable conversions](#conversions) of the English, Simple
    English, and Japanese Wikipedias
@@ -43,6 +43,8 @@ This pipeline builds upon the conversion tools provided by the
 [`trec-car-create`][trec-car-create] package, which provides utilities for
 converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
 Please follow installation and compilation instructions described in the `README`.
+
+Language bindings for java and python to read the CBOR file formats are provided in the [`trec-car-tools`](https://github.com/TREMA-UNH/trec-car-tools) packages.
 
 
 ## Wikipedia Conversions {#conversions}
