@@ -395,6 +395,8 @@ of an article and exposed them as `acceptable entity labels`. The entity
 linking evaluation should only give credit to every entity in
 `true labels`, but not penalize entities in `acceptable labels`.
 
+#### Wikimark Train/Test Instances
+
 
 Number of train/test instances for each Wikimark.
 
@@ -421,6 +423,9 @@ Number of train/test instances for each Wikimark.
 
 ## Evaluation Results for Reference Baselines {#evaluation}
 
+### Results
+
+
 ::: table*
   --------------------------------------- ---------------------- --------------------- ----------------------- -- ----------------------- -----------------------
                                                                         simple                                              en            
@@ -442,6 +447,74 @@ Number of train/test instances for each Wikimark.
   --------------------------------------- ---------------------- --------------------- ----------------------- -- ----------------------- -----------------------
 :::
 
+### Baselines
+
+#### Passage and Entity Retrieval
+
+
+Baseline implementations are based on Lucene, with code provided
+[online](https://github.com/laura-dietz/trec-car-methods). 
+
+
+Baselines for passage retrieval
+
+bm25:
+
+:   Lucene's BM25 method.
+
+bm25-rm3:
+
+:   RM3 query expansion, then retrieve with BM25.
+
+QL-rm3:
+
+:   RM3 query expansion, then retrieve with Lucene's Dirichlet-smoothed
+    query likelihood.
+
+
+Baselines for entity retrieval
+
+page-bm25:
+
+:   Retrieving Wikipedia pages via BM25.
+
+page-bm25-rm3:
+
+:   RM3 query expansion, then retrieving pages with BM25.
+
+paragraph-bm25-ECM:
+
+:   Retrieving paragraphs with BM25, then ranking entities linked in
+    these paragraphs with the entity context model (ECM).
+
+#### Clustering
+
+Based on default implementations in [`scikit.learn`](https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation) for 
+TF-IDF, agglomerative clustering, and K-means clustering. We use packages `sklearn.feature_extraction.text` and `sklearn.cluster` in scikit.learn version 1.0.2
+
+
+TF-IDF agglomerative:
+
+:   Each paragraph is represented as a TF-IDF vector, then using
+    agglomerative clustering with Euclidean distance.
+
+TF-IDF kmeans:
+
+:   TF-IDF paragraph representation, then using K-means clustering.
+
+SBERT kmeans:
+
+:   Using Sentence-BERT paragraph representation (using ), then using
+    K-means clustering.
+
+Sentence-BERT [@reimers2019sentence] is a BERT-based embedding model
+trained for clustering sentences. We are using the `bert-base-uncased`
+version provided by the authors.
+
+#### Entity Linking
+
+We provide reference results for entity linking with the [WAT entity
+linker](https://sobigdata.d4science.org/web/tagme/wat-api) [@piccinno2014wat] using its default configuration.
 
 
 ## License
