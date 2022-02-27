@@ -201,7 +201,7 @@
 <li><em>query-specific clustering</em>: sub-topic clustering of passages for a keyword query</li>
 <li><em>query-specific entity-linking</em>: annotation of query-relevant entity links in relevant passages</li>
 </ul>
-<p><em>Wikimarks</em> are created from a subset of Wikipedia pages, such as lists of Wikidata QIDs or category memberships. The page subset is separated into a test set and five train folds. For each of them task-specific datasets, such as queries, candidate sets, and relevance ground truth’s for the <em>Wikimarks</em> are exported. By default the following information is provided for each dataset:[^9]</p>
+<p><em>Wikimarks</em> are created from a subset of Wikipedia pages, such as lists of Wikidata QIDs or category memberships. The page subset is separated into a test set and five train folds. For each of them task-specific datasets, such as queries, candidate sets, and relevance ground truth’s for the <em>Wikimarks</em> are exported. By default the following information is provided for each dataset:</p>
 <dl>
 <dt>Articles <span class="math inline">†</span>:</dt>
 <dd><p>Content of processed articles (JSONL or CBOR).</p>
@@ -229,7 +229,7 @@
 <li><p>Hierarchical: The query is derived from any section on the page. The goal is to retrieve paragraphs that are exactly in this section, not a subsection.</p></li>
 </ul>
 <p>In addition to passage-level retrieval, we also provide a <em>Wikimark</em> for entity retrieval, where any entity (as represented by their Wikipedia pages) that is linked to from a relevant paragraph is regarded as relevant.</p>
-<p>As a corpus for retrieving passages from, we recommend to use the paragraph corpus described in Section <a href="#sec:paragraph-corpus" data-reference-type="ref" data-reference="sec:paragraph-corpus">[sec:paragraph-corpus]</a>. As a legal set of entities, we recommend to use an unprocessed dump of Wikipedia pages.</p>
+<p>As a corpus for retrieving passages from, we recommend to use the paragraph corpus. As a legal set of entities, we recommend to use an unprocessed dump of Wikipedia pages.</p>
 <p>For the retrieval <em>Wikimark</em>, we provide the following information:</p>
 <dl>
 <dt>Outlines:</dt>
@@ -246,10 +246,10 @@
 </dd>
 </dl>
 <h4 id="evaluation.">Evaluation.</h4>
-<p>We recommend to use the retrieval evaluation tool <code>trec-eval</code>[^10] with option <code>-c</code> using the provided qrels files.</p>
+<p>We recommend to use the retrieval evaluation tool <a href="https://github.com/usnistgov/trec_eval"><code>trec-eval</code></a> with option <code>-c</code> using the provided qrels files.</p>
 <h3 id="sec:wikimark">Query-specific Clustering <em>Wikimark</em></h3>
 <p>The task of search result clustering, will, given a search query and a ranking of search results, identify query-specific clusters for presentation. We provide a <em>Wikimark</em> dataset for this clustering task, where the query is taken as page title, and each top-level section defines one ground truth cluster. The search results are taken from the article-level retrieval task. To train on this task in isolation from a retrieval system, we suggest to use all passages that originate from this page.</p>
-<p>The query-specific clustering <em>Wikimark</em> is provided as a JSONL gzipped file[^11] which contains the following information:</p>
+<p>The query-specific clustering <em>Wikimark</em> is provided as a JSONL gzipped file which contains the following information:</p>
 <dl>
 <dt>Query:</dt>
 <dd><p>The query text is derived from the page name; the query ID from the page ID.</p>
