@@ -55,7 +55,7 @@
 <li><p>Japanese <code>ja</code>: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar">JSONL</a> / <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz">CBOR</a></p></li>
 </ul>
 <h3 id="data-model">Data Model</h3>
-<p>Wikipedia articlesare all described with following this grammar. Wikipedia-internal hyperlinks are preserved through <code>ParaLink</code>s.</p>
+<p>Wikipedia articles, paragraphs, and outlines are provided in CBOR or JSONL are all represented with following this grammar. Wikipedia-internal hyperlinks are preserved through <code>ParaLink</code>s.</p>
 <pre><code>     Page         -&gt; $pageName $pageId [PageSkeleton] PageType PageMetadata
      PageType     -&gt; ArticlePage | CategoryPage | RedirectPage ParaLink | DisambiguationPage
      PageMetadata -&gt; RedirectNames DisambiguationNames DisambiguationIds CategoryNames CategoryIds InlinkIds InlinkAnchors WikiDataQid SiteId PageTags
