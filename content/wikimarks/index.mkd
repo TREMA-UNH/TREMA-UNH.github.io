@@ -198,7 +198,7 @@ Wikidata QIDs or category memberships.  The page subset is separated into a
 test set and five train folds. For each of them task-specific
 datasets, such as queries, candidate sets, and relevance ground truth's
 for the *Wikimarks* are exported. By default the following information
-is provided for each dataset:[^9]
+is provided for each dataset:
 
 Articles $\dagger$:
 
@@ -255,9 +255,7 @@ pages) that is linked to from a relevant paragraph is regarded as
 relevant.
 
 As a corpus for retrieving passages from, we recommend to use the
-paragraph corpus described in Section
-[\[sec:paragraph-corpus\]](#sec:paragraph-corpus){reference-type="ref"
-reference="sec:paragraph-corpus"}. As a legal set of entities, we
+paragraph corpus. As a legal set of entities, we
 recommend to use an unprocessed dump of Wikipedia pages.
 
 For the retrieval *Wikimark*, we provide the following information:
@@ -285,7 +283,7 @@ Entity Qrels $\dagger$:
 
 #### Evaluation.
 
-We recommend to use the retrieval evaluation tool `trec-eval`[^10] with
+We recommend to use the retrieval evaluation tool [`trec-eval`](https://github.com/usnistgov/trec_eval) with
 option `-c` using the provided qrels files.
 
 ### Query-specific Clustering *Wikimark* {#sec:wikimark}
@@ -300,7 +298,7 @@ retrieval system, we suggest to use all passages that originate from
 this page.
 
 The query-specific clustering *Wikimark* is provided as a JSONL gzipped
-file[^11] which contains the following information:
+file which contains the following information:
 
 Query:
 
