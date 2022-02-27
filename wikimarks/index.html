@@ -299,6 +299,7 @@
 </dl>
 <p>We remove instances of paragraphs without any linked entities.</p>
 <p>Wikipedia’s editorial policies mandate that entities are only linked once per article. Consequently, entities that are mentioned repeatedly are only linked once. Since the entity linking ground truth is derived from hyperlinks, entity linking predictions would get penalized for linking all these entities. To alleviate this without resorting to heuristics, we collect all entities linked in all preceding paragraphs of an article and exposed them as <code>acceptable entity labels</code>. The entity linking evaluation should only give credit to every entity in <code>true labels</code>, but not penalize entities in <code>acceptable labels</code>.</p>
+<h4 id="wikimark-traintest-instances">Wikimark Train/Test Instances</h4>
 <p>Number of train/test instances for each Wikimark.</p>
 <div class="table*">
 <div class="footnotesize">
@@ -556,6 +557,7 @@
 </div>
 </div>
 <h2 id="evaluation">Evaluation Results for Reference Baselines</h2>
+<h3 id="results">Results</h3>
 <div class="table*">
 <table>
 <tbody>
@@ -706,6 +708,49 @@
 </tbody>
 </table>
 </div>
+<h3 id="baselines">Baselines</h3>
+<h4 id="passage-and-entity-retrieval">Passage and Entity Retrieval</h4>
+<p>Baseline implementations are based on Lucene, with code provided <a href="https://github.com/laura-dietz/trec-car-methods">online</a>.</p>
+<p>Baselines for passage retrieval</p>
+<dl>
+<dt>bm25:</dt>
+<dd><p>Lucene’s BM25 method.</p>
+</dd>
+<dt>bm25-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieve with BM25.</p>
+</dd>
+<dt>QL-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieve with Lucene’s Dirichlet-smoothed query likelihood.</p>
+</dd>
+</dl>
+<p>Baselines for entity retrieval</p>
+<dl>
+<dt>page-bm25:</dt>
+<dd><p>Retrieving Wikipedia pages via BM25.</p>
+</dd>
+<dt>page-bm25-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieving pages with BM25.</p>
+</dd>
+<dt>paragraph-bm25-ECM:</dt>
+<dd><p>Retrieving paragraphs with BM25, then ranking entities linked in these paragraphs with the entity context model (ECM).</p>
+</dd>
+</dl>
+<h4 id="clustering">Clustering</h4>
+<p>Based on default implementations in <a href="https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation"><code>scikit.learn</code></a> for TF-IDF, agglomerative clustering, and K-means clustering. We use packages <code>sklearn.feature_extraction.text</code> and <code>sklearn.cluster</code> in scikit.learn version 1.0.2</p>
+<dl>
+<dt>TF-IDF agglomerative:</dt>
+<dd><p>Each paragraph is represented as a TF-IDF vector, then using agglomerative clustering with Euclidean distance.</p>
+</dd>
+<dt>TF-IDF kmeans:</dt>
+<dd><p>TF-IDF paragraph representation, then using K-means clustering.</p>
+</dd>
+<dt>SBERT kmeans:</dt>
+<dd><p>Using Sentence-BERT paragraph representation (using ), then using K-means clustering.</p>
+</dd>
+</dl>
+<p>Sentence-BERT <span class="citation" data-cites="reimers2019sentence">[@reimers2019sentence]</span> is a BERT-based embedding model trained for clustering sentences. We are using the <code>bert-base-uncased</code> version provided by the authors.</p>
+<h4 id="entity-linking">Entity Linking</h4>
+<p>We provide reference results for entity linking with the <a href="https://sobigdata.d4science.org/web/tagme/wat-api">WAT entity linker</a> <span class="citation" data-cites="piccinno2014wat">[@piccinno2014wat]</span> using its default configuration.</p>
 <h2 id="license">License</h2>
 <p>This data set is part of the Wikimarks dataset version v2.6.</p>
 <p>The conversions and benchmarks described above are provided by Laura Dietz, Ben Gamari under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. The data is based on content extracted from <a href="https://dumps.wikipedia.org/" class="uri">https://dumps.wikipedia.org/</a> that is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
