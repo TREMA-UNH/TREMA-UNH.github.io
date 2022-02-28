@@ -148,7 +148,7 @@ We provide qrels for different derived information needs:
 
 **Task** Given a query, retrieve relevant entities from all Wikipedia entities (as given in the `unprocessedAll` or `unprocessedAllButBenchmark` collections). All entities which are linked to from the original article are regarded relevant (all other's non-relevant).
 
-Example qrels for Simple English:
+Example qrels for English:
 
 ```
 enwiki:Horseshoe%20crab 0 enwiki:Amebocyte 1
@@ -187,9 +187,6 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 
 **Task** Given a query and a set of relevant paragraphs, produce clusters to represent relevant subtopics. As a ground truth, all paragraphs in the same top-level section are regarded as a cluster. The set of paragraphs provided on the article is taken as a set of relevant paragraphs.
 
-### Query-specific Entity Linking
-
-**Task** Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.
 
 
 
@@ -252,3 +249,86 @@ The `true_cluster_idx` correspond to the following section headings of the artic
 
 
 For example the first paragraph `04f754dba54b26bab09823bcc19bc31227ca6125` is supposed to be clustered with paragraph `08fa5fda300d14d27687bd00341c176a2aff2f39` as these are both in the section on "Threats" (idx 3).
+
+
+
+
+### Query-specific Entity Linking
+
+**Task** Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.
+
+
+```
+{
+  "query_text": "Horseshoe crab",
+  "query_id": "enwiki:Horseshoe%20crab",
+  "paragraph_id": "04f754dba54b26bab09823bcc19bc31227ca6125",
+  "text_only_paragraph": {
+    "para_body": [
+      {
+        "text": "In December 2019, a report of the US Senate which encouraged the Food and Drug Administration to \"establish processes for evaluating alternative pyrogenicity te
+sts and report back [to the Senate] on steps taken to increase their use\" was released; PETA backed the report."
+      }
+    ],
+    "para_id": "04f754dba54b26bab09823bcc19bc31227ca6125"
+  },
+  "true_label_page_ids": [
+    "enwiki:United%20States%20Senate",
+    "enwiki:Food%20and%20Drug%20Administration",
+    "enwiki:People%20for%20the%20Ethical%20Treatment%20of%20Animals"
+  ],
+ "true_label_qids": [
+    "Q66096",
+    "Q204711",
+    "Q151888"
+  ],  
+  "true_linked_paragraph": {
+    "para_body": [
+      {
+        "text": "In December 2019, a report of the "
+      },
+      {
+        "target_page_id": "enwiki:United%20States%20Senate",
+        "target_qid": "Q66096",
+        "text": "US Senate",
+        "target_page": "United States Senate"
+      },
+      {
+        "text": " which encouraged the "
+      },
+      {
+        "target_page_id": "enwiki:Food%20and%20Drug%20Administration",
+        "target_qid": "Q204711",
+        "text": "Food and Drug Administration",
+        "target_page": "Food and Drug Administration"
+      },
+      {
+        "text": " to \"establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use\" was released; "
+      },
+      {
+        "target_page_id": "enwiki:People%20for%20the%20Ethical%20Treatment%20of%20Animals",
+        "target_qid": "Q151888",
+        "text": "PETA",
+        "target_page": "People for the Ethical Treatment of Animals"
+      },
+      {
+        "text": " backed the report."
+      }
+    ],
+    "para_id": "04f754dba54b26bab09823bcc19bc31227ca6125"
+  },
+  "acceptable_label_qids": [
+    "Q30",
+    "Q833",
+    "Q1358",
+    [...]
+ ],
+  "acceptable_label_page_ids": [
+    "enwiki:Albian",
+    "enwiki:Amebocyte",
+    "enwiki:Anisian",
+    [...]
+  ]
+}  
+
+```
