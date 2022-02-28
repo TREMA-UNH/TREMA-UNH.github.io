@@ -24,25 +24,8 @@
 <p>We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of tasks from Wikipedia. We call these benchmarks <em>Wikimarks</em>. This work is an extension of the infrastructure developed while organizing the <a href="http://trec-car.cs.unh.edu/">Complex Answer Retrieval track</a> at <a href="https://trec.nist.gov/">NIST TREC</a> and examines several using Wikipedia to assess several tasks not previously considered in the TREC-CAR context.</p>
 <p>We believe that Wikimarks can serve to complement traditional information retrieval benchmarks as they build upon a readily-available source of real-world text content. Furthermore, Wikipedia articles feature exhibit considerable machine-readable structure in the form of page structure, hyperlink structure, and complementary data sources such as <a href="https://wikidata.org/">Wikidata</a>.</p>
 <h3 id="authors">Authors</h3>
-<ul>
-<li>Laura Dietz <a href="mailto:dietz@cs.unh.edu" class="email">dietz@cs.unh.edu</a></li>
-<li>Shubham Chatterjee <a href="mailto:sc1242@wildcats.unh.edu" class="email">sc1242@wildcats.unh.edu</a></li>
-<li>Connor Lennox <a href="mailto:cjl1053@wildcats.unh.edu" class="email">cjl1053@wildcats.unh.edu</a>,</li>
-<li>Sumanta Kashyapi <a href="mailto:sk1105@wildcats.unh.edu" class="email">sk1105@wildcats.unh.edu</a>,</li>
-<li>Pooja Oza <a href="mailto:pho1003@wildcats.unh.edu" class="email">pho1003@wildcats.unh.edu</a>,</li>
-<li>Ben Gamari <a href="mailto:ben@well-typed.com" class="email">ben@well-typed.com</a></li>
-</ul>
+<p>Laura Dietz <a href="mailto:dietz@cs.unh.edu" class="email">dietz@cs.unh.edu</a>, Shubham Chatterjee <a href="mailto:sc1242@wildcats.unh.edu" class="email">sc1242@wildcats.unh.edu</a>, Connor Lennox <a href="mailto:cjl1053@wildcats.unh.edu" class="email">cjl1053@wildcats.unh.edu</a>, Sumanta Kashyapi <a href="mailto:sk1105@wildcats.unh.edu" class="email">sk1105@wildcats.unh.edu</a>, Pooja Oza <a href="mailto:pho1003@wildcats.unh.edu" class="email">pho1003@wildcats.unh.edu</a>, Ben Gamari <a href="mailto:ben@well-typed.com" class="email">ben@well-typed.com</a></p>
 <p>University of New Hampshire, USA and Well-Typed LLP, UK</p>
-<h2 id="table-of-contents">Table of Contents</h2>
-<p>In this online supplement, we provide:</p>
-<ul>
-<li>An approach for deriving Wikimark collections, i.e., Wikipedia-derived benchmarks,</li>
-<li>for a set of four common information retrieval tasks</li>
-<li>A <a href="code.html">set of tools</a> for deriving Wikimarks from Wikipedia dumps</li>
-<li>A <a href="dumps.html">set of machine-readable conversions</a> of the English, Simple English, and Japanese Wikipedias</li>
-<li>A <a href="wikimarks.html">set of Wikimarks</a> derived from these three Wikipedias</li>
-<li>An <a href="evaluation.html">evaluation</a> of serveral baseline methods using these benchmarks</li>
-</ul>
 <h2 id="what-are-you-looking-for">What are you looking for?</h2>
 <style>
 .tiles {
@@ -73,6 +56,16 @@
 <a href="wikimarks.html">to download the Wikimarks derived from the 2022 Wikipedias</a>
 <li>
 <a href="evaluation.html">for evaluation results of reference baselines</a>
+</ul>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p>In this online supplement, we provide:</p>
+<ul>
+<li>An approach for deriving Wikimark collections, i.e., Wikipedia-derived benchmarks,</li>
+<li>for a set of four common information retrieval tasks</li>
+<li>A <a href="code.html">set of tools</a> for deriving Wikimarks from Wikipedia dumps</li>
+<li>A <a href="dumps.html">set of machine-readable conversions</a> of the English, Simple English, and Japanese Wikipedias</li>
+<li>A <a href="wikimarks.html">set of Wikimarks</a> derived from these three Wikipedias</li>
+<li>An <a href="evaluation.html">evaluation</a> of serveral baseline methods using these benchmarks</li>
 </ul>
 <h3 id="data-model">Data Model</h3>
 <p>The code and all provided downloads make use of the same data model for Wikipedia articles, paragraphs, and outlines. Both the CBOR and JSONL files are represented with following this grammar. Wikipedia-internal hyperlinks are preserved through <code>ParaLink</code>s.</p>
