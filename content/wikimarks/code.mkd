@@ -1,0 +1,16 @@
+# Wikimarks
+
+
+## Tools, Installation, and Usage {#tools}
+
+Our pipeline for generating Wikimarks is
+found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. 
+Please follow installation, configuration and usage instructions in the
+`README`.
+
+This pipeline builds upon the conversion tools provided by the
+[`trec-car-create`][trec-car-create] package, which provides utilities for
+converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
+Please follow installation and compilation instructions described in the `README`.
+
+Language bindings for java and python to read the CBOR file formats are provided in the [`trec-car-tools`](https://github.com/TREMA-UNH/trec-car-tools) packages.
