@@ -39,6 +39,7 @@ In this online supplement, we provide:
 
 ## What are you looking for?
 <div style=" display: block ruby;">
+   
  <style>
 .tile { background-color: #c1c5ff;
 width: 200px;
@@ -53,7 +54,7 @@ height: 200px;
 * <div class="tile">[for more information about provided Wikimarks](wikimarks.html)</div>
 * <div class="tile">[to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)</div>
 * <div class="tile">[for evaluation results of reference baselines](evaluation.html)</div>
-<div>
+</div>
    
 ### Data Model
 
