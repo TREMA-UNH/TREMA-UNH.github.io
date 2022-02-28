@@ -15,7 +15,7 @@ hyperlink structure, and complementary data sources such as [Wikidata][].
 
 
 ### Authors
-Laura Dietz <dietz@cs.unh.edu>, Shubham Chatterjee <sc1242@wildcats.unh.edu>,  Connor Lennox <cjl1053@wildcats.unh.edu>,  Sumanta Kashyapi <sk1105@wildcats.unh.edu>, Pooja Oza <pho1003@wildcats.unh.edu>,  Ben Gamari <ben@well-typed.com>
+[Laura Dietz](dietz@cs.unh.edu), [Shubham Chatterjee](sc1242@wildcats.unh.edu),  [Connor Lennox](mailto:cjl1053@wildcats.unh.edu),  [Sumanta Kashyapi](sk1105@wildcats.unh.edu), [Pooja Oza](pho1003@wildcats.unh.edu), [Ben Gamari](ben@well-typed.com)
 
 University of New Hampshire, USA and Well-Typed LLP, UK
 
