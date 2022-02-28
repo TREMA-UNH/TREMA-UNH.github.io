@@ -1,0 +1,93 @@
+# Wikimarks
+
+We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of
+tasks from Wikipedia. We call these
+benchmarks *Wikimarks*. This work is an extension of the infrastructure
+developed while organizing the [Complex Answer Retrieval track][trec-car] at
+[NIST TREC][trec] and examines several using Wikipedia to assess several tasks
+not previously considered in the TREC-CAR context.
+
+We believe that Wikimarks can serve to complement traditional information
+retrieval benchmarks as they build upon a readily-available source of
+real-world text content. Furthermore, Wikipedia articles feature exhibit
+considerable machine-readable structure in the form of page structure,
+hyperlink structure, and complementary data sources such as [Wikidata][].
+
+
+### Authors
+- Laura Dietz <dietz@cs.unh.edu>
+- Shubham Chatterjee <sc1242@wildcats.unh.edu>
+- Connor Lennox <cjl1053@wildcats.unh.edu>,
+- Sumanta Kashyapi <sk1105@wildcats.unh.edu>, 
+- Pooja Oza <pho1003@wildcats.unh.edu>, 
+- Ben Gamari <ben@well-typed.com>
+
+University of New Hampshire, USA and Well-Typed LLP, UK
+
+## Table of Contents
+
+In this online supplement, we provide:
+
+ * An approach for deriving wikimark collections, i.e., Wikipedia-derived benchmarks, 
+ * for a set of  four common information retrieval tasks
+ * A [set of tools](code.mkd) for deriving Wikimarks from Wikipedia dumps
+ * A [set of machine-readable conversions](dumps.mkd) of the English, Simple
+   English, and Japanese Wikipedias
+ * A [set of Wikimarks](wikimarks.mkd) derived from these three Wikipedias
+ * An [evaluation](evaluation.mkd) of serveral baseline methods using these benchmarks
+
+
+## What are you looking for?
+
+* [Code and pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.mkd)
+* [Download just the Wikipedia dumps from 2022](dumps.mkd)
+* [More information about provided wikimarks](wikimarks.mkd)
+* [Download the wikimarks derived from the 2022 Wikipedias](wikimarks.mkd)
+* [Evaluation results of reference baselines](evaluation.mkd)
+
+
+### Data Model
+
+The code and all provided downloads make use of the same data model for Wikipedia articles, paragraphs, and outlines. 
+Both the CBOR and JSONL files are represented with following this grammar. Wikipedia-internal hyperlinks are preserved through `ParaLink`s.
+
+
+~~~~~
+     Page         -> $pageName $pageId [PageSkeleton] PageType PageMetadata
+     PageType     -> ArticlePage | CategoryPage | RedirectPage ParaLink | DisambiguationPage
+     PageMetadata -> RedirectNames DisambiguationNames DisambiguationIds CategoryNames CategoryIds InlinkIds InlinkAnchors WikiDataQid SiteId PageTags
+     RedirectNames       -> [$pageName] 
+     DisambiguationNames -> [$pageName] 
+     DisambiguationIds   -> [$pageId] 
+     CategoryNames       -> [$pageName] 
+     CategoryIds         -> [$pageId] 
+     InlinkIds           -> [$pageId] 
+     InlinkAnchors       -> [$anchorText] 
+     WikiDataQid         -> [$qid] 
+     SiteId              -> [$siteId] 
+     PageTags            -> [$pageTags] 
+     
+     PageSkeleton -> Section | Para | Image | ListItem | Infobox
+     Section      -> $sectionHeading [PageSkeleton]
+     Para         -> Paragraph
+     Paragraph    -> $paragraphId, [ParaBody]
+     ListItem     -> $nestingLevel, Paragraph
+     Image        -> $imageURL [PageSkeleton]
+     ParaBody     -> ParaText | ParaLink
+     ParaText     -> $text
+     ParaLink     -> $targetPage $targetPageId $targetPageQid $linkSection $anchorText
+     Infobox      -> $infoboxName [($key, [PageSkeleton])]
+~~~~~
+
+
+## License
+
+This data set is part of the Wikimarks dataset version v2.6.
+
+The conversions and benchmarks described above are provided by Laura Dietz, Ben Gamari
+  under a <a rel="license"
+href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative
+Commons Attribution-ShareAlike 3.0 Unported License</a>. The data is
+based on content extracted from <https://dumps.wikipedia.org/> that is
+licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported
+License.
