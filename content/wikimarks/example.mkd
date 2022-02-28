@@ -257,6 +257,12 @@ For example the first paragraph `04f754dba54b26bab09823bcc19bc31227ca6125` is su
 
 **Task** Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.
 
+The article on horseshoe crabs contains the following example paragraph:
+
+
+> In December 2019, a report of the [US Senate](https://en.wikipedia.org/wiki/US_Senate) which encouraged the [Food and Drug Administration](https://en.wikipedia.org/wiki/Food_and_Drug_Administration) to "establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use" was released;[57] [PETA](https://en.wikipedia.org/wiki/People_for_the_Ethical_Treatment_of_Animals) backed the report.[58]
+
+We convert this paragraph into an entity linking ground truth, where only the query and the `text_only_paragraph` are to be used for the prediction, the remainder is held out for evaluation only.
 
 ```
 {
