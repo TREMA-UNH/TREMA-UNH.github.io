@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TREMA @ UNH - overview</title>
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">
+        <div id="sidebar">
+          <nav>
+            <h1>Navigation</h1>
+            <ul>
+              <li><a href="../">Home</a></li>
+              <li><a href="../wikimarks">Wikimarks</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <section id="main">
+        <h1 id="wikimarks">Wikimarks</h1>
+<p>We provide a methodology and tool-set for harvesting relevance benchmarks for a variety of tasks from Wikipedia. We call these benchmarks <em>Wikimarks</em>. This work is an extension of the infrastructure developed while organizing the [Complex Answer Retrieval track][trec-car] at [NIST TREC][trec] and examines several using Wikipedia to assess several tasks not previously considered in the TREC-CAR context.</p>
+<p>We believe that Wikimarks can serve to complement traditional information retrieval benchmarks as they build upon a readily-available source of real-world text content. Furthermore, Wikipedia articles feature exhibit considerable machine-readable structure in the form of page structure, hyperlink structure, and complementary data sources such as [Wikidata][].</p>
+<h3 id="authors">Authors</h3>
+<ul>
+<li>Laura Dietz <a href="mailto:dietz@cs.unh.edu" class="email">dietz@cs.unh.edu</a></li>
+<li>Shubham Chatterjee <a href="mailto:sc1242@wildcats.unh.edu" class="email">sc1242@wildcats.unh.edu</a></li>
+<li>Connor Lennox <a href="mailto:cjl1053@wildcats.unh.edu" class="email">cjl1053@wildcats.unh.edu</a>,</li>
+<li>Sumanta Kashyapi <a href="mailto:sk1105@wildcats.unh.edu" class="email">sk1105@wildcats.unh.edu</a>,</li>
+<li>Pooja Oza <a href="mailto:pho1003@wildcats.unh.edu" class="email">pho1003@wildcats.unh.edu</a>,</li>
+<li>Ben Gamari <a href="mailto:ben@well-typed.com" class="email">ben@well-typed.com</a></li>
+</ul>
+<p>University of New Hampshire, USA and Well-Typed LLP, UK</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p>In this online supplement, we provide:</p>
+<ul>
+<li>An approach for deriving wikimark collections, i.e., Wikipedia-derived benchmarks,</li>
+<li>for a set of four common information retrieval tasks</li>
+<li>A <a href="code.mkd">set of tools</a> for deriving Wikimarks from Wikipedia dumps</li>
+<li>A <a href="dumps.mkd">set of machine-readable conversions</a> of the English, Simple English, and Japanese Wikipedias</li>
+<li>A <a href="wikimarks.mkd">set of Wikimarks</a> derived from these three Wikipedias</li>
+<li>An <a href="evaluation.mkd">evaluation</a> of serveral baseline methods using these benchmarks</li>
+</ul>
+<h2 id="what-are-you-looking-for">What are you looking for?</h2>
+<ul>
+<li><a href="code.mkd">Code and pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark</a></li>
+<li><a href="dumps.mkd">Download just the Wikipedia dumps from 2022</a></li>
+<li><a href="wikimarks.mkd">More information about provided wikimarks</a></li>
+<li><a href="wikimarks.mkd">Download the wikimarks derived from the 2022 Wikipedias</a></li>
+<li><a href="evaluation.mkd">Evaluation results of reference baselines</a></li>
+</ul>
+<h3 id="data-model">Data Model</h3>
+<p>The code and all provided downloads make use of the same data model for Wikipedia articles, paragraphs, and outlines. Both the CBOR and JSONL files are represented with following this grammar. Wikipedia-internal hyperlinks are preserved through <code>ParaLink</code>s.</p>
+<pre><code>     Page         -&gt; $pageName $pageId [PageSkeleton] PageType PageMetadata
+     PageType     -&gt; ArticlePage | CategoryPage | RedirectPage ParaLink | DisambiguationPage
+     PageMetadata -&gt; RedirectNames DisambiguationNames DisambiguationIds CategoryNames CategoryIds InlinkIds InlinkAnchors WikiDataQid SiteId PageTags
+     RedirectNames       -&gt; [$pageName] 
+     DisambiguationNames -&gt; [$pageName] 
+     DisambiguationIds   -&gt; [$pageId] 
+     CategoryNames       -&gt; [$pageName] 
+     CategoryIds         -&gt; [$pageId] 
+     InlinkIds           -&gt; [$pageId] 
+     InlinkAnchors       -&gt; [$anchorText] 
+     WikiDataQid         -&gt; [$qid] 
+     SiteId              -&gt; [$siteId] 
+     PageTags            -&gt; [$pageTags] 
+     
+     PageSkeleton -&gt; Section | Para | Image | ListItem | Infobox
+     Section      -&gt; $sectionHeading [PageSkeleton]
+     Para         -&gt; Paragraph
+     Paragraph    -&gt; $paragraphId, [ParaBody]
+     ListItem     -&gt; $nestingLevel, Paragraph
+     Image        -&gt; $imageURL [PageSkeleton]
+     ParaBody     -&gt; ParaText | ParaLink
+     ParaText     -&gt; $text
+     ParaLink     -&gt; $targetPage $targetPageId $targetPageQid $linkSection $anchorText
+     Infobox      -&gt; $infoboxName [($key, [PageSkeleton])]</code></pre>
+<h2 id="license">License</h2>
+<p>This data set is part of the Wikimarks dataset version v2.6.</p>
+<p>The conversions and benchmarks described above are provided by Laura Dietz, Ben Gamari under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. The data is based on content extracted from <a href="https://dumps.wikipedia.org/" class="uri">https://dumps.wikipedia.org/</a> that is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
