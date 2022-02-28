@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TREMA @ UNH - evaluation</title>
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">
+        <div id="sidebar">
+          <nav>
+            <h1>Navigation</h1>
+            <ul>
+              <li><a href="../">Home</a></li>
+              <li><a href="../wikimarks">Wikimarks</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <section id="main">
+        <h1 id="wikimarks">Wikimarks</h1>
+<p>Reference evaluation results of a range of baselines.</p>
+<p>Also, see information on <a href="wikimarks.mkd">tasks and how wikimarks are derived</a> from Wikipedia articles.</p>
+<h2 id="evaluation">Evaluation Results for Reference Baselines</h2>
+<h3 id="results">Results</h3>
+<div class="table*">
+<table>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td style="text-align: center;">simple</td>
+<td></td>
+<td></td>
+<td style="text-align: center;">en</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td style="text-align: center;">benchmarkY1.train</td>
+<td>benchmarkY1.test</td>
+<td></td>
+<td style="text-align: center;">benchmarkY1.train</td>
+<td>benchmarkY1.test</td>
+</tr>
+<tr class="odd">
+<td>Paragraph Retrieval [MAP]</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>bm25</td>
+<td style="text-align: center;"><strong>0.31+/-0.04</strong></td>
+<td><strong>0.29</strong>+/-<strong>0.03</strong></td>
+<td></td>
+<td style="text-align: center;">0.097+/-0.01</td>
+<td>0.094+/-0.01</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>bm25-rm3</td>
+<td style="text-align: center;">0.29+/-0.04</td>
+<td>0.26+/-0.03</td>
+<td></td>
+<td style="text-align: center;"><strong>0.107</strong>+/-<strong>0.01</strong></td>
+<td><strong>0.101</strong>+/-<strong>0.01</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>QL-rm3</td>
+<td style="text-align: center;">0.25+/-0.04</td>
+<td>0.20+/-0.02</td>
+<td></td>
+<td style="text-align: center;">0.084+/-0.01</td>
+<td>0.076+/-0.01</td>
+</tr>
+<tr class="odd">
+<td>Entity Ranking [MAP]</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>page-bm25</td>
+<td style="text-align: center;">0.03+/-0.005</td>
+<td>0.038+/-0.007</td>
+<td></td>
+<td style="text-align: center;">0.025+/-0.002</td>
+<td>0.026+/-0.003</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>page-bm25-rm3</td>
+<td style="text-align: center;">0.05+/-0.007</td>
+<td>0.048+/-0.007</td>
+<td></td>
+<td style="text-align: center;">0.037+/-0.003</td>
+<td>0.038+/-0.004</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>paragraph-bm25-ECM</td>
+<td style="text-align: center;"><strong>0.23</strong>+/-<strong>0.03</strong></td>
+<td><strong>0.253</strong>+/-<strong>0.021</strong></td>
+<td></td>
+<td style="text-align: center;"><strong>0.215</strong>+/-<strong>0.01</strong></td>
+<td><strong>0.21</strong>+/-<strong>0.01</strong></td>
+</tr>
+<tr class="odd">
+<td>Cluster [Adj. RAND]</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>TF-IDF agglomerative</td>
+<td style="text-align: center;">0.16+/-0.06</td>
+<td>0.27+/-0.07</td>
+<td></td>
+<td style="text-align: center;">0.15+/-0.01</td>
+<td>0.16+/-0.01</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>TF-IDF kmeans</td>
+<td style="text-align: center;">0.13+/-0.01</td>
+<td>0.12+/-0.01</td>
+<td></td>
+<td style="text-align: center;">0.11+/-0.04</td>
+<td><strong>0.19</strong>+/-<strong>0.05</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>SBERT kmeans</td>
+<td style="text-align: center;"><strong>0.38</strong>+/-<strong>0.09</strong></td>
+<td><strong>0.38</strong>+/-<strong>0.09</strong></td>
+<td></td>
+<td style="text-align: center;"><strong>0.23</strong>+/-<strong>0.02</strong></td>
+<td><strong>0.19</strong>+/-<strong>0.01</strong></td>
+</tr>
+<tr class="odd">
+<td>Entity Linking [Paragraph-macro F1]</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>WAT</td>
+<td style="text-align: center;"><strong>0.44</strong>+/-<strong>0.01</strong></td>
+<td><strong>0.42</strong>+/-<strong>0.01</strong></td>
+<td></td>
+<td style="text-align: center;"><strong>0.332</strong>+/-<strong>0.004</strong></td>
+<td><strong>0.310</strong>+/-<strong>0.003</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="baselines">Baselines</h3>
+<h4 id="passage-and-entity-retrieval">Passage and Entity Retrieval</h4>
+<p>Baseline implementations are based on Lucene, with code provided <a href="https://github.com/laura-dietz/trec-car-methods">online</a>.</p>
+<p>Baselines for passage retrieval</p>
+<dl>
+<dt>bm25:</dt>
+<dd><p>Lucene’s BM25 method.</p>
+</dd>
+<dt>bm25-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieve with BM25.</p>
+</dd>
+<dt>QL-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieve with Lucene’s Dirichlet-smoothed query likelihood.</p>
+</dd>
+</dl>
+<p>Baselines for entity retrieval</p>
+<dl>
+<dt>page-bm25:</dt>
+<dd><p>Retrieving Wikipedia pages via BM25.</p>
+</dd>
+<dt>page-bm25-rm3:</dt>
+<dd><p>RM3 query expansion, then retrieving pages with BM25.</p>
+</dd>
+<dt>paragraph-bm25-ECM:</dt>
+<dd><p>Retrieving paragraphs with BM25, then ranking entities linked in these paragraphs with the entity context model (ECM).</p>
+</dd>
+</dl>
+<h4 id="clustering">Clustering</h4>
+<p>Based on default implementations in <a href="https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation"><code>scikit.learn</code></a> for TF-IDF, agglomerative clustering, and K-means clustering. We use packages <code>sklearn.feature_extraction.text</code> and <code>sklearn.cluster</code> in scikit.learn version 1.0.2</p>
+<dl>
+<dt>TF-IDF agglomerative:</dt>
+<dd><p>Each paragraph is represented as a TF-IDF vector, then using agglomerative clustering with Euclidean distance.</p>
+</dd>
+<dt>TF-IDF kmeans:</dt>
+<dd><p>TF-IDF paragraph representation, then using K-means clustering.</p>
+</dd>
+<dt>SBERT kmeans:</dt>
+<dd><p>Using Sentence-BERT paragraph representation (using ), then using K-means clustering.</p>
+</dd>
+</dl>
+<p>Sentence-BERT <span class="citation" data-cites="reimers2019sentence">[@reimers2019sentence]</span> is a BERT-based embedding model trained for clustering sentences. We are using the <code>bert-base-uncased</code> version provided by the authors.</p>
+<h4 id="entity-linking">Entity Linking</h4>
+<p>We provide reference results for entity linking with the <a href="https://sobigdata.d4science.org/web/tagme/wat-api">WAT entity linker</a> <span class="citation" data-cites="piccinno2014wat">[@piccinno2014wat]</span> using its default configuration.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
