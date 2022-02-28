@@ -38,11 +38,11 @@
 <p>The benchmarks described above are constructed from the following subset of Wikipedia pages from each of the provided Wikipedias:</p>
 <dl>
 <dt>Vital-articles:</dt>
-<dd><p>A set of important articles that the Wikipedia community [identified][vital articles]. The community strives to provide these articles for all languages. We obtain the set of “vital” articles via Wikidata, then filter the processed articles by Wikidata QID.</p>
+<dd><p>A set of important articles that the Wikipedia community <a href="https://en.wikipedia.org/wiki/Wikipedia:Vital_articles">identified</a>. The community strives to provide these articles for all languages. We obtain the set of “vital” articles via Wikidata, then filter the processed articles by Wikidata QID.</p>
 <p><code>trec-car-filter</code> Predicate: <code>qid-set-from-file "./vital-articles.qids"</code></p>
 </dd>
 <dt>Good-articles:</dt>
-<dd><p>A Wikipedia committee defines a set of [good articles][] that are well-written, contain factually accurate and verifiable information and are of broad importance. Such pages are identified either as template “GA” or “good article”, which our pipeline is configured to expose as page tag “Good article”.</p>
+<dd><p>A Wikipedia committee defines a set of <a href="https://en.wikipedia.org/wiki/Wikipedia:Good_articles">good articles</a> that are well-written, contain factually accurate and verifiable information and are of broad importance. Such pages are identified either as template “GA” or “good article”, which our pipeline is configured to expose as page tag “Good article”.</p>
 <p><code>trec-car-filter</code> Predicate: <code>has-page-tag ["Good article"]</code></p>
 </dd>
 <dt>US-history:</dt>
@@ -54,7 +54,7 @@
 <p><code>trec-car-filter</code> Predicate: <code>qid-in-set ["Q1329239"]</code></p>
 </dd>
 </dl>
-<p>Additionally, we provide subsets used in the [TREC Complex Answer Retrieval Track][trec-car] for backwards compatibility.</p>
+<p>Additionally, we provide subsets used in the <a href="http://trec-car.cs.unh.edu/">TREC Complex Answer Retrieval Track</a> for backwards compatibility.</p>
 <h3 id="subset-statistics">Subset Statistics</h3>
 <div id="tab:data-stats">
 <table>
