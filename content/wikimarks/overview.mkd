@@ -43,11 +43,11 @@ In this online supplement, we provide:
 .tile { background-color: #e33; width: 100px; }
 </style>
 
-* <div class="tile">hello world</div>[Code and pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)</div>
-* <div class="tile">[Download just the Wikipedia dumps from 2022](dumps.html)</div>
-* <div class="tile">[More information about provided Wikimarks](wikimarks.html)</div>
-* <div class="tile">[Download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)</div>
-* <div class="tile">[Evaluation results of reference baselines](evaluation.html)</div>
+* <div class="tile">[for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)</div>
+* <div class="tile">[to download just the Wikipedia dumps from 2022](dumps.html)</div>
+* <div class="tile">[for more information about provided Wikimarks](wikimarks.html)</div>
+* <div class="tile">[to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)</div>
+* <div class="tile">[for evaluation results of reference baselines](evaluation.html)</div>
 
 
 ### Data Model
