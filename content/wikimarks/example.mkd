@@ -367,6 +367,9 @@ sts and report back [to the Senate] on steps taken to increase their use\" was r
 
 ```
 
+Due to Wikipedia's editorial policy a hyperlink to an entity is only inserted at its first occurrence. To avoid wrongfully penalizing entity links because of this policy, we provide `acceptable_label` entities, which are entities linked in a preceeding paragraphs. During evaluation, a linker should only receive credit for `true_label` entities, but should not be penalize for entities contained in `acceptable_label`.
+
+
 
 [scikit-learn]:https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation
 [trec-eval]:https://github.com/usnistgov/trec_eval
