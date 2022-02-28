@@ -43,11 +43,13 @@ University of New Hampshire, USA and Well-Typed LLP, UK
 
 
 <ul class="tiles">
-<li> [for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)
-<li> [to download just the Wikipedia dumps from 2022](dumps.html)
-<li> [for more information about provided Wikimarks](wikimarks.html)
-<li> [to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)
-<li> [for evaluation results of reference baselines](evaluation.html)
+<li> [Code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)
+<li> [Wikipedia dumps from 2022](dumps.html)
+<li> [More information about provided Wikimarks](wikimarks.html)
+<li> [Download Wikimarks derived from the 2022 Wikipedias](wikimarks.html)
+<li> [Evaluation results of reference baselines](evaluation.html)
+<li> [Example on Horseshoe crabs](example.html)
+   
 </ul>
    
    
@@ -62,6 +64,7 @@ In this online supplement, we provide:
    English, and Japanese Wikipedias
  * A [set of Wikimarks](wikimarks.html) derived from these three Wikipedias
  * An [evaluation](evaluation.html) of serveral baseline methods using these benchmarks
+ * An [example](example.html) for the article on Horseshoe crabs.
 
 
 ### Data Model
