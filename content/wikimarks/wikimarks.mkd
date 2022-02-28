@@ -320,3 +320,13 @@ Number of train/test instances for each Wikimark.
 :::
 :::
 
+
+[trec-car]: http://trec-car.cs.unh.edu/ 
+[trec]: https://trec.nist.gov/
+[Wikidata]: https://wikidata.org/
+[cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
+[trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
+[trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
+[download]: http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/
+[good articles]: https://en.wikipedia.org/wiki/Wikipedia:Good_articles
+[vital articles]: https://en.wikipedia.org/wiki/Wikipedia:Vital_articles
