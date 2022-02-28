@@ -28,7 +28,7 @@ University of New Hampshire, USA and Well-Typed LLP, UK
 
 In this online supplement, we provide:
 
- * An approach for deriving wikimark collections, i.e., Wikipedia-derived benchmarks, 
+ * An approach for deriving Wikimark collections, i.e., Wikipedia-derived benchmarks, 
  * for a set of  four common information retrieval tasks
  * A [set of tools](code.html) for deriving Wikimarks from Wikipedia dumps
  * A [set of machine-readable conversions](dumps.html) of the English, Simple
@@ -41,8 +41,8 @@ In this online supplement, we provide:
 
 * [Code and pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)
 * [Download just the Wikipedia dumps from 2022](dumps.html)
-* [More information about provided wikimarks](wikimarks.html)
-* [Download the wikimarks derived from the 2022 Wikipedias](wikimarks.html)
+* [More information about provided Wikimarks](wikimarks.html)
+* [Download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)
 * [Evaluation results of reference baselines](evaluation.html)
 
 
