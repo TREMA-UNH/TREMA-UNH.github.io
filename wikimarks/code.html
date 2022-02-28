@@ -22,9 +22,13 @@
         <section id="main">
         <h1 id="wikimarks">Wikimarks</h1>
 <h2 id="tools">Tools, Installation, and Usage</h2>
-<p>Our pipeline for generating Wikimarks is found in the [<code>TREMA-UNH/trec-car-release</code>][trec-car-release] project. Please follow installation, configuration and usage instructions in the <code>README</code>.</p>
-<p>This pipeline builds upon the conversion tools provided by the [<code>trec-car-create</code>][trec-car-create] package, which provides utilities for converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia. Please follow installation and compilation instructions described in the <code>README</code>.</p>
+<h3 id="data-conversion-pipeline">Data Conversion Pipeline</h3>
+<p>Our pipeline for converting Wikipedias and generating Wikimarks is found in the <a href="https://github.com/TREMA-UNH/trec-car-release"><code>TREMA-UNH/trec-car-release</code></a> project. Please follow installation, configuration and usage instructions in the <a href="https://github.com/TREMA-UNH/trec-car-release/blob/master/README.mkd"><code>README</code></a>.</p>
+<h3 id="sourcecode-for-conversion-tools">Sourcecode for Conversion Tools</h3>
+<p>This pipeline builds upon the conversion tools provided by the <a href="https://github.com/TREMA-UNH/trec-car-create"><code>trec-car-create</code></a> package, which provides utilities for converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia. Please follow installation and compilation instructions described in the <a href="https://github.com/TREMA-UNH/trec-car-create/blob/main/README.mkd"><code>README</code></a>.</p>
+<h3 id="language-bindings-for-cbor">Language Bindings for CBOR</h3>
 <p>Language bindings for java and python to read the CBOR file formats are provided in the <a href="https://github.com/TREMA-UNH/trec-car-tools"><code>trec-car-tools</code></a> packages.</p>
+<p>Alternatively the equivalent JSONL format can be used with any JSON parsing package. Because of the high amount of redundancy, we provide JSONL files as gzipped and recommend to open them directly with a GzipCompressed file handler. (See data model on the main page.)</p>
         </section>
       </div>
     </div>
