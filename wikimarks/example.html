@@ -65,19 +65,63 @@
 <p>Please see <a href="wikimarks.html">Wikimarks</a> page for further information on how Wikimarks are derived.</p>
 <h3 id="passage-retrieval">Passage retrieval</h3>
 <p><strong>Task</strong> Given a query, retrieve relevant passages from the passageCorpus (produced in step 6 of the processing phase). Every paragraph that was given on the original Wikipedia article (after processing) is regarded relevant. All other paragraphs are regarded non-relevant.</p>
-<p>Example qrels for Simple English:</p>
-<pre><code>simplewiki:Horseshoe%20crab 0 16d05a332a2732b4b21442ac66a39cc00c3e5f33 1
-simplewiki:Horseshoe%20crab 0 29b3ad54374d4476d6606625d0118ea35874ab2d 1
-simplewiki:Horseshoe%20crab 0 2b5a835e0cdbdb5d511792daf33e2fcd7bac6469 1
-simplewiki:Horseshoe%20crab 0 2faf498f22a448b70dc31f61bd96e139884d5e11 1
-simplewiki:Horseshoe%20crab 0 37d95a6d501ab91dbcaffb6493bbf4758ab7e82e 1
-simplewiki:Horseshoe%20crab 0 4e600216147eace70a62ff32b2e63d74c1b7064b 1
-simplewiki:Horseshoe%20crab 0 581f6a207955d80e3e72112172bafea92af3a6b8 1
-simplewiki:Horseshoe%20crab 0 89094d9ee9871d0acf98f2e2f7ccaf4358d4ce9b 1
-simplewiki:Horseshoe%20crab 0 92b71c566ffa2ff0897d8868bfd7ad4ffecb8e55 1
-simplewiki:Horseshoe%20crab 0 ab39b67e4e92cef8e3f5d32cc7f5d63d50aa5f34 1
-simplewiki:Horseshoe%20crab 0 d53deb685b981d765904d0bbc92d16ca29e9d182 1
-simplewiki:Horseshoe%20crab 0 df761e6699d1bc8711ee4f740b0f187e7a4335fc 1</code></pre>
+<p>Example qrels for English:</p>
+<pre><code>enwiki:Horseshoe%20crab 0 04f754dba54b26bab09823bcc19bc31227ca6125 1
+enwiki:Horseshoe%20crab 0 089fb8822e86094e88812f29a38fdb14124e9a06 1
+enwiki:Horseshoe%20crab 0 08fa5fda300d14d27687bd00341c176a2aff2f39 1
+enwiki:Horseshoe%20crab 0 0d39d8da4abef9b0e0250134f089efcd25ae8a4a 1
+enwiki:Horseshoe%20crab 0 104ca33fe36d7862188f817b9caeadee08fc688b 1
+enwiki:Horseshoe%20crab 0 23667f56d940635112bc94925b6407b60f891d5e 1
+enwiki:Horseshoe%20crab 0 240858db3a4d55758738fea3f8a0df49c687e806 1
+enwiki:Horseshoe%20crab 0 37b94b0fd1023585d97f184720147fe96737d7b8 1
+enwiki:Horseshoe%20crab 0 5cf9bb85c2f46b2dc20014c57a094cace99639fb 1
+enwiki:Horseshoe%20crab 0 612f8eccbb814c19d2b96244154e2c9839971a44 1
+enwiki:Horseshoe%20crab 0 64cda7e5c2ec7f41b299b1847901a58be969871d 1
+enwiki:Horseshoe%20crab 0 64d5a7bac6e28813a939f27d3bae35c2c8382012 1
+enwiki:Horseshoe%20crab 0 741d58976a9853e5decd6a37e1a3ebddad35a582 1
+enwiki:Horseshoe%20crab 0 81b3a8c494395607c38d9d8f305d01de78a8c3d1 1
+enwiki:Horseshoe%20crab 0 8e0ebe03995b9d03f8c1f429dead60c56625f4ba 1
+enwiki:Horseshoe%20crab 0 a05a8915d939546da069acc6b17f235dacbeb02f 1
+enwiki:Horseshoe%20crab 0 a8a2b4be899206e32081b3888aa5101889da555e 1
+enwiki:Horseshoe%20crab 0 b0ab9894c8ca05e76a709997ed24881d8ffe4e4f 1
+enwiki:Horseshoe%20crab 0 b20cda148c26bdbc550da6535ea6319f9f2d4ef9 1
+enwiki:Horseshoe%20crab 0 c6fd86ddaf732b6ad69e67e740a94e5da9143579 1
+enwiki:Horseshoe%20crab 0 cc16e6f76af1e4394ddcf7bd3872ad1cb114c73c 1
+enwiki:Horseshoe%20crab 0 def494df77e2249ff7133955b52f37c5e3e9a7b5 1</code></pre>
+<p>An example of the first relevant paragragph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code></p>
+<pre><code>{
+  &quot;para_body&quot;: [
+    {
+      &quot;text&quot;: &quot;In December 2019, a report of the &quot;
+    },
+    {
+      &quot;target_page_id&quot;: &quot;enwiki:United%20States%20Senate&quot;,
+      &quot;text&quot;: &quot;US Senate&quot;,
+      &quot;target_page&quot;: &quot;United States Senate&quot;
+    },
+    {
+      &quot;text&quot;: &quot; which encouraged the &quot;
+    },
+    {
+      &quot;target_page_id&quot;: &quot;enwiki:Food%20and%20Drug%20Administration&quot;,
+      &quot;text&quot;: &quot;Food and Drug Administration&quot;,
+      &quot;target_page&quot;: &quot;Food and Drug Administration&quot;
+    },
+    {
+      &quot;text&quot;: &quot; to \&quot;establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use\&quot; was released; &quot;
+    },
+    {
+      &quot;target_page_id&quot;: &quot;enwiki:People%20for%20the%20Ethical%20Treatment%20of%20Animals&quot;,
+      &quot;text&quot;: &quot;PETA&quot;,
+      &quot;target_page&quot;: &quot;People for the Ethical Treatment of Animals&quot;
+    },
+    {
+      &quot;text&quot;: &quot; backed the report.&quot;
+    }
+  ],
+  &quot;para_id&quot;: &quot;04f754dba54b26bab09823bcc19bc31227ca6125&quot;
+}
+</code></pre>
 <p>We provide qrels for different derived information needs:</p>
 <ul>
 <li>article-level (query = “Horseshoe crab”):</li>
@@ -87,47 +131,17 @@ simplewiki:Horseshoe%20crab 0 df761e6699d1bc8711ee4f740b0f187e7a4335fc 1</code><
 <h3 id="entity-retrieval">Entity retrieval</h3>
 <p><strong>Task</strong> Given a query, retrieve relevant entities from all Wikipedia entities (as given in the <code>unprocessedAll</code> or <code>unprocessedAllButBenchmark</code> collections). All entities which are linked to from the original article are regarded relevant (all other’s non-relevant).</p>
 <p>Example qrels for Simple English:</p>
-<pre><code>simplewiki:Horseshoe%20crab 0 simplewiki:Arachnid 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Atlantic%20Ocean 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Bacteria 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Benthos 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Burgess%20Shale 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Carapace 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Cladistics 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Clam 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Coagulation 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Coast 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Crab 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Crustacean 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Dome 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Environment 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Enzyme 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Estuary 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Eurypterid 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Eye 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Habitat 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Immune%20system 1
-simplewiki:Horseshoe%20crab 0 simplewiki:India 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Leg 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Living%20fossil 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Maine 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Mexico 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Million 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Moulting 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Mud 1
-simplewiki:Horseshoe%20crab 0 simplewiki:New%20Jersey 1
-simplewiki:Horseshoe%20crab 0 simplewiki:North%20America 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Ordovician 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Pigment 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Sand 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Seto%20Inland%20Sea 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Shell%20(zoology) 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Species 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Virginia 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Weapon 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Worm 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Xiphosura 1
-simplewiki:Horseshoe%20crab 0 simplewiki:Yucat%C3%A1n%20Peninsula 1</code></pre>
+<pre><code>enwiki:Horseshoe%20crab 0 enwiki:Amebocyte 1
+enwiki:Horseshoe%20crab 0 enwiki:Arachnid 1
+enwiki:Horseshoe%20crab 0 enwiki:Arthropod 1
+enwiki:Horseshoe%20crab 0 enwiki:Arthropod%20leg 1
+enwiki:Horseshoe%20crab 0 enwiki:Artificial%20insemination 1
+enwiki:Horseshoe%20crab 0 enwiki:Book%20lung 1
+enwiki:Horseshoe%20crab 0 enwiki:Brackish%20water 1
+enwiki:Horseshoe%20crab 0 enwiki:Bulkhead%20(barrier) 1
+enwiki:Horseshoe%20crab 0 enwiki:COVID-19%20pandemic 1
+enwiki:Horseshoe%20crab 0 enwiki:Carapace 1
+[...]</code></pre>
 <p>We provide qrels for different derived information needs:</p>
 <ul>
 <li>article-level (query = “Horseshoe crab”):</li>
@@ -135,26 +149,73 @@ simplewiki:Horseshoe%20crab 0 simplewiki:Yucat%C3%A1n%20Peninsula 1</code></pre>
 <li>hierarchical (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
 </ul>
 <p>Example:</p>
-<pre><code>simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Atlantic%20Ocean 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Clam 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Crustacean 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Eye 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Maine 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Mexico 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Moulting 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Mud 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:New%20Jersey 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:North%20America 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Pigment 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Sand 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Shell%20(zoology) 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Virginia 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Worm 1
-simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Yucat%C3%A1n%20Peninsula 1</code></pre>
+<pre><code>enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Amebocyte 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:COVID-19%20pandemic 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Eli%20Lilly%20and%20Company 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Fishing%20bait 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Food%20and%20Drug%20Administration 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Hemocyanin 1
+enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20COVID-19%20vaccine%20development 1
+[...]</code></pre>
 <h3 id="query-specific-clustering">Query-specific Clustering</h3>
 <p><strong>Task</strong> Given a query and a set of relevant paragraphs, produce clusters to represent relevant subtopics. As a ground truth, all paragraphs in the same top-level section are regarded as a cluster. The set of paragraphs provided on the article is taken as a set of relevant paragraphs.</p>
 <h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
 <p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
+<pre><code>{                                                                                                                                          
+  &quot;query_text&quot;: &quot;Horseshoe crab&quot;,                                                                                                          
+  &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
+  &quot;true_cluster_idx&quot;: [
+    3,
+    1,
+    3,
+    0,
+    3,
+    3,
+    3,
+    0,
+    1,
+    2,
+    1,
+    3,
+    2,
+    3,
+    2,
+    0,
+    2,
+    3,
+    3
+  ],
+  &quot;elements&quot;: [
+    &quot;04f754dba54b26bab09823bcc19bc31227ca6125&quot;,
+    &quot;089fb8822e86094e88812f29a38fdb14124e9a06&quot;,
+    &quot;08fa5fda300d14d27687bd00341c176a2aff2f39&quot;,
+    &quot;0d39d8da4abef9b0e0250134f089efcd25ae8a4a&quot;,
+    &quot;104ca33fe36d7862188f817b9caeadee08fc688b&quot;,
+    &quot;240858db3a4d55758738fea3f8a0df49c687e806&quot;,
+    &quot;37b94b0fd1023585d97f184720147fe96737d7b8&quot;,
+    &quot;5cf9bb85c2f46b2dc20014c57a094cace99639fb&quot;,
+    &quot;612f8eccbb814c19d2b96244154e2c9839971a44&quot;,
+    &quot;64cda7e5c2ec7f41b299b1847901a58be969871d&quot;,
+    &quot;64d5a7bac6e28813a939f27d3bae35c2c8382012&quot;,
+    &quot;741d58976a9853e5decd6a37e1a3ebddad35a582&quot;,
+    &quot;81b3a8c494395607c38d9d8f305d01de78a8c3d1&quot;,
+    &quot;8e0ebe03995b9d03f8c1f429dead60c56625f4ba&quot;,
+    &quot;a05a8915d939546da069acc6b17f235dacbeb02f&quot;,
+    &quot;a8a2b4be899206e32081b3888aa5101889da555e&quot;,
+    &quot;b20cda148c26bdbc550da6535ea6319f9f2d4ef9&quot;,
+    &quot;c6fd86ddaf732b6ad69e67e740a94e5da9143579&quot;,
+    &quot;def494df77e2249ff7133955b52f37c5e3e9a7b5&quot;
+  ],
+  &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;
+****              </code></pre>
+<p>The <code>true_cluster_idx</code> correspond to the following section headings of the article</p>
+<ul>
+<li>0: Anatomy and behavior</li>
+<li>1: Breeding</li>
+<li>2: Taxonomy</li>
+<li>3: Threats</li>
+</ul>
+<p>For example the first paragraph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> is supposed to be clustered with paragraph <code>08fa5fda300d14d27687bd00341c176a2aff2f39</code> as these are both in the section on “Threats” (idx 3).</p>
         </section>
       </div>
     </div>
