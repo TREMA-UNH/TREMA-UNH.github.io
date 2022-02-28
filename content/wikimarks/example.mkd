@@ -34,8 +34,8 @@ With every subset, we provide information about the processed article, provenanc
 - `qids`: Wikidata QIDs of pages in this subset
 - `topics`: Hierarchical section headings in this subset (was used for TREC CAR)
 - `*.pages.provenance.*`: Provenance of Wikipedia versions the subset was created from.
-- `*.pages.cbor-*.qrels`:  Query relevance files for retrieval Wikimarks. These files are compatible with `trec_eval`.
-- `*.pages.cbor-toplevel.cluster.*`: Queries and ground truth files for query-specific clustering. These files are compatible with the cluster evaluation package of`scikit.learn`
+- `*.pages.cbor-*.qrels`:  Query relevance files for retrieval Wikimarks. These files are compatible with [trec_eval][trec-eval].
+- `*.pages.cbor-toplevel.cluster.*`: Queries and ground truth files for query-specific clustering. These files are compatible with the cluster evaluation package of [scikit.learn][scikit-learn]
 - `*.pages.cbor-entity-linking.*`: Queries and ground truth for query-specific entity linking.
 - `LICENSE` and `README.mkd`: License information. If you redistribute or provide derived data, please include this licensing information to be compliant with Wikipedias CC-SA license.
 
@@ -366,3 +366,16 @@ sts and report back [to the Senate] on steps taken to increase their use\" was r
 }  
 
 ```
+
+
+[scikit-learn]:https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation
+[trec-eval]:https://github.com/usnistgov/trec_eval
+[trec-car]: http://trec-car.cs.unh.edu/ 
+[trec]: https://trec.nist.gov/
+[Wikidata]: https://wikidata.org/
+[cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
+[trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
+[trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
+[download]: http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/
+[good articles]: https://en.wikipedia.org/wiki/Wikipedia:Good_articles
+[vital articles]: https://en.wikipedia.org/wiki/Wikipedia:Vital_articles
