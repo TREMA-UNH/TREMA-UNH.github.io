@@ -30,11 +30,11 @@ In this online supplement, we provide:
 
  * An approach for deriving wikimark collections, i.e., Wikipedia-derived benchmarks, 
  * for a set of  four common information retrieval tasks
- * A [set of tools](code.mkd) for deriving Wikimarks from Wikipedia dumps
- * A [set of machine-readable conversions](dumps.mkd) of the English, Simple
+ * A [set of tools](code.html) for deriving Wikimarks from Wikipedia dumps
+ * A [set of machine-readable conversions](dumps.html) of the English, Simple
    English, and Japanese Wikipedias
- * A [set of Wikimarks](wikimarks.mkd) derived from these three Wikipedias
- * An [evaluation](evaluation.mkd) of serveral baseline methods using these benchmarks
+ * A [set of Wikimarks](wikimarks.html) derived from these three Wikipedias
+ * An [evaluation](evaluation.html) of serveral baseline methods using these benchmarks
 
 
 ## What are you looking for?
