@@ -1,0 +1,14 @@
+
+## Wikipedia Conversions {#conversions}
+
+Along with the methodology and tools, we provide the raw products of our
+article conversion pipeline run on the English, Simple English, and Japanese
+Wikipedia dumps from 1 January 2022. These datasets, which we call
+`unprocessedAll`, include all pages of each Wiki in machine-readable JSONL or
+CBOR formats.
+
+* English `en`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-en-collectionCbor.tar.xz)
+
+* Simple English `simple`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-simple-collectionCbor.tar.xz)
+
+* Japanese `ja`: [JSONL](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionJsonl.tar) / [CBOR](http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/wiki2022-ja-collectionCbor.tar.xz)
