@@ -130,7 +130,7 @@ enwiki:Horseshoe%20crab 0 def494df77e2249ff7133955b52f37c5e3e9a7b5 1</code></pre
 </ul>
 <h3 id="entity-retrieval">Entity retrieval</h3>
 <p><strong>Task</strong> Given a query, retrieve relevant entities from all Wikipedia entities (as given in the <code>unprocessedAll</code> or <code>unprocessedAllButBenchmark</code> collections). All entities which are linked to from the original article are regarded relevant (all other’s non-relevant).</p>
-<p>Example qrels for Simple English:</p>
+<p>Example qrels for English:</p>
 <pre><code>enwiki:Horseshoe%20crab 0 enwiki:Amebocyte 1
 enwiki:Horseshoe%20crab 0 enwiki:Arachnid 1
 enwiki:Horseshoe%20crab 0 enwiki:Arthropod 1
@@ -159,8 +159,6 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 [...]</code></pre>
 <h3 id="query-specific-clustering">Query-specific Clustering</h3>
 <p><strong>Task</strong> Given a query and a set of relevant paragraphs, produce clusters to represent relevant subtopics. As a ground truth, all paragraphs in the same top-level section are regarded as a cluster. The set of paragraphs provided on the article is taken as a set of relevant paragraphs.</p>
-<h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
-<p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
 <pre><code>{                                                                                                                                          
   &quot;query_text&quot;: &quot;Horseshoe crab&quot;,                                                                                                          
   &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
@@ -216,6 +214,80 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 <li>3: Threats</li>
 </ul>
 <p>For example the first paragraph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> is supposed to be clustered with paragraph <code>08fa5fda300d14d27687bd00341c176a2aff2f39</code> as these are both in the section on “Threats” (idx 3).</p>
+<h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
+<p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
+<pre><code>{
+  &quot;query_text&quot;: &quot;Horseshoe crab&quot;,
+  &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
+  &quot;paragraph_id&quot;: &quot;04f754dba54b26bab09823bcc19bc31227ca6125&quot;,
+  &quot;text_only_paragraph&quot;: {
+    &quot;para_body&quot;: [
+      {
+        &quot;text&quot;: &quot;In December 2019, a report of the US Senate which encouraged the Food and Drug Administration to \&quot;establish processes for evaluating alternative pyrogenicity te
+sts and report back [to the Senate] on steps taken to increase their use\&quot; was released; PETA backed the report.&quot;
+      }
+    ],
+    &quot;para_id&quot;: &quot;04f754dba54b26bab09823bcc19bc31227ca6125&quot;
+  },
+  &quot;true_label_page_ids&quot;: [
+    &quot;enwiki:United%20States%20Senate&quot;,
+    &quot;enwiki:Food%20and%20Drug%20Administration&quot;,
+    &quot;enwiki:People%20for%20the%20Ethical%20Treatment%20of%20Animals&quot;
+  ],
+ &quot;true_label_qids&quot;: [
+    &quot;Q66096&quot;,
+    &quot;Q204711&quot;,
+    &quot;Q151888&quot;
+  ],  
+  &quot;true_linked_paragraph&quot;: {
+    &quot;para_body&quot;: [
+      {
+        &quot;text&quot;: &quot;In December 2019, a report of the &quot;
+      },
+      {
+        &quot;target_page_id&quot;: &quot;enwiki:United%20States%20Senate&quot;,
+        &quot;target_qid&quot;: &quot;Q66096&quot;,
+        &quot;text&quot;: &quot;US Senate&quot;,
+        &quot;target_page&quot;: &quot;United States Senate&quot;
+      },
+      {
+        &quot;text&quot;: &quot; which encouraged the &quot;
+      },
+      {
+        &quot;target_page_id&quot;: &quot;enwiki:Food%20and%20Drug%20Administration&quot;,
+        &quot;target_qid&quot;: &quot;Q204711&quot;,
+        &quot;text&quot;: &quot;Food and Drug Administration&quot;,
+        &quot;target_page&quot;: &quot;Food and Drug Administration&quot;
+      },
+      {
+        &quot;text&quot;: &quot; to \&quot;establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use\&quot; was released; &quot;
+      },
+      {
+        &quot;target_page_id&quot;: &quot;enwiki:People%20for%20the%20Ethical%20Treatment%20of%20Animals&quot;,
+        &quot;target_qid&quot;: &quot;Q151888&quot;,
+        &quot;text&quot;: &quot;PETA&quot;,
+        &quot;target_page&quot;: &quot;People for the Ethical Treatment of Animals&quot;
+      },
+      {
+        &quot;text&quot;: &quot; backed the report.&quot;
+      }
+    ],
+    &quot;para_id&quot;: &quot;04f754dba54b26bab09823bcc19bc31227ca6125&quot;
+  },
+  &quot;acceptable_label_qids&quot;: [
+    &quot;Q30&quot;,
+    &quot;Q833&quot;,
+    &quot;Q1358&quot;,
+    [...]
+ ],
+  &quot;acceptable_label_page_ids&quot;: [
+    &quot;enwiki:Albian&quot;,
+    &quot;enwiki:Amebocyte&quot;,
+    &quot;enwiki:Anisian&quot;,
+    [...]
+  ]
+}  
+</code></pre>
         </section>
       </div>
     </div>
