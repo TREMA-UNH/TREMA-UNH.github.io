@@ -40,11 +40,11 @@ In this online supplement, we provide:
 ## What are you looking for?
 
  <style>
-.tile { background-color: #e33; width: 100px; }
+.tile { background-color: #e33; width: 100px; display: inline-block; }
 </style>
 
-* <div class="tile">[for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)</div>
-* <div class="tile">[to download just the Wikipedia dumps from 2022](dumps.html)</div>
+* <div style="background-color: #e33; width: 100px; display: inline-block;">[for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)</div>
+* <div style="background-color: #e33; width: 100px; display: inline-block;">[to download just the Wikipedia dumps from 2022](dumps.html)</div>
 * <div class="tile">[for more information about provided Wikimarks](wikimarks.html)</div>
 * <div class="tile">[to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)</div>
 * <div class="tile">[for evaluation results of reference baselines](evaluation.html)</div>
