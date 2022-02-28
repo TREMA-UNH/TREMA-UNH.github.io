@@ -95,6 +95,16 @@ Both the CBOR and JSONL files are represented with following this grammar. Wikip
 ~~~~~
 
 
+### Example: Horseshoe Crab
+
+As an example to detail the data model we provide the converted version of the article on Horseshoe crabs in two Wikipedias
+
+* English Wikipedia [article](https://en.wikipedia.org/wiki/Horseshoe_crab) -> converted [page in JSON](http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab.article-en.json)
+* Simple English Wikipedia [article](https://simple.wikipedia.org/wiki/Horseshoe_crab) -> converted [page in JSON](http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab.article-simple.json)
+
+
+
+
 ## License
 
 This data set is part of the Wikimarks dataset version v2.6.
