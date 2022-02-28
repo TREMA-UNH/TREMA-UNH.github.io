@@ -216,6 +216,11 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 <p>For example the first paragraph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> is supposed to be clustered with paragraph <code>08fa5fda300d14d27687bd00341c176a2aff2f39</code> as these are both in the section on “Threats” (idx 3).</p>
 <h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
 <p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
+<p>The article on horseshoe crabs contains the following example paragraph:</p>
+<blockquote>
+<p>In December 2019, a report of the <a href="https://en.wikipedia.org/wiki/US_Senate">US Senate</a> which encouraged the <a href="https://en.wikipedia.org/wiki/Food_and_Drug_Administration">Food and Drug Administration</a> to “establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use” was released;[57] <a href="https://en.wikipedia.org/wiki/People_for_the_Ethical_Treatment_of_Animals">PETA</a> backed the report.[58]</p>
+</blockquote>
+<p>We convert this paragraph into an entity linking ground truth, where only the query and the <code>text_only_paragraph</code> are to be used for the prediction, the remainder is held out for evaluation only.</p>
 <pre><code>{
   &quot;query_text&quot;: &quot;Horseshoe crab&quot;,
   &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
