@@ -38,7 +38,7 @@ In this online supplement, we provide:
 
 
 ## What are you looking for?
-<div style=" display: block ruby;">
+<div style=" display: block ruby; list-style: none; ">
    
  <style>
 .tile { background-color: #c1c5ff;
@@ -47,6 +47,10 @@ display: inline-block;
 vertical-align: middle;
 height: 200px;
 list-style-position: inside;
+margin-left: 1em;
+padding-left: 1em;
+text-indent: 0em;
+list-style: none;
    }
 </style>
 
