@@ -3,14 +3,41 @@
 
 ## Tools, Installation, and Usage {#tools}
 
-Our pipeline for generating Wikimarks is
+###  Data Conversion Pipeline
+
+Our pipeline for converting Wikipedias and generating Wikimarks is
 found in the [`TREMA-UNH/trec-car-release`][trec-car-release] project. 
 Please follow installation, configuration and usage instructions in the
-`README`.
+[`README`](https://github.com/TREMA-UNH/trec-car-release/blob/master/README.mkd).
+
+
+
+### Sourcecode for Conversion Tools 
+
 
 This pipeline builds upon the conversion tools provided by the
 [`trec-car-create`][trec-car-create] package, which provides utilities for
 converting, extracting, inspecting, filtering, and generating benchmarks from Wikipedia.
-Please follow installation and compilation instructions described in the `README`.
+Please follow installation and compilation instructions described in the 
+[`README`](https://github.com/TREMA-UNH/trec-car-create/blob/main/README.mkd).
 
-Language bindings for java and python to read the CBOR file formats are provided in the [`trec-car-tools`](https://github.com/TREMA-UNH/trec-car-tools) packages.
+### Language Bindings for CBOR
+
+Language bindings for java and python to read the CBOR file formats are provided 
+in the [`trec-car-tools`](https://github.com/TREMA-UNH/trec-car-tools) packages.
+
+Alternatively the equivalent JSONL format can be used with any JSON parsing package. 
+Because of the high amount of redundancy, we provide JSONL files as gzipped and
+recommend to open them directly with a GzipCompressed file handler. (See data model on the main page.)
+
+
+
+[trec-car]: http://trec-car.cs.unh.edu/ 
+[trec]: https://trec.nist.gov/
+[Wikidata]: https://wikidata.org/
+[cc-sa]: http://creativecommons.org/licenses/by-sa/3.0/
+[trec-car-release]: https://github.com/TREMA-UNH/trec-car-release
+[trec-car-create]: https://github.com/TREMA-UNH/trec-car-create
+[download]: http://trec-car.cs.unh.edu/wikimarks/datareleases/wikimarks-20220101/
+[good articles]: https://en.wikipedia.org/wiki/Wikipedia:Good_articles
+[vital articles]: https://en.wikipedia.org/wiki/Wikipedia:Vital_articles
