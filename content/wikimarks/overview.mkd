@@ -38,28 +38,34 @@ In this online supplement, we provide:
 
 
 ## What are you looking for?
-<div style=" display: block ruby; list-style: none; ">
-   
- <style>
-.tile { background-color: #c1c5ff;
-width: 200px;
-display: inline-block;
-vertical-align: middle;
-height: 200px;
-list-style-position: inside;
-margin-left: 1em;
-padding-left: 1em;
-text-indent: 0em;
-list-style: none;
-   }
+
+<style>
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tiles li {
+    background-color: #c1c5ff;
+    width: 200px;
+    height: 200px;
+    vertical-align: middle;
+    margin: 1em;
+    text-align: center;
+    padding: 1em;
+    text-indent: 0em;
+    list-style: none;
+}
 </style>
 
-* <div class="tile">[for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)</div>
-* <div class="tile">[to download just the Wikipedia dumps from 2022](dumps.html)</div>
-* <div class="tile">[for more information about provided Wikimarks](wikimarks.html)</div>
-* <div class="tile">[to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)</div>
-* <div class="tile">[for evaluation results of reference baselines](evaluation.html)</div>
-</div>
+
+<ul class="tiles">
+<li> [for code and data pipeline to convert any Wikipedia into a machine-readable corpus or Wikimark](code.html)
+<li> [to download just the Wikipedia dumps from 2022](dumps.html)
+<li> [for more information about provided Wikimarks](wikimarks.html)
+<li> [to download the Wikimarks derived from the 2022 Wikipedias](wikimarks.html)
+<li> [for evaluation results of reference baselines](evaluation.html)
+</ul>
    
 ### Data Model
 
