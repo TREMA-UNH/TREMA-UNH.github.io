@@ -2,7 +2,7 @@
 
 Reference evaluation results of a range of baselines. 
 
-Also, see information on [tasks and how wikimarks are derived](wikimarks.mkd) from Wikipedia articles.
+Also, see information on [tasks and how wikimarks are derived](wikimarks.html) from Wikipedia articles.
 
 ## Evaluation Results for Reference Baselines {#evaluation}
 
