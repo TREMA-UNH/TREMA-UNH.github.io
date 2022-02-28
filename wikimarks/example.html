@@ -23,7 +23,7 @@
         <h1 id="wikimarks">Wikimarks</h1>
 <h2 id="example-horseshoe-crab">Example: Horseshoe Crab</h2>
 <p>We provide an example of the outputs of our conversion pipeline and how we create Wikimarks for several tasks.</p>
-<p>The topic <code>Horseshoe</code> crab has articles on both English Wikipedias</p>
+<p>The topic <code>Horseshoe crab</code> has articles on both English Wikipedias</p>
 <ul>
 <li>English Wikipedia <a href="https://en.wikipedia.org/wiki/Horseshoe_crab">article</a></li>
 <li>Simple English Wikipedia <a href="https://simple.wikipedia.org/wiki/Horseshoe_crab">article</a></li>
@@ -61,6 +61,100 @@
 }</code></pre>
 <p>Each subset is automatically divided into train and test splits, and each train split is provided in five folds to enable machine learning with cross-validation.</p>
 <h2 id="wikimark-extraction">Wikimark extraction</h2>
+<p>The final step is to extract different Wikimarks (i.e., Wikipedia-derived benchmarks) from each article. We offer Wikimarks for a set up common IR tasks. In all cases the title of the Wikipedia page constitutes the search query, which is interpreted as an information need on “Tell me about ….”. In this case the information need is “Tell me about Horseshoe crabs”.</p>
+<p>Please see <a href="wikimarks.html">Wikimarks</a> page for further information on how Wikimarks are derived.</p>
+<h3 id="passage-retrieval">Passage retrieval</h3>
+<p><strong>Task</strong> Given a query, retrieve relevant passages from the passageCorpus (produced in step 6 of the processing phase). Every paragraph that was given on the original Wikipedia article (after processing) is regarded relevant. All other paragraphs are regarded non-relevant.</p>
+<p>Example qrels for Simple English:</p>
+<pre><code>simplewiki:Horseshoe%20crab 0 16d05a332a2732b4b21442ac66a39cc00c3e5f33 1
+simplewiki:Horseshoe%20crab 0 29b3ad54374d4476d6606625d0118ea35874ab2d 1
+simplewiki:Horseshoe%20crab 0 2b5a835e0cdbdb5d511792daf33e2fcd7bac6469 1
+simplewiki:Horseshoe%20crab 0 2faf498f22a448b70dc31f61bd96e139884d5e11 1
+simplewiki:Horseshoe%20crab 0 37d95a6d501ab91dbcaffb6493bbf4758ab7e82e 1
+simplewiki:Horseshoe%20crab 0 4e600216147eace70a62ff32b2e63d74c1b7064b 1
+simplewiki:Horseshoe%20crab 0 581f6a207955d80e3e72112172bafea92af3a6b8 1
+simplewiki:Horseshoe%20crab 0 89094d9ee9871d0acf98f2e2f7ccaf4358d4ce9b 1
+simplewiki:Horseshoe%20crab 0 92b71c566ffa2ff0897d8868bfd7ad4ffecb8e55 1
+simplewiki:Horseshoe%20crab 0 ab39b67e4e92cef8e3f5d32cc7f5d63d50aa5f34 1
+simplewiki:Horseshoe%20crab 0 d53deb685b981d765904d0bbc92d16ca29e9d182 1
+simplewiki:Horseshoe%20crab 0 df761e6699d1bc8711ee4f740b0f187e7a4335fc 1</code></pre>
+<p>We provide qrels for different derived information needs:</p>
+<ul>
+<li>article-level (query = “Horseshoe crab”):</li>
+<li>top-level (e.g. query = “Horseshoe crab / Threats”):</li>
+<li>hierarchical (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
+</ul>
+<h3 id="entity-retrieval">Entity retrieval</h3>
+<p><strong>Task</strong> Given a query, retrieve relevant entities from all Wikipedia entities (as given in the <code>unprocessedAll</code> or <code>unprocessedAllButBenchmark</code> collections). All entities which are linked to from the original article are regarded relevant (all other’s non-relevant).</p>
+<p>Example qrels for Simple English:</p>
+<pre><code>simplewiki:Horseshoe%20crab 0 simplewiki:Arachnid 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Atlantic%20Ocean 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Bacteria 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Benthos 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Burgess%20Shale 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Carapace 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Cladistics 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Clam 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Coagulation 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Coast 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Crab 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Crustacean 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Dome 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Environment 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Enzyme 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Estuary 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Eurypterid 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Eye 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Habitat 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Immune%20system 1
+simplewiki:Horseshoe%20crab 0 simplewiki:India 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Leg 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Living%20fossil 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Maine 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Mexico 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Million 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Moulting 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Mud 1
+simplewiki:Horseshoe%20crab 0 simplewiki:New%20Jersey 1
+simplewiki:Horseshoe%20crab 0 simplewiki:North%20America 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Ordovician 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Pigment 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Sand 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Seto%20Inland%20Sea 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Shell%20(zoology) 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Species 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Virginia 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Weapon 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Worm 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Xiphosura 1
+simplewiki:Horseshoe%20crab 0 simplewiki:Yucat%C3%A1n%20Peninsula 1</code></pre>
+<p>We provide qrels for different derived information needs:</p>
+<ul>
+<li>article-level (query = “Horseshoe crab”):</li>
+<li>top-level (e.g. query = “Horseshoe crab / Threats”):</li>
+<li>hierarchical (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
+</ul>
+<p>Example:</p>
+<pre><code>simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Atlantic%20Ocean 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Clam 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Crustacean 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Eye 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Maine 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Mexico 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Moulting 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Mud 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:New%20Jersey 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:North%20America 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Pigment 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Sand 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Shell%20(zoology) 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Virginia 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Worm 1
+simplewiki:Horseshoe%20crab/Distribution/Atlantic 0 simplewiki:Yucat%C3%A1n%20Peninsula 1</code></pre>
+<h3 id="query-specific-clustering">Query-specific Clustering</h3>
+<p><strong>Task</strong> Given a query and a set of relevant paragraphs, produce clusters to represent relevant subtopics. As a ground truth, all paragraphs in the same top-level section are regarded as a cluster. The set of paragraphs provided on the article is taken as a set of relevant paragraphs.</p>
+<h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
+<p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
         </section>
       </div>
     </div>
