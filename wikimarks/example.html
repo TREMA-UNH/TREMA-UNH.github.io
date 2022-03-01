@@ -33,13 +33,13 @@
 <p>The example is contained in the download archive along with other <a href="wikimarks.html">Wikimark collections</a>.</p>
 <p>For simplicity, we also provide all files created for the horseshoe crab benchmark here:</p>
 <ul>
-<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/">English</a></li>
-<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-simple/">Simple English</a></li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.json">English</a></li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-simple/train.pages.json">Simple English</a></li>
 </ul>
 <p>These directories also contain <code>*json</code> files which can be rendered by most web browsers. These filed are not included by default (we only provide jsonl.gz). As multiple objects are provided for paragraphs and entity-linking wikimark, we converted the jsonl format to an array of JSON objects.</p>
 <p>With every subset, we provide information about the processed article, provenance, etc along with Wikimark data.</p>
 <ul>
-<li>`<em>.pages.</em>: The full article</li>
+<li><code>*.pages.*</code>: The full article</li>
 <li><code>*.pages.cbor-paragraphs.*</code>: Paragraphs contained in this subset (for retrieval, we recommend to use the full <code>paragraphCorpus</code>)</li>
 <li><code>*.pages.cbor-outlines.*</code>: Only the section outline without paragraph content. These were used in TREC CAR to represent the query.</li>
 <li><code>titles</code>: page titles in this subset</li>
@@ -71,8 +71,8 @@
 <p>We call the outputs of this phase “processed”.</p>
 <p>The two example articles will look as follows</p>
 <ul>
-<li>English Wikipedia: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab.article-en.json">page in JSON</a></li>
-<li>Simple English Wikipedia: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab.article-simple.json">page in JSON</a></li>
+<li>English Wikipedia: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.json">page in JSON</a></li>
+<li>Simple English Wikipedia: <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-simple/train.pages.json">page in JSON</a></li>
 </ul>
 <h2 id="subset-selection">Subset selection</h2>
 <p>During the next phase, different page subsets can be selected to provide a corpus of interest. This could be a random subset of all pages to obtain a smaller collection, or a pages within a set of categories, or articles of different quality levels (such as good or vital articles) or a list of pages that were manually selected, or retrieved from Wikidata’s SPARQL endpoint.</p>
@@ -87,7 +87,7 @@
 <p>Please see <a href="wikimarks.html">Wikimarks</a> page for further information on how Wikimarks are derived.</p>
 <h3 id="passage-retrieval">Passage retrieval</h3>
 <p><strong>Task</strong> Given a query, retrieve relevant passages from the passageCorpus (produced in step 6 of the processing phase). Every paragraph that was given on the original Wikipedia article (after processing) is regarded relevant. All other paragraphs are regarded non-relevant.</p>
-<p>Example qrels for English:</p>
+<p>Example <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-article.qrels">qrels for English</a>:</p>
 <pre><code>enwiki:Horseshoe%20crab 0 04f754dba54b26bab09823bcc19bc31227ca6125 1
 enwiki:Horseshoe%20crab 0 089fb8822e86094e88812f29a38fdb14124e9a06 1
 enwiki:Horseshoe%20crab 0 08fa5fda300d14d27687bd00341c176a2aff2f39 1
@@ -110,7 +110,7 @@ enwiki:Horseshoe%20crab 0 b20cda148c26bdbc550da6535ea6319f9f2d4ef9 1
 enwiki:Horseshoe%20crab 0 c6fd86ddaf732b6ad69e67e740a94e5da9143579 1
 enwiki:Horseshoe%20crab 0 cc16e6f76af1e4394ddcf7bd3872ad1cb114c73c 1
 enwiki:Horseshoe%20crab 0 def494df77e2249ff7133955b52f37c5e3e9a7b5 1</code></pre>
-<p>An example of the first relevant paragragph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code></p>
+<p>An example of the first relevant paragragph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> from the <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-paragraphs.json">paragraphs</a> file</p>
 <pre><code>{
   &quot;para_body&quot;: [
     {
@@ -146,9 +146,9 @@ enwiki:Horseshoe%20crab 0 def494df77e2249ff7133955b52f37c5e3e9a7b5 1</code></pre
 </code></pre>
 <p>We provide qrels for different derived information needs:</p>
 <ul>
-<li>article-level (query = “Horseshoe crab”):</li>
-<li>top-level (e.g. query = “Horseshoe crab / Threats”):</li>
-<li>hierarchical (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-article.qrels">article-level</a> (query = “Horseshoe crab”):</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-toplevel.qrels">top-level</a> (e.g. query = “Horseshoe crab / Threats”):</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-hierarchical.qrels">hierarchical</a> (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
 </ul>
 <h3 id="entity-retrieval">Entity retrieval</h3>
 <p><strong>Task</strong> Given a query, retrieve relevant entities from all Wikipedia entities (as given in the <code>unprocessedAll</code> or <code>unprocessedAllButBenchmark</code> collections). All entities which are linked to from the original article are regarded relevant (all other’s non-relevant).</p>
@@ -164,13 +164,13 @@ enwiki:Horseshoe%20crab 0 enwiki:Bulkhead%20(barrier) 1
 enwiki:Horseshoe%20crab 0 enwiki:COVID-19%20pandemic 1
 enwiki:Horseshoe%20crab 0 enwiki:Carapace 1
 [...]</code></pre>
-<p>We provide qrels for different derived information needs:</p>
+<p>We provide entity qrels for different derived information needs:</p>
 <ul>
-<li>article-level (query = “Horseshoe crab”):</li>
-<li>top-level (e.g. query = “Horseshoe crab / Threats”):</li>
-<li>hierarchical (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-article.entity.qrels">article-level</a> (query = “Horseshoe crab”):</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-toplevel.entity.qrels">top-level</a> (e.g. query = “Horseshoe crab / Threats”):</li>
+<li><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-hierarchical.entity.qrels">hierarchical</a> (e.g. query = “Horseshoe crab / Threats / Harvest for blood”)</li>
 </ul>
-<p>Example:</p>
+<p><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-hierarchical.entity.qrels">Example for Hierarchical Entity Qrels</a>:</p>
 <pre><code>enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Amebocyte 1
 enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:COVID-19%20pandemic 1
 enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:Eli%20Lilly%20and%20Company 1
@@ -181,6 +181,7 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 [...]</code></pre>
 <h3 id="query-specific-clustering">Query-specific Clustering</h3>
 <p><strong>Task</strong> Given a query and a set of relevant paragraphs, produce clusters to represent relevant subtopics. As a ground truth, all paragraphs in the same top-level section are regarded as a cluster. The set of paragraphs provided on the article is taken as a set of relevant paragraphs.</p>
+<p><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-toplevel.cluster.json">Example Clustering Wikimark</a>:</p>
 <pre><code>{                                                                                                                                          
   &quot;query_text&quot;: &quot;Horseshoe crab&quot;,                                                                                                          
   &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
@@ -235,7 +236,7 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 <li>2: Taxonomy</li>
 <li>3: Threats</li>
 </ul>
-<p>For example the first paragraph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> is supposed to be clustered with paragraph <code>08fa5fda300d14d27687bd00341c176a2aff2f39</code> as these are both in the section on “Threats” (idx 3).</p>
+<p>For example the first paragraph <code>04f754dba54b26bab09823bcc19bc31227ca6125</code> is supposed to be clustered with paragraph <code>08fa5fda300d14d27687bd00341c176a2aff2f39</code> as these are both in the section on “Threats” (idx 3). <a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-paragraphs.json">Content of paragraphs</a> are available separately.</p>
 <h3 id="query-specific-entity-linking">Query-specific Entity Linking</h3>
 <p><strong>Task</strong> Given a query and the text of a paragraph, identify entity mentions in this paragraph and annotate them with their Wikipedia entity ids. These paragraphs are taken from article, of which the hyperlinks are removed. We take every span in the paragrpah that was originally annotated with a hyperlink to another Wikipedia page as a true span, and the entity it is linked to as a true entity.</p>
 <p>The article on horseshoe crabs contains the following example paragraph:</p>
@@ -243,6 +244,7 @@ enwiki:Horseshoe%20crab/Threats/Harvest%20for%20blood 0 enwiki:History%20of%20CO
 <p>In December 2019, a report of the <a href="https://en.wikipedia.org/wiki/US_Senate">US Senate</a> which encouraged the <a href="https://en.wikipedia.org/wiki/Food_and_Drug_Administration">Food and Drug Administration</a> to “establish processes for evaluating alternative pyrogenicity tests and report back [to the Senate] on steps taken to increase their use” was released;[57] <a href="https://en.wikipedia.org/wiki/People_for_the_Ethical_Treatment_of_Animals">PETA</a> backed the report.[58]</p>
 </blockquote>
 <p>We convert this paragraph into an entity linking ground truth, where only the query and the <code>text_only_paragraph</code> are to be used for the prediction, the remainder is held out for evaluation only.</p>
+<p><a href="http://trec-car.cs.unh.edu/wikimarks/datareleases/horseshoe-crab-en/train.pages.cbor-entity-linking.json">Example Entity Linking Wikimark</a>:</p>
 <pre><code>{
   &quot;query_text&quot;: &quot;Horseshoe crab&quot;,
   &quot;query_id&quot;: &quot;enwiki:Horseshoe%20crab&quot;,
@@ -316,6 +318,8 @@ sts and report back [to the Senate] on steps taken to increase their use\&quot; 
 }  
 </code></pre>
 <p>Due to Wikipedia’s editorial policy a hyperlink to an entity is only inserted at its first occurrence. To avoid wrongfully penalizing entity links because of this policy, we provide <code>acceptable_label</code> entities, which are entities linked in a preceeding paragraphs. During evaluation, a linker should only receive credit for <code>true_label</code> entities, but should not be penalize for entities contained in <code>acceptable_label</code>.</p>
+<h3 id="questions">Questions?</h3>
+<p>Please contact us if you have remaining questions about the <a href="wikimarks.html">Wikimarks data format</a> or want to propose Wikimarks for additional tasks. Our <a href="code.html">pipeline software</a> can be customized and extended to produce additional styles of wikimarks.</p>
         </section>
       </div>
     </div>
