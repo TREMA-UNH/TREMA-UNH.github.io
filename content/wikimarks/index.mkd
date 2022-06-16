@@ -19,6 +19,7 @@ hyperlink structure, and complementary data sources such as [Wikidata][].
 
 University of New Hampshire, USA and Well-Typed LLP, UK
 
+[Publication at SIGIR 2022](dietz-2022-wikimarks.pdf)
 
 ## What are you looking for?
 
